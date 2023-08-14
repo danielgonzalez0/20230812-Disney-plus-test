@@ -5,6 +5,7 @@ import backgroundTab from './background-tab.jpg';
 import backgroundMob from './background-mob.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import {colors} from "../../utils/variables"
 
 //   @media only screen and (min-width: 769px) and (max-width: 1024px) {
 
@@ -111,8 +112,8 @@ const CTA = styled.div`
 `;
 
 const SignUpBtn = styled.a`
-  color: #f9f9f9;
-  background: #0063e5;
+  color: ${colors.white};
+  background: ${colors.blue1};
   width: 100%;
   max-width: 360px;
   letter-spacing: 1.5px;
@@ -122,7 +123,7 @@ const SignUpBtn = styled.a`
   border: 1px solid transparent;
   border-radius: 4px;
   &:hover {
-    background: #0483ee;
+    background: ${colors.blue2};
   }
 `;
 
@@ -148,7 +149,7 @@ const H4 = styled.h4`
   font-size: 24px;
   line-height: 34px;
   font-weight: 400;
-  color: #f9f9f9;
+  color: ${colors.white};
 
   @media only screen and (max-width: 768px) {
     font-size: 16px;
@@ -160,7 +161,7 @@ const Promo = styled.p`
   font-size: 20px;
   line-height: 30px;
   font-weight: 400;
-  color: silver;
+  color: ${colors.silver};
 
   @media only screen and (max-width: 768px) {
     font-size: 18px;
@@ -172,7 +173,7 @@ const Span = styled.span`
   font-size: 12px;
   line-height: 16px;
   font-weight: 400;
-  color: silver;
+  color: ${colors.silver};
 
   @media only screen and (max-width: 768px) {
     font-size: 11px;
@@ -190,6 +191,6 @@ const BtnChevron = styled.button`
 
 const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
-  color: silver;
+  color: ${colors.silver};
 `;
 export default SignUp;
