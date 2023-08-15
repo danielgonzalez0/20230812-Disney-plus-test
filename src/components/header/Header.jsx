@@ -8,40 +8,76 @@ import originalIcon from './original-icon.svg';
 import searchIcon from './search-icon.svg';
 import seriesIcon from './series-icon.svg';
 import watchListIcon from './watchlist-icon.svg';
+import { auth, provider } from '../../utils/firebase';
+import { signInWithPopup } from 'firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUserLoginDetails } from '../../redux/features/userSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  const setUser = (user) => {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    );
+  };
+
+  const handleAuth = () => {
+    console.log('click');
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        setUser(res.user);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return (
     <Nav>
       <Logo>
         <img src={disneyLogo} alt="Disney plus" />
       </Logo>
-      <NavMenu>
-        <a href="/home">
-          <img src={homeIcon} alt="accueil" />
-          <span>ACCUEIL</span>
-        </a>
-        <a href="/home">
-          <img src={searchIcon} alt="recherche" />
-          <span>RECHERCHE</span>
-        </a>
-        <a href="/home">
-          <img src={watchListIcon} alt="ma liste" />
-          <span>MA LISTE</span>
-        </a>
-        <a href="/home">
-          <img src={originalIcon} alt="originals" />
-          <span>ORIGINALS</span>
-        </a>
-        <a href="/home">
-          <img src={movieIcon} alt="film" />
-          <span>FILM</span>
-        </a>
-        <a href="/home">
-          <img src={seriesIcon} alt="séries" />
-          <span>SÉRIES</span>
-        </a>
-      </NavMenu>
-      <Login>S'IDENTIFIER</Login>
+      {!user.name ? (
+        <Login onClick={handleAuth}>S'IDENTIFIER</Login>
+      ) : (
+        <>
+          <NavMenu>
+            <a href="/home">
+              <img src={homeIcon} alt="accueil" />
+              <span>ACCUEIL</span>
+            </a>
+            <a href="/home">
+              <img src={searchIcon} alt="recherche" />
+              <span>RECHERCHE</span>
+            </a>
+            <a href="/home">
+              <img src={watchListIcon} alt="ma liste" />
+              <span>MA LISTE</span>
+            </a>
+            <a href="/home">
+              <img src={originalIcon} alt="originals" />
+              <span>ORIGINALS</span>
+            </a>
+            <a href="/home">
+              <img src={movieIcon} alt="film" />
+              <span>FILM</span>
+            </a>
+            <a href="/home">
+              <img src={seriesIcon} alt="séries" />
+              <span>SÉRIES</span>
+            </a>
+          </NavMenu>
+          <UserImg src={user.photo} alt={user.name} />
+        </>
+      )}
     </Nav>
   );
 };
@@ -151,4 +187,8 @@ const Login = styled.a`
     border-color: transparent;
   }
 `;
+
+const UserImg = styled.img`
+  height: 100%;
+`
 export default Header;
