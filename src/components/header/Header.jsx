@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import disneyLogo from '../../assets/images/disneyLogo.svg';
@@ -12,32 +12,50 @@ import { auth, provider } from '../../utils/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUserLoginDetails } from '../../redux/features/userSlice';
+import { setSignOutState, setUserLoginDetails } from '../../redux/features/userSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  const setUser = (user) => {
-    dispatch(
-      setUserLoginDetails({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      })
-    );
-  };
+  const setUser = useCallback(
+    (user) => {
+      dispatch(
+        setUserLoginDetails({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        navigate('/home');
+      }
+    });
+  }, [user.name, navigate, setUser]);
 
   const handleAuth = () => {
-    console.log('click');
-    signInWithPopup(auth, provider)
-      .then((res) => {
-        setUser(res.user);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    if (!user.name) {
+      signInWithPopup(auth, provider)
+        .then((res) => {
+          setUser(res.user);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else {
+      auth.signOut().then(()=>{
+        dispatch(setSignOutState())
+           navigate('/');
+      }).catch((err)=>console.log(err.message))
+    }
   };
 
   return (
@@ -75,7 +93,12 @@ const Header = () => {
               <span>SÉRIES</span>
             </a>
           </NavMenu>
-          <UserImg src={user.photo} alt={user.name} />
+          <SignOut>
+            <UserImg src={user.photo} alt={user.name} />
+            <DropDown>
+              <span onClick={handleAuth}>SE DÉCONNECTER</span>
+            </DropDown>
+          </SignOut>
         </>
       )}
     </Nav>
@@ -190,5 +213,44 @@ const Login = styled.a`
 
 const UserImg = styled.img`
   height: 100%;
-`
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 18px 0;
+  padding: 10px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  width: 140px;
+  text-align: center;
+  opacity: 0;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  ${UserImg} {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 250ms;
+    }
+  }
+`;
 export default Header;
