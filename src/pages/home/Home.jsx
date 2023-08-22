@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import bgImg from './home-background.png';
 import ImgSlider from '../../components/ImgSlider/ImgSlider';
 import img from './slider-image.jpg';
+
 
 
 const Home = () => {
@@ -22,7 +23,7 @@ const Home = () => {
 
   return (
     <Container>
-      <ImgSlider slides={array} />
+      <ImgSlider slides={array} infinite={true} slidesVisible={1} slidesToScroll={1} />
     </Container>
   );
 };
@@ -34,7 +35,7 @@ const Container = styled.main`
   overflow-x: hidden;
   display: block;
   top: 72px;
-  padding: 0 calc(3.5vw + 5px);
+  padding: 0 5%;
 
   &:after {
     background: url(${bgImg}) center center / cover no-repeat fixed;
