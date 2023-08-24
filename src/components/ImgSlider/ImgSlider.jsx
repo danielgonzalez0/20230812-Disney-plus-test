@@ -8,7 +8,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 //styled components
 
 const Carrousel = styled.div`
-  margin: 0 auto;
+  margin: 20px auto 0;
   /* border: 1px solid red; */
   position: relative;
 `;
@@ -20,7 +20,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 
 const Button = styled.button`
   position: absolute;
-  top: 0.5vw;
+  top: 20px;
   z-index: 2;
   width: 3.5vw;
   height: 25.5vw;
@@ -30,9 +30,16 @@ const Button = styled.button`
   color: ${colors.white};
   font-size: 24px;
   cursor: pointer;
+  opacity: 0;
+
+  &:hover {
+    opacity: 1;
+    transition: opacity 0.2s ease 0s;
+  }
 
   &:focus-visible {
     outline: 1px solid ${colors.white};
+    opacity: 1;
   }
 `;
 const LeftBtn = styled(Button)`
@@ -56,14 +63,50 @@ const Slider = styled.div`
   }
 
   .container {
-    /* background-color: red; */
-    /* flex: 0 0 10%; */
+    /* background-color: red;  */
 
-    img {
+    /* flex: 0 0 10%; */
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: rgb(0 0 0 / 69%) 0 26px 30px -10px,
+      rgb(0 0 0 / 73%) 0 16px 10px -10px;
+    &:after {
+      position: absolute;
+      content: '';
+      top: 0;
+      right: 0;
+      height: 98%;
+      width: 100%;
+      border-radius: 4px;
+    }
+    &:hover:after {
+      border: 4px solid ${colors.white};
+      transition-duration: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s !important;
+    }
+
+    img:first-child {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: right center;
+      border-radius: 4px;
+    }
+
+    img:last-child {
+      position: absolute;
+      z-index: 3;
+      content: '';
+      left: 50px;
+      top: 20%;
+      height: 50%;
+      width: auto;
+      transform: translateX(30px);
+      transition: transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 150ms;
+    }
+
+    .visible {
+      transform: translateX(0) !important;
     }
   }
 `;
@@ -126,9 +169,7 @@ const InfiniteLoopComponent = ({ elements, offset }) => {
 
   useEffect(() => {
     if (elements.length > 0) {
-      console.log(elements.length);
       const cloned = cloneElements(elements, offset);
-      console.log(cloned);
       setClonedElements(cloned);
     }
   }, [elements, offset]);
@@ -149,7 +190,7 @@ const InfiniteLoopComponent = ({ elements, offset }) => {
   );
 };
 
-const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
+const ImgSlider = ({ slides, autoPlay, slidesVisible, slidesToScroll }) => {
   const [slideIndex, setSlideIndex] = useState(slidesToScroll + slidesVisible);
   const [sliderDomElement, setSliderDomElement] = useState();
   const offset = slidesToScroll + slidesVisible;
@@ -160,13 +201,6 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
     ((1 + slides.length) * 100) / slides.length
   }% - ${(1 + slides.length) * 2}vw)`;
 
-  useEffect(() => {
-    setSliderDomElement(document.querySelector(`.${Slider.styledComponentId}`));
-    if (sliderDomElement) {
-      sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
-    }
-  }, [sliderDomElement, translateInitial]);
-
   const handleLeft = async () => {
     let translateX = `calc(-${((slideIndex - 1) * 100) / slides.length}% - ${
       (slideIndex - 1) * 2
@@ -174,9 +208,6 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
     if (slideIndex <= 1) {
       // setSlideIndex(slides.length);
     } else {
-      console.log('clickleft');
-      console.log('slideIndex', slideIndex);
-      console.log('translateX', translateX);
       // Calculer la valeur de translation
       // Appliquer les transformations et la transition
 
@@ -188,7 +219,6 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
 
   const resetInfinite = () => {
     if (slideIndex >= slides.length + offset) {
-      console.log('test');
       // Réinitialisez les styles et l'indice de la diapositive
       setSlideIndex(offset);
       sliderDomElement.style.transition = 'none';
@@ -196,18 +226,16 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
     }
     if (slideIndex <= 1) {
       setSlideIndex(slides.length + 1);
-      console.log('test left');
       // Réinitialisez les styles et l'indice de la diapositive
       sliderDomElement.style.transition = 'none';
       sliderDomElement.style.transform = `translate3d(${translateFinal}, 0, 0)`;
     }
   };
 
-  const handleRight = async () => {
+  const handleRight = () => {
     let translateX = `calc(-${((slideIndex + 1) * 100) / slides.length}% - ${
       (slideIndex + 1) * 2
     }vw)`;
-    console.log(slides.length);
 
     if (slideIndex >= slides.length + offset) {
     } else {
@@ -217,11 +245,9 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
       sliderDomElement.style.transition = 'transform 0.5s ease 0s';
       setSlideIndex(slideIndex + 1);
     }
-    console.log(slideIndex);
   };
 
   const gotToSlide = (index) => {
-    console.log(index);
     setSlideIndex(index);
     let translateX = `calc(-${(index * 100) / slides.length}% - ${
       index * 2
@@ -229,6 +255,25 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
     sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
     sliderDomElement.style.transition = 'transform 0.5s ease 0s';
   };
+
+  // const handleAutoPlay = useCallback(() => {
+  //   if (autoPlay && sliderDomElement) {
+  //     setInterval(() => {
+  //       setSlideIndex((prevSlideIndex) => prevSlideIndex + 1);
+  //       handleRight();
+  //       resetInfinite();
+  //     }, 1000);
+  //   }
+  // }, [autoPlay, sliderDomElement, slideIndex]);
+
+  // window.addEventListener('load', handleAutoPlay);
+
+  useEffect(() => {
+    setSliderDomElement(document.querySelector(`.${Slider.styledComponentId}`));
+    if (sliderDomElement) {
+      sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
+    }
+  }, [sliderDomElement, translateInitial]);
 
   return (
     <>
@@ -247,7 +292,17 @@ const ImgSlider = ({ slides, infinite, slidesVisible, slidesToScroll }) => {
             <InfiniteLoopComponent
               offset={offset}
               elements={slides.map((movie, index) => (
-                <img key={index} src={movie} alt="Slide" data-in={index} />
+                <>
+                  <img key={index} src={movie.img} alt="Slide" />
+                  <img
+                    key={`title-${index}`}
+                    src={movie.title}
+                    alt="title"
+                    className={
+                      slideIndex - 2 === parseInt(index) ? 'visible' : null
+                    }
+                  />
+                </>
               ))}
             />
           )}
