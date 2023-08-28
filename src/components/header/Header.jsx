@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import disneyLogo from '../../assets/images/disneyLogo.svg';
@@ -8,63 +8,33 @@ import originalIcon from './original-icon.svg';
 import searchIcon from './search-icon.svg';
 import seriesIcon from './series-icon.svg';
 import watchListIcon from './watchlist-icon.svg';
-import { auth, provider } from '../../utils/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { auth } from '../../utils/firebase';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { setSignOutState, setUserLoginDetails } from '../../redux/features/userSlice';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { setSignOutState } from '../../redux/features/userSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const location = useLocation()
 
-  const setUser = useCallback(
-    (user) => {
-      dispatch(
-        setUserLoginDetails({
-          name: user.displayName,
-          email: user.email,
-          photo: user.photoURL,
-        })
-      );
-    },
-    [dispatch]
-  );
-
-  useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        setUser(user);
-        navigate('/home');
-      }
-    });
-  }, [user.name, navigate, setUser]);
-
-  const handleAuth = () => {
-    if (!user.name) {
-      signInWithPopup(auth, provider)
-        .then((res) => {
-          setUser(res.user);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    } else {
+  const logout = () =>{
       auth.signOut().then(()=>{
         dispatch(setSignOutState())
            navigate('/');
       }).catch((err)=>console.log(err.message))
-    }
-  };
+}
 
   return (
     <Nav>
-      <Logo>
+      <Logo to='/'>
         <img src={disneyLogo} alt="Disney plus" />
       </Logo>
       {!user.name ? (
-        <Login onClick={handleAuth}>S'IDENTIFIER</Login>
+        location.pathname === '/login' ? null : 
+        <Login onClick={()=>navigate('/login')}>S'IDENTIFIER</Login>
       ) : (
         <>
           <NavMenu>
@@ -96,7 +66,7 @@ const Header = () => {
           <SignOut>
             <UserImg src={user.photo} alt={user.name} />
             <DropDown>
-              <span onClick={handleAuth}>SE DÉCONNECTER</span>
+              <span onClick={logout}>SE DÉCONNECTER</span>
             </DropDown>
           </SignOut>
         </>
@@ -120,7 +90,7 @@ const Nav = styled.nav`
   z-index: 3;
 `;
 
-const Logo = styled.a`
+const Logo = styled(NavLink)`
   padding: 0;
   width: 80px;
   margin-top: 4px;

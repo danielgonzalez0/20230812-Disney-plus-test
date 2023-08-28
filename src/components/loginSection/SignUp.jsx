@@ -6,6 +6,7 @@ import backgroundMob from './background-mob.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import {colors} from "../../utils/variables"
+import { useNavigate } from 'react-router-dom';
 
 //   @media only screen and (min-width: 769px) and (max-width: 1024px) {
 
@@ -14,6 +15,7 @@ import {colors} from "../../utils/variables"
 // @media only screen and (max-width: 768px){}
 
 const SignUp = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <Content>
@@ -23,7 +25,7 @@ const SignUp = () => {
             incontournables et encore + en streaming
           </Title>
           <H4>Sans coût additionnel. Sans engagement.*</H4>
-          <SignUpBtn>S'INSCRIRE</SignUpBtn>
+          <SignUpBtn onClick={()=> navigate("/login")}>S'INSCRIRE</SignUpBtn>
           <Promo>
             Profitez de 12 mois au prix de 10 avec un abonnement annuel.
             Économies par rapport à un an d'abonnement mensuel.
@@ -111,7 +113,7 @@ const CTA = styled.div`
   }
 `;
 
-const SignUpBtn = styled.a`
+const SignUpBtn = styled.button`
   color: ${colors.white};
   background: ${colors.blue1};
   width: 100%;
@@ -122,6 +124,7 @@ const SignUpBtn = styled.a`
   padding: 16.5px 0;
   border: 1px solid transparent;
   border-radius: 4px;
+  cursor: pointer;
   &:hover {
     background: ${colors.blue2};
   }

@@ -10,6 +10,16 @@ import img3 from './indi.jpg';
 import title3 from './indi.png';
 import img4 from './img4.jpg';
 import title4 from './title4.png';
+import img5 from './avatar.jpg';
+import title5 from './avatar.png';
+import img6 from './secret.jpg';
+import title6 from './secret-title.png';
+import img7 from './img5.jpg';
+import title7 from './img5-title.png';
+import img8 from './img6.jpg';
+import title8 from './img6-title.png';
+import img9 from './img7.jpg';
+import title9 from './img7-title.png';
 import Viewers from '../../components/viewers/Viewers';
 
 const Home = () => {
@@ -18,6 +28,12 @@ const Home = () => {
     { img: img2, title: title2 },
     { img: img3, title: title3 },
     { img: img4, title: title4 },
+    { img: img5, title: title5 },
+    { img: img6, title: title6 },
+    { img: img7, title: title7 },
+    { img: img8, title: title8 },
+    { img: img9, title: title9 }
+   
   ];
 
   return (
