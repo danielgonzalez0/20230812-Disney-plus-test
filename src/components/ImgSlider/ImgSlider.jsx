@@ -4,6 +4,7 @@ import { colors } from '../../utils/variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 //styled components
 
@@ -71,18 +72,26 @@ const Slider = styled.div`
     cursor: pointer;
     box-shadow: rgb(0 0 0 / 69%) 0 26px 30px -10px,
       rgb(0 0 0 / 73%) 0 16px 10px -10px;
-    &:after {
-      position: absolute;
-      content: '';
-      top: 0;
-      right: 0;
-      height: 98%;
+
+    .link {
+      position: relative;
+      display: block;
       width: 100%;
-      border-radius: 4px;
-    }
-    &:hover:after {
-      border: 4px solid ${colors.white};
-      transition-duration: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s !important;
+      height: 100%;
+      z-index: 100;
+      &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        height: 98%;
+        width: 100%;
+        border-radius: 4px;
+      }
+      &:hover:after {
+        border: 4px solid ${colors.white};
+        transition-duration: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s !important;
+      }
     }
 
     img:first-child {
@@ -256,18 +265,6 @@ const ImgSlider = ({ slides, autoPlay, slidesVisible, slidesToScroll }) => {
     sliderDomElement.style.transition = 'transform 0.5s ease 0s';
   };
 
-  // const handleAutoPlay = useCallback(() => {
-  //   if (autoPlay && sliderDomElement) {
-  //     setInterval(() => {
-  //       setSlideIndex((prevSlideIndex) => prevSlideIndex + 1);
-  //       handleRight();
-  //       resetInfinite();
-  //     }, 1000);
-  //   }
-  // }, [autoPlay, sliderDomElement, slideIndex]);
-
-  // window.addEventListener('load', handleAutoPlay);
-
   useEffect(() => {
     setSliderDomElement(document.querySelector(`.${Slider.styledComponentId}`));
     if (sliderDomElement) {
@@ -292,7 +289,14 @@ const ImgSlider = ({ slides, autoPlay, slidesVisible, slidesToScroll }) => {
             <InfiniteLoopComponent
               offset={offset}
               elements={slides.map((movie, index) => (
-                <>
+                <NavLink
+                  className="link"
+                  to={
+                    movie.type === 'movie'
+                      ? `/movie/${movie.id}`
+                      : `/serie/${movie.id}`
+                  }
+                >
                   <img key={index} src={movie.img} alt="Slide" />
                   <img
                     key={`title-${index}`}
@@ -302,7 +306,7 @@ const ImgSlider = ({ slides, autoPlay, slidesVisible, slidesToScroll }) => {
                       slideIndex - 2 === parseInt(index) ? 'visible' : null
                     }
                   />
-                </>
+                </NavLink>
               ))}
             />
           )}

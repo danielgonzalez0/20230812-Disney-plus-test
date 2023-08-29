@@ -116,10 +116,12 @@ const Connexion = () => {
   );
 
   const handleAuthGoogle = () => {
+    console.log(user.name);
     if (!user.name) {
       signInWithPopup(auth, provider)
         .then((res) => {
           setUser(res.user);
+          navigate('/home');
         })
         .catch((err) => {
           console.log(err.message);
@@ -185,7 +187,7 @@ const Connexion = () => {
         ))}
       </ProfilsDiv>
       <p>Non isncrit ?</p>
-      <AuthButton onClick={() => handleAuthGoogle}>
+      <AuthButton onClick={handleAuthGoogle}>
         Se connecter avec Google
       </AuthButton>
     </Container>

@@ -20,21 +20,32 @@ import img8 from './img6.jpg';
 import title8 from './img6-title.png';
 import img9 from './img7.jpg';
 import title9 from './img7-title.png';
+import img10 from './img8.jpg';
+import title10 from './img8-title.png';
 import Viewers from '../../components/viewers/Viewers';
+import { getMoviesFromCompany } from '../../services/api';
+import { useQuery } from '@tanstack/react-query';
 
 const Home = () => {
   const array = [
-    { img: img, title: title },
-    { img: img2, title: title2 },
-    { img: img3, title: title3 },
-    { img: img4, title: title4 },
-    { img: img5, title: title5 },
-    { img: img6, title: title6 },
-    { img: img7, title: title7 },
-    { img: img8, title: title8 },
-    { img: img9, title: title9 }
-   
+    { img: img, title: title, id: 114461, type: 'serie' },
+    { img: img2, title: title2, id: 277834, type: 'movie' },
+    { img: img3, title: title3, id: 85, type: 'movie' },
+    { img: img4, title: title4, id: 82856, type: 'serie' },
+    { img: img5, title: title5, id: 76600, type: 'movie' },
+    { img: img6, title: title6, id: 114472, type: 'serie' },
+    { img: img7, title: title7, id: 508947, type: 'movie' },
+    { img: img8, title: title8, id: 84958, type: 'serie' },
+    { img: img9, title: title9, id: 83867, type: 'serie' },
+    { img: img10, title: title10, id: 284053, type: 'movie' },
   ];
+
+  const queryKey = ['getMovies'];
+  const { isLoading, data } = useQuery(queryKey, async () => {
+    return await getMoviesFromCompany(3, 10);
+    // return await getData();
+  });
+  const movies = data || [];
 
   return (
     <Container>
@@ -45,6 +56,18 @@ const Home = () => {
         slidesToScroll={1}
       />
       <Viewers />
+      {isLoading && <div>en cours de chargement</div>}
+      {!isLoading && (
+        <div>
+          {movies.map((movie) => (
+            <div key={movie.id}>
+              <h2>{movie.title}</h2>
+              <p>{movie.production_companies}</p>
+              {/* Affichez d'autres détails du film ici */}
+            </div>
+          ))}
+        </div>
+      )}
     </Container>
   );
 };
