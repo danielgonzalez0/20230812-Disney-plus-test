@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import disneyLogo from '../../assets/images/disneyLogo.svg';
@@ -14,80 +14,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { setSignOutState } from '../../redux/features/userSlice';
 
-const Header = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
-  const location = useLocation()
-
-  const logout = () =>{
-      auth.signOut().then(()=>{
-        dispatch(setSignOutState())
-           navigate('/');
-      }).catch((err)=>console.log(err.message))
-}
-
-  return (
-    <Nav>
-      <Logo to='/'>
-        <img src={disneyLogo} alt="Disney plus" />
-      </Logo>
-      {!user.name ? (
-        location.pathname === '/login' ? null : 
-        <Login onClick={()=>navigate('/login')}>S'IDENTIFIER</Login>
-      ) : (
-        <>
-          <NavMenu>
-            <a href="/home">
-              <img src={homeIcon} alt="accueil" />
-              <span>ACCUEIL</span>
-            </a>
-            <a href="/home">
-              <img src={searchIcon} alt="recherche" />
-              <span>RECHERCHE</span>
-            </a>
-            <a href="/home">
-              <img src={watchListIcon} alt="ma liste" />
-              <span>MA LISTE</span>
-            </a>
-            <a href="/home">
-              <img src={originalIcon} alt="originals" />
-              <span>ORIGINALS</span>
-            </a>
-            <a href="/home">
-              <img src={movieIcon} alt="film" />
-              <span>FILM</span>
-            </a>
-            <a href="/home">
-              <img src={seriesIcon} alt="séries" />
-              <span>SÉRIES</span>
-            </a>
-          </NavMenu>
-          <SignOut>
-            <UserImg src={user.photo} alt={user.name} />
-            <DropDown>
-              <span onClick={logout}>SE DÉCONNECTER</span>
-            </DropDown>
-          </SignOut>
-        </>
-      )}
-    </Nav>
-  );
-};
-
 const Nav = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  background: ${colors.headerColor};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 36px;
-  letter-spacing: 16px;
-  z-index: 3;
+  .wrapper {
+    transition: all 300ms ease 0s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    letter-spacing: 16px;
+    z-index: 3;
+  }
+  .hidden {
+    background: transparent;
+  }
+  .show {
+    background: ${colors.headerColor};
+  }
 `;
 
 const Logo = styled(NavLink)`
@@ -223,4 +170,88 @@ const SignOut = styled.div`
     }
   }
 `;
+
+const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const location = useLocation();
+  const [scrolling, setScrolling] = useState(false);
+
+  const logout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(setSignOutState());
+        navigate('/');
+      })
+      .catch((err) => console.log(err.message));
+  };
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 0) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolling]);
+
+  return (
+    <Nav id="navbar">
+      <div className={scrolling ? 'wrapper show' : 'wrapper hidden'}>
+        <Logo to="/">
+          <img src={disneyLogo} alt="Disney plus" />
+        </Logo>
+        {!user.name ? (
+          location.pathname === '/login' ? null : (
+            <Login onClick={() => navigate('/login')}>S'IDENTIFIER</Login>
+          )
+        ) : (
+          <>
+            <NavMenu>
+              <NavLink to="/home">
+                <img src={homeIcon} alt="accueil" />
+                <span>ACCUEIL</span>
+              </NavLink>
+              <NavLink to="/home">
+                <img src={searchIcon} alt="recherche" />
+                <span>RECHERCHE</span>
+              </NavLink>
+              <NavLink to="/home">
+                <img src={watchListIcon} alt="ma liste" />
+                <span>MA LISTE</span>
+              </NavLink>
+              <NavLink to="/home">
+                <img src={originalIcon} alt="originals" />
+                <span>ORIGINALS</span>
+              </NavLink>
+              <NavLink to="/home">
+                <img src={movieIcon} alt="film" />
+                <span>FILM</span>
+              </NavLink>
+              <NavLink to="/home">
+                <img src={seriesIcon} alt="séries" />
+                <span>SÉRIES</span>
+              </NavLink>
+            </NavMenu>
+            <SignOut>
+              <UserImg src={user.photo} alt={user.name} />
+              <DropDown>
+                <span onClick={logout}>SE DÉCONNECTER</span>
+              </DropDown>
+            </SignOut>
+          </>
+        )}
+      </div>
+    </Nav>
+  );
+};
+
 export default Header;
