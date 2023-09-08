@@ -100,17 +100,9 @@ const MainHomeSlider = ({slides}) => {
 //  const [sliderDomElement, setSliderDomElement] = useState();
  const translateInitial = `calc(-${(1 * 100) / slides.length}% - ${1 * 2}vw)`;
 
-//  useEffect(() => {
-//    setSliderDomElement(document.querySelector(`.${Slider.styledComponentId}`));
-//    if (sliderDomElement) {
-//      sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
-//    }
-//  }, [sliderDomElement]);
 
 const handleLeft = async () => {}
 const handleRight = async () => {}
-
-// medium.com/netscape/a-react-infinite-scroll-slider-c0643fa9e5eb
 
 return (
   <Carrousel>

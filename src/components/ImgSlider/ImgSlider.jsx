@@ -199,7 +199,7 @@ const InfiniteLoopComponent = ({ elements, offset }) => {
   );
 };
 
-const ImgSlider = ({ slides, autoPlay, slidesVisible, slidesToScroll }) => {
+const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
   const [slideIndex, setSlideIndex] = useState(slidesToScroll + slidesVisible);
   const [sliderDomElement, setSliderDomElement] = useState();
   const offset = slidesToScroll + slidesVisible;

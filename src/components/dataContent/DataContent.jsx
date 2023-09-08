@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Video from '../video/Video';
+import VideoMin from '../video/VideoMin';
 
 const BtnPlay = styled.button`
   display: flex;
@@ -35,6 +36,16 @@ const BtnTrailer = styled(BtnPlay)`
   }
 `;
 
+const VideosContainer = styled.ul`
+  display: flex;
+  gap: 20px;
+
+  p {
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+`;
+
 const DataContent = ({ id, genres, runtime, release, data, videos }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -50,7 +61,7 @@ const DataContent = ({ id, genres, runtime, release, data, videos }) => {
   }, [isOpen, videos]);
   return (
     <div>
-      <p>{id}</p>
+      <div style={{ borderRadius: 10 }}>{id}</div>
       <ul>
         {genres.map((genre) => (
           <li key={genre.id}>{genre.name}</li>
@@ -64,9 +75,18 @@ const DataContent = ({ id, genres, runtime, release, data, videos }) => {
       <div>
         <BtnPlay onClick={() => setIsOpen(true)}>LECTURE</BtnPlay>
         <BtnTrailer onClick={() => setIsOpen(true)}>BANDE-ANNONCE</BtnTrailer>
-        {isOpen && <Video close={setIsOpen} playing={true} id={videos[0].key}/>}
+        {isOpen && (
+          <Video close={setIsOpen} playing={true} id={videos[0].key} />
+        )}
       </div>
-      <ul></ul>
+      <VideosContainer>
+        {videos.map((video, index) => (
+          <li key={index}>
+            <VideoMin id={video.key} playing={false} />
+            <p>{video.name}</p>
+          </li>
+        ))}
+      </VideosContainer>
     </div>
   );
 };
