@@ -21,6 +21,12 @@ body {
   padding: 0;
 }
 
+button {
+  font-family: 'Nunito Variable Font', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+}
+
 a {
   color: #f9f9f9;
   text-decoration: none;

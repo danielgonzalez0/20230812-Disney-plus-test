@@ -39,7 +39,7 @@ async function getMoviesFromCompany(companyId, totalPage) {
   while (currentPage <= totalPage) {
     //  const url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${companyId}&api_key=${apiKey}&language=fr-FR&page=${currentPage}`;
 
-    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=false&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`;
+    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`;
 
     try {
       const response = await fetch(url2);
@@ -64,7 +64,7 @@ async function getMoviesFromCompany(companyId, totalPage) {
  */
 async function getUrl(id, type) {
   const urlSerie = `https://api.themoviedb.org/3/tv/${id}?language=fr-FR`;
-  const urlMovie = `https://api.themoviedb.org/3/movie/${id}?language=fr-FR`;
+  const urlMovie = `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos&language=fr-FR`;
   const urlImageMovie = `https://api.themoviedb.org/3/movie/${id}/images?include_image_language=fr%2Cen`;
 
   switch (type) {
@@ -100,3 +100,5 @@ async function getDetail(id, type) {
 }
 
 export { getDetail, getMoviesFromCompany };
+
+

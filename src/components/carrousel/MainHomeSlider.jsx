@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import img from '../../pages/home/slider-image.jpg';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
