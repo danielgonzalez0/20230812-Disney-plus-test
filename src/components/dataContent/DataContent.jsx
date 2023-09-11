@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Video from '../video/Video';
 import VideoMin from '../video/VideoMin';
+import Slider from '../carrousel/Slider';
+import VideoContainer from './VideoContainer';
 
 const BtnPlay = styled.button`
   display: flex;
@@ -33,16 +35,6 @@ const BtnTrailer = styled(BtnPlay)`
     background: #f9f9f9;
     border: 2px solid #f9f9f9;
     color: black;
-  }
-`;
-
-const VideosContainer = styled.ul`
-  display: flex;
-  gap: 20px;
-
-  p {
-    margin-top: 10px;
-    border-radius: 5px;
   }
 `;
 
@@ -79,14 +71,8 @@ const DataContent = ({ id, genres, runtime, release, data, videos }) => {
           <Video close={setIsOpen} playing={true} id={videos[0].key} />
         )}
       </div>
-      <VideosContainer>
-        {videos.map((video, index) => (
-          <li key={index}>
-            <VideoMin id={video.key} playing={false} />
-            <p>{video.name}</p>
-          </li>
-        ))}
-      </VideosContainer>
+      <VideoContainer videos={videos} />
+      <Slider />
     </div>
   );
 };

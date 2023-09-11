@@ -11,6 +11,7 @@ const Container = styled.main`
   margin-top: 70px;
   min-height: 150vh;
   padding: 0 calc(3.5vw + 24px);
+  overflow-x: hidden;
   .filter {
     background-color: rgb(26, 29, 41);
     position: fixed;
@@ -51,7 +52,7 @@ const Background = styled.div`
   }
 `;
 
-const Main = styled.main`
+const Main = styled.section`
   article {
     width: 100%;
     padding: 56px 0 16px;
@@ -124,7 +125,14 @@ const Movie = () => {
           />
         </article>
       </Main>
-      <DataContent id={movieDetail.id} genres={movieDetail.genres} runtime={movieDetail.runtime} release={movieDetail.release} data={movieDetail} videos={movieDetail.getVideos()}/>
+      <DataContent
+        id={movieDetail.id}
+        genres={movieDetail.genres}
+        runtime={movieDetail.runtime}
+        release={movieDetail.release}
+        data={movieDetail}
+        videos={movieDetail.getVideos()}
+      />
     </Container>
   );
 };
