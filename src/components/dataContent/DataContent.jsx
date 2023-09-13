@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Video from '../video/Video';
-import VideoMin from '../video/VideoMin';
-import Slider from '../carrousel/Slider';
-import VideoContainer from './VideoContainer';
+
+import { useDispatch } from 'react-redux';
+import { setVideoParams } from '../../redux/features/videoSlice';
 
 const BtnPlay = styled.button`
   display: flex;
@@ -38,22 +37,15 @@ const BtnTrailer = styled(BtnPlay)`
   }
 `;
 
-const DataContent = ({ id, genres, runtime, release, data, videos }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const DataContent = ({genres, runtime, release, data, videos }) => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log(videos);
-    if (isOpen) {
-      document.body.style.overflowY = 'hidden';
-      document.body.style.pointerEvents = 'none';
-    } else {
-      document.body.style.overflowY = 'auto';
-      document.body.style.pointerEvents = 'auto';
-    }
-  }, [isOpen, videos]);
+  }, [videos]);
+
   return (
     <div>
-      <div style={{ borderRadius: 10 }}>{id}</div>
       <ul>
         {genres.map((genre) => (
           <li key={genre.id}>{genre.name}</li>
@@ -65,14 +57,13 @@ const DataContent = ({ id, genres, runtime, release, data, videos }) => {
       <p>{data.getGenresQueryParams()}</p>
 
       <div>
-        <BtnPlay onClick={() => setIsOpen(true)}>LECTURE</BtnPlay>
-        <BtnTrailer onClick={() => setIsOpen(true)}>BANDE-ANNONCE</BtnTrailer>
-        {isOpen && (
-          <Video close={setIsOpen} playing={true} id={videos[0].key} />
-        )}
+        <BtnPlay onClick={() => dispatch(setVideoParams(videos[0].key))}>
+          LECTURE
+        </BtnPlay>
+        <BtnTrailer onClick={() => dispatch(setVideoParams(videos[0].key))}>
+          BANDE-ANNONCE
+        </BtnTrailer>
       </div>
-      <VideoContainer videos={videos} />
-      <Slider />
     </div>
   );
 };

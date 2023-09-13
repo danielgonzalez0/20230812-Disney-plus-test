@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { deleteVideoParams } from '../../redux/features/videoSlice';
 
 const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   background: black;
-  z-index: 200;
-  overflow-y: hidden;
+  z-index: 4000000;
   pointer-events: visible;
 
   .closeBtn {
@@ -37,10 +38,14 @@ const Container = styled.div`
   }
 `;
 
-const Video = ({ close, id, playing}) => {
+const Video = ({ id, playing }) => {
+  const dispatch = useDispatch();
   return (
     <Container>
-      <button className="closeBtn" onClick={() => close(false)}>
+      <button
+        className="closeBtn"
+        onClick={() => dispatch(deleteVideoParams())}
+      >
         Retour
       </button>
       <ReactPlayer
@@ -50,7 +55,7 @@ const Video = ({ close, id, playing}) => {
         width={'100%'}
         height={'100%'}
         playing={playing}
-        onEnded={() => close(false)}
+        onEnded={() => dispatch(deleteVideoParams())}
       />
     </Container>
   );

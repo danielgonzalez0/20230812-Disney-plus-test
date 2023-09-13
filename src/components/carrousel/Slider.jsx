@@ -4,6 +4,7 @@ import { colors } from '../../utils/variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { handleSlidesVisible } from '../../utils/utils';
 
 //styled components
 
@@ -51,16 +52,17 @@ const RightBtn = styled(Button)`
 `;
 
 const Slider = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth * 0.93 -48);
-  const [slideWidth, setSlideWidth] = useState(window.innerWidth * 0.25 + 20)
-  const [slidesVisible, setSlidesVisible] = useState(Math.round(windowWidth / slideWidth))
+  const [slidesVisible, setSlidesVisible] = useState(
+    handleSlidesVisible(window.innerWidth)
+  );
+
+
 
 
 const handleResize = useCallback(() => {
-  setWindowWidth(Math.round(window.innerWidth * 0.93 - 48));
-  setSlideWidth(Math.round(window.innerWidth * 0.25 + 20));
-  setSlidesVisible(Math.round(windowWidth / 283));
-}, [windowWidth, slideWidth]);
+  setSlidesVisible(handleSlidesVisible(window.innerWidth));
+  
+}, []);
 
   useEffect(() => {
     window.addEventListener('resize', ()=>handleResize());

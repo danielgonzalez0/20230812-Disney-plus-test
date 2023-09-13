@@ -6,12 +6,18 @@ import { getDetail } from '../../services/api';
 import { Images } from '../../models/images';
 import DataContent from '../../components/dataContent/DataContent';
 import { MovieData } from '../../models/movie';
+import VideoContainer from '../../components/dataContent/VideoContainer';
+import Video from '../../components/video/Video';
+import { useSelector } from 'react-redux';
 
 const Container = styled.main`
   margin-top: 70px;
   min-height: 150vh;
   padding: 0 calc(3.5vw + 24px);
-  overflow-x: hidden;
+  overflow-x: visible;
+
+
+
   .filter {
     background-color: rgb(26, 29, 41);
     position: fixed;
@@ -67,6 +73,8 @@ const Main = styled.section`
 
 const Movie = () => {
   const [opacityValue, setopacityValue] = useState(1);
+  const videoIsOpen = useSelector((state)=>state.video.isOpen)
+  const videoId = useSelector((state)=>state.video.id)
 
   const { id } = useParams();
   const movieQueryKey = ['getMovieDetail'];
@@ -105,7 +113,22 @@ const Movie = () => {
     };
   }, [opacityValue]);
 
+  useEffect(() => {
+    if (videoIsOpen) {
+      document.body.style.overflowY = 'hidden';
+      document.body.style.pointerEvents = 'none';
+    } else {
+      document.body.style.overflowY = 'auto';
+      document.body.style.pointerEvents = 'auto';
+    }
+  }, [videoIsOpen]);
+
+
   if (isLoading) return <div>en cours de chargement</div>;
+
+  if(videoIsOpen) return <Video playing={true} id={videoId} />;
+      
+
 
   return (
     <Container>
@@ -124,15 +147,18 @@ const Movie = () => {
             alt={movieDetail.title}
           />
         </article>
+        <DataContent
+          id={movieDetail.id}
+          genres={movieDetail.genres}
+          runtime={movieDetail.runtime}
+          release={movieDetail.release}
+          data={movieDetail}
+          videos={movieDetail.getVideos()}
+        />
+        <VideoContainer
+          videos={movieDetail.getVideos()}
+        />
       </Main>
-      <DataContent
-        id={movieDetail.id}
-        genres={movieDetail.genres}
-        runtime={movieDetail.runtime}
-        release={movieDetail.release}
-        data={movieDetail}
-        videos={movieDetail.getVideos()}
-      />
     </Container>
   );
 };
