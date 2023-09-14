@@ -1,5 +1,5 @@
 export class MovieData {
-  constructor(data, release, casting) {
+  constructor(data, casting) {
     this._id = data.id;
     this._imageBackPath = data.backdrop_path;
     this._genres = data.genres;
@@ -12,6 +12,8 @@ export class MovieData {
     this._tagline = data.tagline;
     this._title = data.title;
     this._videos = data.videos.results;
+    this._cast = casting.cast;
+    this._crew = casting.crew;
   }
 
   get id() {
@@ -50,12 +52,24 @@ export class MovieData {
   get videos() {
     return this._videos;
   }
+  get cast() {
+    return this._cast;
+  }
+  get crew() {
+    return this._crew;
+  }
 
   getCompaniesQueryParams() {
     let resultArray = [];
-    this._companies.forEach((companie) => {
-      resultArray.push(companie.id);
-    });
+    let companiesArray = [1, 2, 3, 420, 7521];
+    this._companies
+      .filter((companie) => companiesArray.includes(companie.id))
+      .forEach((companie) => {
+        resultArray.push(companie.id);
+      });
+      if(resultArray.length === 0){
+        resultArray = companiesArray
+      } 
     return resultArray.join('%7C');
   }
 
@@ -81,9 +95,15 @@ export class MovieData {
     let resultArray = [];
     let trailers = this.getVideosByType('Trailer');
     let clips = this.getVideosByType('Clip');
-    resultArray = [...trailers, ...clips]
-    console.log(resultArray);
+    resultArray = [...trailers, ...clips];
     return resultArray;
+  }
+
+  getDirectors() {
+    let resultArray = [];
+    return (resultArray = this._crew.filter(
+      (person) => person.job === 'Director'
+    ));
   }
 }
 

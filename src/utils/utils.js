@@ -38,7 +38,7 @@ const handleSlideOverflow = () => {
     if (lis.length > 0) {
       lis.forEach((li) => {
         const liLeft = li.getBoundingClientRect().left;
-        const liRight = liLeft + li.clientWidth - 10;
+        const liRight = liLeft + li.clientWidth - 15;
 
         if (liLeft > ulLeft && liRight < ulRight) {
           // L'élément li est entièrement visible dans la zone ul
@@ -52,4 +52,39 @@ const handleSlideOverflow = () => {
   }
 };
 
-export { handleSlidesVisible, handleSlideOverflow };
+/**
+ * Convertit un nombre de minutes en une chaîne de caractères au format "hh h mm min".
+ *
+ * @param {number} minutes - Le nombre de minutes à convertir en heures et minutes.
+ * @returns {string} Une chaîne de caractères au format "hh h mm min" ou "Invalid Input" si l'entrée est invalide.
+ */
+const handleFormatTime = (minutes) => {
+  /**
+   * Convertit un nombre de minutes en une chaîne de caractères au format "hh h mm min".
+   *
+   * @param {number} minutes - Le nombre de minutes à convertir en heures et minutes.
+   * @returns {string} Une chaîne de caractères au format "hh h mm min" ou "Invalid Input" si l'entrée est invalide.
+   */
+    if (isNaN(minutes) || minutes < 0) {
+      return 'Invalid Input';
+    }
+
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    const formattedHours = hours > 0 ? `${hours} h` : '';
+    const formattedMinutes =
+      remainingMinutes > 0 ? `${remainingMinutes} min` : '';
+
+    if (formattedHours && formattedMinutes) {
+      return `${formattedHours} ${formattedMinutes}`;
+    } else if (formattedHours) {
+      return formattedHours;
+    } else if (formattedMinutes) {
+      return formattedMinutes;
+    } else {
+      return '0 min'; // Si l'entrée est 0 minute
+    }
+};
+
+export { handleFormatTime, handleSlidesVisible, handleSlideOverflow };

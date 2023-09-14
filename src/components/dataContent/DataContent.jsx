@@ -1,13 +1,61 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { setVideoParams } from '../../redux/features/videoSlice';
+import { handleFormatTime } from '../../utils/utils';
+import ccImg from './cc.png';
+import adImg from './ad.png';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  display: flex;
+  min-height: 30px;
+  margin-bottom: 56px;
+  span {
+    font-size: 12px;
+  }
+  .btnContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  font-size: 25px;
+  margin-right: 15px;
+`;
+
+const GenresList = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 30px;
+  padding-bottom: 32px;
+  img {
+    height: 20px;
+  }
+`;
+
+const Description = styled.p`
+  padding: 1rem 0;
+  span {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 const BtnPlay = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   height: 56px;
   padding: 0 24px;
   color: #0e0b14;
@@ -37,7 +85,14 @@ const BtnTrailer = styled(BtnPlay)`
   }
 `;
 
-const DataContent = ({genres, runtime, release, data, videos }) => {
+const DataContent = ({
+  genres,
+  runtime,
+  release,
+  videos,
+  tagline,
+  title,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,26 +100,33 @@ const DataContent = ({genres, runtime, release, data, videos }) => {
   }, [videos]);
 
   return (
-    <div>
-      <ul>
-        {genres.map((genre) => (
-          <li key={genre.id}>{genre.name}</li>
+    <Container>
+      <span>{`${release.slice(0, 4)} • ${handleFormatTime(runtime)}`}</span>
+      <GenresList>
+        <img src={adImg} alt="logo ad" />
+        <img src={ccImg} alt="logo cc" />
+        {genres.map((genre, index) => (
+          <li key={genre.id}>
+            {' '}
+            {genre.name}
+            {index < genres.length - 1 ? ',' : ''}
+          </li>
         ))}
-      </ul>
-      <p>{runtime}</p>
-      <p>{release}</p>
-      <p>{data.getCompaniesQueryParams()}</p>
-      <p>{data.getGenresQueryParams()}</p>
+      </GenresList>
 
-      <div>
+      <div className="btnContainer">
         <BtnPlay onClick={() => dispatch(setVideoParams(videos[0].key))}>
-          LECTURE
+          <StyledIcon icon={faPlay} /> LECTURE
         </BtnPlay>
         <BtnTrailer onClick={() => dispatch(setVideoParams(videos[0].key))}>
           BANDE-ANNONCE
         </BtnTrailer>
       </div>
-    </div>
+      <Description>
+        <span>{title}</span>
+        <span>{tagline}</span>
+      </Description>
+    </Container>
   );
 };
 

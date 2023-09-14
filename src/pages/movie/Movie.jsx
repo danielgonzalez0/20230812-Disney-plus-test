@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useQuery } from '@tanstack/react-query';
-import { getDetail } from '../../services/api';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getDetail, getMoviesSuggestion } from '../../services/api';
 import { Images } from '../../models/images';
 import DataContent from '../../components/dataContent/DataContent';
 import { MovieData } from '../../models/movie';
-import VideoContainer from '../../components/dataContent/VideoContainer';
 import Video from '../../components/video/Video';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteVideoParams } from '../../redux/features/videoSlice';
+import MovieSection from '../../components/movieSection/MovieSection';
 
 const Container = styled.main`
   margin-top: 70px;
   min-height: 150vh;
   padding: 0 calc(3.5vw + 24px);
   overflow-x: visible;
-
-
 
   .filter {
     background-color: rgb(26, 29, 41);
@@ -73,40 +72,54 @@ const Main = styled.section`
 
 const Movie = () => {
   const [opacityValue, setopacityValue] = useState(1);
-  const videoIsOpen = useSelector((state)=>state.video.isOpen)
-  const videoId = useSelector((state)=>state.video.id)
+  const videoIsOpen = useSelector((state) => state.video.isOpen);
+  const videoId = useSelector((state) => state.video.id);
+  const dispatch = useDispatch();
+
+  //call API
 
   const { id } = useParams();
-  const movieQueryKey = ['getMovieDetail'];
+  const queryClient = useQueryClient();
+  const movieQueryKey = ['getMovieDetail', id];
   const { isLoading, data } = useQuery(
     movieQueryKey,
     async () => {
       const data = await getDetail(id, 'movie');
       const movieImageData = await getDetail(id, 'imageMovie');
-      const movieDetail = new MovieData(data);
+      const castingData = await getDetail(id, 'casting');
+      const movieDetail = new MovieData(data, castingData);
       const movieImage = new Images(movieImageData);
+      const suggestionData = await getMoviesSuggestion(
+        movieDetail.getGenresQueryParams(),
+        movieDetail.getCompaniesQueryParams()
+      );
       console.log('moviImages', movieImage);
       console.log('movieData', movieDetail);
-      return { movieDetail, movieImage };
+      console.log('suggestions', suggestionData);
+      return { movieDetail, movieImage, suggestionData };
     },
     { cacheTime: 0 }
   );
 
-  const { movieDetail, movieImage } = data || [];
+  const { movieDetail, movieImage, suggestionData } = data || [];
 
   useEffect(() => {
-    function handleScroll() {
-      if (window.scrollY >= 100 && window.scrollY < 200) {
-        setopacityValue(0.73333);
-      } else if (window.scrollY >= 200 && window.scrollY < 300) {
-        setopacityValue(0.46667);
-      } else if (window.scrollY >= 300) {
-        setopacityValue(0.2);
-      } else {
-        setopacityValue(1);
-      }
-    }
+    // Invoquez queryClient.invalidateQueries lorsque id change
+    queryClient.invalidateQueries(movieQueryKey);
+  }, [id]);
 
+  function handleScroll() {
+    if (window.scrollY >= 100 && window.scrollY < 200) {
+      setopacityValue(0.73333);
+    } else if (window.scrollY >= 200 && window.scrollY < 300) {
+      setopacityValue(0.46667);
+    } else if (window.scrollY >= 300) {
+      setopacityValue(0.2);
+    } else {
+      setopacityValue(1);
+    }
+  }
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -121,14 +134,21 @@ const Movie = () => {
       document.body.style.overflowY = 'auto';
       document.body.style.pointerEvents = 'auto';
     }
-  }, [videoIsOpen]);
-
+    window.addEventListener('popstate', () => {
+      dispatch(deleteVideoParams());
+      document.body.style.overflowY = 'auto';
+      document.body.style.pointerEvents = 'auto';
+    });
+    return () => {
+      window.removeEventListener('popstate', () =>
+        dispatch(deleteVideoParams())
+      );
+    };
+  }, [videoIsOpen, dispatch]);
 
   if (isLoading) return <div>en cours de chargement</div>;
 
-  if(videoIsOpen) return <Video playing={true} id={videoId} />;
-      
-
+  if (videoIsOpen) return <Video playing={true} id={videoId} />;
 
   return (
     <Container>
@@ -142,22 +162,25 @@ const Movie = () => {
 
       <Main>
         <article>
-          <img
-            src={`https://image.tmdb.org/t/p/w300/${movieImage.logos[0].file_path}`}
-            alt={movieDetail.title}
-          />
+          {movieImage.logos[0] ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${movieImage.logos[0].file_path}`}
+              alt={movieDetail.title}
+            />
+          ) : (
+            <span>{movieDetail.title}</span>
+          )}
         </article>
         <DataContent
           id={movieDetail.id}
           genres={movieDetail.genres}
           runtime={movieDetail.runtime}
           release={movieDetail.release}
-          data={movieDetail}
+          title={movieDetail.title}
+          tagline={movieDetail.tagline}
           videos={movieDetail.getVideos()}
         />
-        <VideoContainer
-          videos={movieDetail.getVideos()}
-        />
+        <MovieSection movie={movieDetail} suggestions={suggestionData} />
       </Main>
     </Container>
   );
