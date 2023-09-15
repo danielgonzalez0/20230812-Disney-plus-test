@@ -33,6 +33,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 const GenresList = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 5px;
   font-size: 12px;
   line-height: 30px;

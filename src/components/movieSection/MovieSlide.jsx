@@ -10,7 +10,7 @@ const Container = styled.div`
   cursor: pointer;
   /* position: relative; */
   transition: transform 300ms ease-out 0s;
-  background-color: rgb(26, 29, 41);
+  /* background-color: rgb(26, 29, 41); */
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.69) 0px 26px 30px -10px,
     rgba(0, 0, 0, 0.73) 0px 16px 10px -10px;
@@ -21,24 +21,22 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     z-index: 100;
-    &:after {
-      position: absolute;
-      content: '';
-      top: 0;
-      right: 0;
-      height: 98%;
-      width: 100%;
+    transition: all 200ms ease-out 0s !important;
+    border: 4px transparent;
+    border-radius: 4px;
+
+    &:hover {
+      padding: 4px;
+      transform: scale(1.1);
+      border: 4px solid ${colors.white};
       border-radius: 4px;
     }
-    &:hover:after {
-      border: 4px solid ${colors.white};
-      transition-duration: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s !important;
-    }
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: right center;
+      object-position: center center;
       border-radius: 4px;
     }
   }
@@ -79,7 +77,7 @@ const MovieSlide = (movie) => {
 
   const { movieImage } = data || [];
 
-    if (isLoading) return <div>en cours de chargement</div>;
+  if (isLoading) return <div>en cours de chargement</div>;
 
   return (
     <>

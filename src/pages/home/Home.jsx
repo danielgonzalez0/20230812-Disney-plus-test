@@ -25,6 +25,7 @@ import title10 from './img8-title.png';
 import Viewers from '../../components/viewers/Viewers';
 import { getMoviesFromCompany } from '../../services/api';
 import { useQuery } from '@tanstack/react-query';
+import Footer from '../../components/footer/Footer';
 
 const Home = () => {
   const array = [
@@ -42,53 +43,47 @@ const Home = () => {
 
   const queryKey = ['getMovies'];
   const { isLoading, data } = useQuery(queryKey, async () => {
-    return await getMoviesFromCompany(3, 10);
+    return await getMoviesFromCompany(1, 10, 878);
     // return await getData();
   });
   const movies = data || [];
 
   return (
-    <Container>
-      <ImgSlider
-        slides={array}
-        autoPlay={true}
-        slidesVisible={1}
-        slidesToScroll={1}
-      />
-      <Viewers />
-      {isLoading && <div>en cours de chargement</div>}
-      {!isLoading && (
-        <div>
-          {movies.map((movie) => (
-            <div key={movie.id}>
-              <h2>{movie.title}</h2>
-              <p>{movie.production_companies}</p>
-              {/* Affichez d'autres détails du film ici */}
-            </div>
-          ))}
-        </div>
-      )}
-    </Container>
+    <>
+      <Container>
+        <ImgSlider
+          slides={array}
+          autoPlay={true}
+          slidesVisible={1}
+          slidesToScroll={1}
+        />
+        <Viewers />
+        {isLoading && <div>en cours de chargement</div>}
+        {!isLoading && (
+          <div>
+            {movies.map((movie) => (
+              <div key={movie.id}>
+                <h2>{movie.title}</h2>
+                <p>{movie.production_companies}</p>
+                {/* Affichez d'autres détails du film ici */}
+              </div>
+            ))}
+          </div>
+        )}
+      </Container>
+      <Footer />
+    </>
   );
 };
 
 const Container = styled.main`
   position: relative;
-  background: url(${bgImg});
+  background: url(${bgImg}) center center / cover no-repeat fixed;
   min-height: calc(100vh - 250px);
   overflow-x: hidden;
   display: block;
   top: 72px;
   padding: 0 5%;
-
-  &:after {
-    background: url(${bgImg}) center center / cover no-repeat fixed;
-    position: absolute;
-    content: '';
-    inset: 0px;
-    opacity: 1;
-    z-index: -1;
-  }
 `;
 
 export default Home;

@@ -33,13 +33,13 @@ class Api {
 }
 
 // Fonction récursive pour paginer à travers les résultats
-async function getMoviesFromCompany(companyId, totalPage) {
+async function getMoviesFromCompany(companyId, totalPage, genre) {
   const allResults = [];
   let currentPage = 1;
   while (currentPage <= totalPage) {
     //  const url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${companyId}&api_key=${apiKey}&language=fr-FR&page=${currentPage}`;
 
-    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`;
+    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&with_genres=${genre}&api_key=${apiKey}`;
 
     try {
       const response = await fetch(url2);
@@ -63,10 +63,12 @@ async function getMoviesFromCompany(companyId, totalPage) {
  * @returns an url for the api call
  */
 async function getUrl(id, type) {
-  const urlSerie = `https://api.themoviedb.org/3/tv/${id}?language=fr-FR`;
+  const urlSerie = `https://api.themoviedb.org/3/tv/${id}?append_to_response=videos&language=fr-FR`;
   const urlMovie = `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos&language=fr-FR`;
   const urlImageMovie = `https://api.themoviedb.org/3/movie/${id}/images?include_image_language=fr%2Cen`;
+  const urlImageSerie = `https://api.themoviedb.org/3/tv/${id}/images?include_image_language=fr%2Cen`;
   const urlCasting = `https://api.themoviedb.org/3/movie/${id}/credits?language=fr-FR`;
+  const urlSerieCasting = `https://api.themoviedb.org/3/tv/${id}/credits?language=fr-FR`;
 
   switch (type) {
     case 'movie':
@@ -75,8 +77,12 @@ async function getUrl(id, type) {
       return urlSerie;
     case 'imageMovie':
       return urlImageMovie;
+    case 'imageSerie':
+      return urlImageSerie;
     case 'casting':
       return urlCasting;
+    case 'castingSerie':
+      return urlSerieCasting;
     default:
       return urlMovie;
   }
@@ -121,5 +127,25 @@ async function getMoviesSuggestion(genres, companies) {
   const response = new Api(url, options).getData();
   return response;
 }
+/**
+ * get detail of asset of thmb depending of an genres and companies
+ * @param {string} genres of the movie
+ * @param {string} companies of the movie
+ * @returns array with the detail movies suggestions
+ */
+async function getSeriesSuggestion(genres, companies) {
+  const url = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc&with_companies=${companies}&with_genres=${genres}`;
 
-export { getDetail, getMoviesFromCompany, getMoviesSuggestion };
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiToken}`,
+    },
+  };
+
+  const response = new Api(url, options).getData();
+  return response;
+}
+
+export { getDetail, getMoviesFromCompany, getMoviesSuggestion, getSeriesSuggestion };

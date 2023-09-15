@@ -18,7 +18,7 @@ const Container = styled.div`
   gap: 25px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 `;
 
@@ -47,10 +47,12 @@ const Wrap = styled.div`
   }
 
   video {
-    width: 100%;
-    height: 100%;
+    width: 120%;
+    height: 120%;
     position: absolute;
-    top: 0px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 0;
     z-index: 0;
   }

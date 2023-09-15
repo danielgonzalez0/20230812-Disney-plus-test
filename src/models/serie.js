@@ -1,4 +1,4 @@
-export class MovieData {
+export class SerieData {
   constructor(data, casting) {
     this._id = data.id;
     this._imageBackPath = data.backdrop_path;
@@ -7,14 +7,16 @@ export class MovieData {
     this._imageFrontPath = data.poster_path;
     this._popularity = data.popularity;
     this._companies = data.production_companies;
-    this._release = data.release_date;
-    this._runtime = data.runtime;
+    this._first_release = data.first_air_date;
+    this._last_release = data.last_air_date;
     this._tagline = data.tagline;
-    this._title = data.title;
+    this._title = data.name;
     this._videos = data.videos.results;
+    this._number_of_seasons = data.number_of_seasons;
+    this._seasons = data.seasons;
     this._cast = casting.cast;
     this._crew = casting.crew;
-    this._type = "movie";
+    this._type = 'serie';
   }
 
   get id() {
@@ -38,11 +40,11 @@ export class MovieData {
   get companies() {
     return this._companies;
   }
-  get release() {
-    return this._release;
+  get first_release() {
+    return this._first_release;
   }
-  get runtime() {
-    return this._runtime;
+  get last_release() {
+    return this._last_release;
   }
   get tagline() {
     return this._tagline;
@@ -52,6 +54,12 @@ export class MovieData {
   }
   get videos() {
     return this._videos;
+  }
+  get number_of_seasons() {
+    return this._number_of_seasons;
+  }
+  get seasons() {
+    return this._seasons;
   }
   get cast() {
     return this._cast;
@@ -71,9 +79,9 @@ export class MovieData {
       .forEach((companie) => {
         resultArray.push(companie.id);
       });
-      if(resultArray.length === 0){
-        resultArray = companiesArray
-      } 
+    if (resultArray.length === 0) {
+      resultArray = companiesArray;
+    }
     return resultArray.join('%7C');
   }
 
@@ -110,5 +118,3 @@ export class MovieData {
     ));
   }
 }
-
-

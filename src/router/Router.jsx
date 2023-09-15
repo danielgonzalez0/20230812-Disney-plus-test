@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Serie from '../pages/serie/Serie';
 import Movie from '../pages/movie/Movie';
 
+
 const Router = () => {
   const user = useSelector((state) => state.user.name);
   return (

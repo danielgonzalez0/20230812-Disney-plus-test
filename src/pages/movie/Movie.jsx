@@ -10,10 +10,11 @@ import Video from '../../components/video/Video';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteVideoParams } from '../../redux/features/videoSlice';
 import MovieSection from '../../components/movieSection/MovieSection';
+import Footer from '../../components/footer/Footer';
 
 const Container = styled.main`
   margin-top: 70px;
-  min-height: 150vh;
+  min-height: 100vh;
   padding: 0 calc(3.5vw + 24px);
   overflow-x: visible;
 
@@ -151,6 +152,7 @@ const Movie = () => {
   if (videoIsOpen) return <Video playing={true} id={videoId} />;
 
   return (
+    <>
     <Container>
       <div className="filter"></div>
       <Background style={{ opacity: opacityValue }}>
@@ -183,6 +185,8 @@ const Movie = () => {
         <MovieSection movie={movieDetail} suggestions={suggestionData} />
       </Main>
     </Container>
+    <Footer/>
+    </>
   );
 };
 

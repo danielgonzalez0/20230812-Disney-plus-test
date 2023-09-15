@@ -54,7 +54,7 @@ const Section = styled.section`
 `;
 
 const MovieSection = ({ movie, suggestions }) => {
-  const [activeTab, setActiveTab] = useState('details');
+  const [activeTab, setActiveTab] = useState('suggestions');
   const handleTabDisplay = (tab) => {
     setActiveTab(tab);
   };
