@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { setVideoParams } from '../../redux/features/videoSlice';
-import { handleFormatTime } from '../../utils/utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import ccImg from './cc.png';
 import adImg from './ad.png';
 
@@ -30,6 +29,18 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 15px;
 `;
 
+const SeasonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 30px;
+  img {
+    height: 20px;
+  }
+`;
+
 const GenresList = styled.div`
   display: flex;
   align-items: center;
@@ -38,13 +49,11 @@ const GenresList = styled.div`
   font-size: 12px;
   line-height: 30px;
   padding-bottom: 32px;
-  img {
-    height: 20px;
-  }
 `;
 
 const Description = styled.p`
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  max-width: 874px;
   span {
     font-size: 20px;
     display: flex;
@@ -86,19 +95,38 @@ const BtnTrailer = styled(BtnPlay)`
   }
 `;
 
-const DataContent = ({ genres, runtime, release, videos, tagline, title }) => {
+const SerieContent = ({
+  genres,
+  firstRelease,
+  lastRelease,
+  videos,
+  overview,
+  numberOfSeasons,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log(videos);
   }, [videos]);
-
   return (
     <Container>
-      <span>{`${release.slice(0, 4)} • ${handleFormatTime(runtime)}`}</span>
-      <GenresList>
+      <SeasonContainer>
         <img src={adImg} alt="logo ad" />
         <img src={ccImg} alt="logo cc" />
+        {numberOfSeasons > 1 ? (
+          <span>{`${firstRelease.slice(0, 4)} - ${lastRelease.slice(
+            0,
+            4
+          )} • ${numberOfSeasons} saisons`}</span>
+        ) : (
+          <span>{`${firstRelease.slice(
+            0,
+            4
+          )} • ${numberOfSeasons} saison`}</span>
+        )}
+      </SeasonContainer>
+
+      <GenresList>
         {genres.map((genre, index) => (
           <li key={genre.id}>
             {' '}
@@ -119,11 +147,10 @@ const DataContent = ({ genres, runtime, release, videos, tagline, title }) => {
         </div>
       )}
       <Description>
-        <span>{title}</span>
-        <span>{tagline}</span>
+        <span>{overview}</span>
       </Description>
     </Container>
   );
 };
 
-export default DataContent;
+export default SerieContent;

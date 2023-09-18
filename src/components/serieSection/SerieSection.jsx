@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import VideoContainer from './VideoContainer';
-import DetailMovie from './DetailMovie';
-import MovieSuggestions from './MovieSuggestions';
 
 const Nav = styled.nav`
   width: 100%;
@@ -53,18 +50,24 @@ const Section = styled.section`
   padding: 10px 0;
 `;
 
-const MovieSection = ({ movie, suggestions }) => {
-  const [activeTab, setActiveTab] = useState('suggestions');
+const SerieSection = ({ serie, suggestions }) => {
+  const [activeTab, setActiveTab] = useState('episodes');
   const handleTabDisplay = (tab) => {
     setActiveTab(tab);
   };
   useEffect(() => {
-    console.log(movie);
-  }, [movie]);
+    console.log(serie);
+  }, [serie]);
   return (
     <>
       <Nav>
         <ul>
+          <li
+            className={activeTab === 'episodes' ? 'active' : null}
+            onClick={() => handleTabDisplay('episodes')}
+          >
+            ÉPISODES
+          </li>
           <li
             className={activeTab === 'suggestions' ? 'active' : null}
             onClick={() => handleTabDisplay('suggestions')}
@@ -86,12 +89,20 @@ const MovieSection = ({ movie, suggestions }) => {
         </ul>
       </Nav>
       <Section>
-        {activeTab === 'suggestions' && <MovieSuggestions suggestions={suggestions.results}/>}
-        {activeTab === 'details' && <DetailMovie movie={movie} />}
-        {activeTab === 'bonus' && <VideoContainer videos={movie.getVideos()} />}
+        {activeTab === 'episodes' &&
+          'episodes'
+        }
+        {activeTab === 'suggestions' &&
+          'suggestions'
+          //   <MovieSuggestions suggestions={suggestions.results} />
+        }
+        {activeTab === 'details' && 'details'}
+        {/* {activeTab === 'details' && <DetailMovie movie={movie} />} */}
+        {activeTab === 'bonus' && 'bonus'}
+        {/* {activeTab === 'bonus' && <VideoContainer videos={movie.getVideos()} />} */}
       </Section>
     </>
   );
 };
 
-export default MovieSection;
+export default SerieSection;

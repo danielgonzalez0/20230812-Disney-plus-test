@@ -8,9 +8,9 @@ import Footer from '../../components/footer/Footer';
 import { SerieData } from '../../models/serie';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteVideoParams } from '../../redux/features/videoSlice';
-import DataContent from '../../components/dataContent/DataContent';
 import Video from '../../components/video/Video';
-import MovieSection from '../../components/movieSection/MovieSection';
+import SerieContent from '../../components/dataContent/SerieContent';
+import SerieSection from '../../components/serieSection/SerieSection';
 
 const Container = styled.main`
   margin-top: 70px;
@@ -171,15 +171,16 @@ const Serie = () => {
               <span>{serieDetail.title}</span>
             )}
           </article>
-          <DataContent
-            id={serieDetail.id}
+
+          <SerieContent
             genres={serieDetail.genres}
-            runtime={109}
-            release={serieDetail.first_release}
-            title={serieDetail.title}
-            tagline={serieDetail.tagline}
+            firstRelease={serieDetail.first_release}
+            lastRelease={serieDetail.last_release}
+            overview={serieDetail.overview}
+            numberOfSeasons={serieDetail.number_of_seasons}
             videos={serieDetail.getVideos()}
           />
+          <SerieSection serie={serieDetail} suggestions={suggestionData} />
         </Main>
       </Container>
       <Footer />
