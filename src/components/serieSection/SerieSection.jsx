@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import SeasonsBtn from './SeasonsBtn';
+import VideoContainer from '../movieSection/VideoContainer';
+import DetailSerie from './DetailSerie';
+import SerieSuggestions from './SerieSuggestions';
 
 const Nav = styled.nav`
   width: 100%;
@@ -89,17 +93,19 @@ const SerieSection = ({ serie, suggestions }) => {
         </ul>
       </Nav>
       <Section>
-        {activeTab === 'episodes' &&
-          'episodes'
+        {activeTab === 'episodes' && (
+          <SeasonsBtn
+            id={serie.id}
+            seasons={serie.seasons}
+            defaultVideo={serie.getVideos()}
+          />
+        )}
+        {
+          activeTab === 'suggestions' && 
+            <SerieSuggestions suggestions={suggestions.results} />
         }
-        {activeTab === 'suggestions' &&
-          'suggestions'
-          //   <MovieSuggestions suggestions={suggestions.results} />
-        }
-        {activeTab === 'details' && 'details'}
-        {/* {activeTab === 'details' && <DetailMovie movie={movie} />} */}
-        {activeTab === 'bonus' && 'bonus'}
-        {/* {activeTab === 'bonus' && <VideoContainer videos={movie.getVideos()} />} */}
+        {activeTab === 'details' && <DetailSerie serie={serie} />}
+        {activeTab === 'bonus' && <VideoContainer videos={serie.getVideos()} />}
       </Section>
     </>
   );

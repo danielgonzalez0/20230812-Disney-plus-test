@@ -14,6 +14,7 @@ export class SerieData {
     this._videos = data.videos.results;
     this._number_of_seasons = data.number_of_seasons;
     this._seasons = data.seasons;
+    this._runtime = data.last_episode_to_air.runtime;
     this._cast = casting.cast;
     this._crew = casting.crew;
     this._type = 'serie';
@@ -67,6 +68,9 @@ export class SerieData {
   get crew() {
     return this._crew;
   }
+  get runtime() {
+    return this._runtime;
+  }
   get type() {
     return this._type;
   }
@@ -114,7 +118,9 @@ export class SerieData {
   getDirectors() {
     let resultArray = [];
     return (resultArray = this._crew.filter(
-      (person) => person.job === 'Director'
+      (person) =>
+        person.job === 'Executive Producer' &&
+        person.known_for_department === 'Production'
     ));
   }
 }

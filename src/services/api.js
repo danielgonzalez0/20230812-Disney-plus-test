@@ -60,15 +60,18 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
  * url of tmdb depending on a specific type
  * @param {number||string} id of a movie or a tv show
  * @param {string} type of the request
+ * @param {number||string} season of a tv show
  * @returns an url for the api call
  */
-async function getUrl(id, type) {
+async function getUrl(id, type, season) {
   const urlSerie = `https://api.themoviedb.org/3/tv/${id}?append_to_response=videos&language=fr-FR`;
   const urlMovie = `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos&language=fr-FR`;
   const urlImageMovie = `https://api.themoviedb.org/3/movie/${id}/images?include_image_language=fr%2Cen`;
   const urlImageSerie = `https://api.themoviedb.org/3/tv/${id}/images?include_image_language=fr%2Cen`;
   const urlCasting = `https://api.themoviedb.org/3/movie/${id}/credits?language=fr-FR`;
   const urlSerieCasting = `https://api.themoviedb.org/3/tv/${id}/credits?language=fr-FR`;
+  const urlSeason = `https://api.themoviedb.org/3/tv/${id}/season/${season}?language=fr-FR`;
+  const urlSeasonVideos = `https://api.themoviedb.org/3/tv/${id}/season/${season}/videos?language=en-US`;
 
   switch (type) {
     case 'movie':
@@ -83,6 +86,10 @@ async function getUrl(id, type) {
       return urlCasting;
     case 'castingSerie':
       return urlSerieCasting;
+    case 'season':
+      return urlSeason;
+    case 'seasonVideo':
+      return urlSeasonVideos;
     default:
       return urlMovie;
   }
@@ -91,10 +98,11 @@ async function getUrl(id, type) {
  * get detail of asset of thmb depending of an id and a type
  * @param {number||string} id of a movie or a tv show
  * @param {string} type of the request
+ * @param {number||string} season of a tv show
  * @returns array with the detail of an asset (movie, tv show, images, ...)
  */
-async function getDetail(id, type) {
-  let url = await getUrl(id, type);
+async function getDetail(id, type, season) {
+  let url = await getUrl(id, type, season);
 
   const options = {
     method: 'GET',
