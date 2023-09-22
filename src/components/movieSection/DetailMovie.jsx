@@ -4,6 +4,7 @@ import { handleFormatTime } from '../../utils/utils';
 
 const Container = styled.section`
   width: 100%;
+  padding-bottom: 110px;
   h1 {
     font-size: 24px;
     letter-spacing: 0.11px;

@@ -18,8 +18,7 @@ const SerieEpisodes = ({ id, season, defaultVideo }) => {
       console.log('seasonVideo', seasonVideoData);
       console.log('episodes', seasonDetail);
       return { seasonDetail };
-    },
-    { cacheTime: 0 }
+    }
   );
 
   const { seasonDetail } = data || [];

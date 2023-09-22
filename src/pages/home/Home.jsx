@@ -23,7 +23,7 @@ import title9 from './img7-title.png';
 import img10 from './img8.jpg';
 import title10 from './img8-title.png';
 import Viewers from '../../components/viewers/Viewers';
-import { getMoviesFromCompany } from '../../services/api';
+import { getAllMovies, getMoviesFromCompany } from '../../services/api';
 import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/footer/Footer';
 
@@ -43,7 +43,7 @@ const Home = () => {
 
   const queryKey = ['getMovies'];
   const { isLoading, data } = useQuery(queryKey, async () => {
-    return await getMoviesFromCompany(1, 10, 878);
+    return await getAllMovies(50);
     // return await getData();
   });
   const movies = data || [];
@@ -82,8 +82,8 @@ const Container = styled.main`
   min-height: calc(100vh - 250px);
   overflow-x: hidden;
   display: block;
-  top: 72px;
   padding: 0 5%;
+  padding-top: 70px;
 `;
 
 export default Home;

@@ -46,6 +46,7 @@ const SignUp = () => {
 
 //style component
 const Container = styled.section`
+  background: #040714;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -63,6 +64,7 @@ const Content = styled.div`
   width: 100%;
   padding-top: 22vw;
   position: relative;
+  z-index: 2;
   min-height: 100vh;
   box-sizing: border-box;
   display: flex;

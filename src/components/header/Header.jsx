@@ -28,7 +28,16 @@ const Nav = styled.nav`
     padding: 0 36px;
     letter-spacing: 16px;
     z-index: 3;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 170px;
+      width: 100%;
+    }
   }
+
   .hidden {
     background: transparent;
   }
@@ -44,6 +53,7 @@ const Logo = styled(NavLink)`
   max-height: 70px;
   font-size: 0;
   display: inline-block;
+  z-index:5;
   img {
     display: block;
     width: 100%;
@@ -60,6 +70,7 @@ const NavMenu = styled.div`
   position: relative;
   margin-right: auto;
   margin-left: 25px;
+  z-index: 5;
 
   a {
     display: flex;
@@ -120,6 +131,7 @@ const Login = styled.a`
   border: 1px solid ${colors.white};
   border-radius: 4px;
   transition: all 0.2s ease 0s;
+  z-index: 5;
 
   &:hover {
     background-color: ${colors.white};
@@ -134,6 +146,7 @@ const UserImg = styled.img`
 
 const DropDown = styled.div`
   position: absolute;
+  z-index: 5;
   top: 48px;
   right: 0;
   background: rgb(19, 19, 19);
@@ -150,6 +163,7 @@ const DropDown = styled.div`
 
 const SignOut = styled.div`
   position: relative;
+  z-index: 5;
   height: 48px;
   width: 48px;
   display: flex;
@@ -232,7 +246,7 @@ const Header = () => {
                 <img src={originalIcon} alt="originals" />
                 <span>ORIGINALS</span>
               </NavLink>
-              <NavLink to="/home">
+              <NavLink to="/movies">
                 <img src={movieIcon} alt="film" />
                 <span>FILM</span>
               </NavLink>

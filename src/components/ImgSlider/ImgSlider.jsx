@@ -12,6 +12,7 @@ const Carrousel = styled.div`
   margin: 20px auto 0;
   /* border: 1px solid red; */
   position: relative;
+  z-index: 5;
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -21,8 +22,8 @@ const StyledIcon = styled(FontAwesomeIcon)`
 
 const Button = styled.button`
   position: absolute;
-  top: 20px;
-  z-index: 2;
+  top: 90px;
+  z-index: 6;
   width: 3.5vw;
   height: 25.5vw;
   margin: 0 auto;

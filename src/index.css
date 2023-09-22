@@ -15,7 +15,8 @@ html {
   list-style: none;
 }
 body {
-  background: #040714;
+  /* background: #040714; */
+    background-color: rgb(26, 29, 41);
   color: #f9f9f9;
   font-family: 'Nunito Variable Font', sans-serif;
   margin: 0;

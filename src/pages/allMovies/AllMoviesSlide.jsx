@@ -9,7 +9,20 @@ import { Images } from '../../models/images';
 const Container = styled.div`
   cursor: pointer;
   /* position: relative; */
-  transition: transform 300ms ease-out 0s;
+  animation: fadeIn 0.5s ease-in-out;
+
+  /* Définition de l'animation CSS */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   /* background-color: rgb(26, 29, 41); */
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.69) 0px 26px 30px -10px,
@@ -62,7 +75,7 @@ const Container = styled.div`
   }
 `;
 
-const MovieSlide = (movie) => {
+const AllMoviesSlide = ({movie}) => {
   const movieQueryKey = ['getMovieDetail', movie.id];
   const { isLoading, data } = useQuery(
     movieQueryKey,
@@ -71,30 +84,31 @@ const MovieSlide = (movie) => {
       const movieImage = new Images(movieImageData);
       // console.log('moviImages', movieImage);
       return { movieImage };
-    },
-    { cacheTime: 0 }
+    }
   );
 
   const { movieImage } = data || [];
 
-  if (isLoading) return <div>en cours de chargement</div>;
+//   if (isLoading) return <div>en cours de chargement</div>;
 
-  return (
-    <>
-      <Container>
-        <NavLink className="link" to={`/movie/${movie.id}`}>
-          {movieImage.backdrops[0] ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${movieImage.backdrops[0].file_path}`}
-              alt={`titre ${movie.title}`}
-            />
-          ) : (
-            <p>{movie.title}</p>
-          )}
-        </NavLink>
-      </Container>
-    </>
-  );
+ if(!isLoading) return (
+   <>
+     <Container
+
+     >
+       <NavLink className="link" to={`/movie/${movie.id}`}>
+         {movieImage.backdrops[0] ? (
+           <img
+             src={`https://image.tmdb.org/t/p/w300/${movieImage.backdrops[0].file_path}`}
+             alt={`titre ${movie.title}`}
+           />
+         ) : (
+           <p>{movie.title}</p>
+         )}
+       </NavLink>
+     </Container>
+   </>
+ );
 };
 
-export default MovieSlide;
+export default AllMoviesSlide;

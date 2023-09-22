@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-
 const Carrousel = styled.div`
   margin: 0 auto;
   border: 1px solid red;
@@ -38,7 +37,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 
 const Button = styled.button`
   position: absolute;
-  top: 0.5vw;
+  top: calc(0.5vw + 70px);
   z-index: 2;
   width: 3.5vw;
   height: 25.5vw;
@@ -48,6 +47,7 @@ const Button = styled.button`
   color: ${colors.white};
   font-size: 24px;
   cursor: pointer;
+  margin-top: 70px;
 
   &:focus-visible {
     outline: 1px solid ${colors.white};
@@ -96,42 +96,38 @@ const InfiniteLoopComponent = ({ elements }) => {
   );
 };
 
-const MainHomeSlider = ({slides}) => {
-//  const [sliderDomElement, setSliderDomElement] = useState();
- const translateInitial = `calc(-${(1 * 100) / slides.length}% - ${1 * 2}vw)`;
+const MainHomeSlider = ({ slides }) => {
+  //  const [sliderDomElement, setSliderDomElement] = useState();
+  const translateInitial = `calc(-${(1 * 100) / slides.length}% - ${1 * 2}vw)`;
 
+  const handleLeft = async () => {};
+  const handleRight = async () => {};
 
-const handleLeft = async () => {}
-const handleRight = async () => {}
-
-return (
-  <Carrousel>
-    <LeftBtn onClick={handleLeft}>
-      <StyledIcon icon={faChevronLeft} />
-    </LeftBtn>
-    <Slider
-      style={{
-        width: `${slides.length * 100}%`,
-        transform: `translate3d(${translateInitial}, 0, 0)`,
-        transition: `transform 0.5s ease 0s`,
-      }}
-    >
-      {slides && (
-        <InfiniteLoopComponent
-          elements={slides.map((movie, index) => (
-            <img key={index} src={movie} alt="Slide" data-in={index} />
-          ))}
-        />
-      )}
-    </Slider>
-    <RightBtn onClick={(e) => handleRight(e)}>
-      <StyledIcon icon={faChevronRight} />
-    </RightBtn>
-  </Carrousel>
-);
+  return (
+    <Carrousel>
+      <LeftBtn onClick={handleLeft} style={{marginTop : "70px"}} className='test'>
+        <StyledIcon icon={faChevronLeft} />
+      </LeftBtn>
+      <Slider
+        style={{
+          width: `${slides.length * 100}%`,
+          transform: `translate3d(${translateInitial}, 0, 0)`,
+          transition: `transform 0.5s ease 0s`,
+        }}
+      >
+        {slides && (
+          <InfiniteLoopComponent
+            elements={slides.map((movie, index) => (
+              <img key={index} src={movie} alt="Slide" data-in={index} />
+            ))}
+          />
+        )}
+      </Slider>
+      <RightBtn onClick={(e) => handleRight(e)}>
+        <StyledIcon icon={faChevronRight} />
+      </RightBtn>
+    </Carrousel>
+  );
 };
 
-
 export default MainHomeSlider;
-
-

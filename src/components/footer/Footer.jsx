@@ -4,7 +4,7 @@ import disneyLogo from '../../assets/images/disneyLogo.svg';
 import { NavLink } from 'react-router-dom';
 
 const FooterContainer = styled.footer`
-  margin-top: 100px;
+  /* margin-top: 100px; */
   width: 100vw;
   background-color: #0e0b14;
   min-height: 200px;

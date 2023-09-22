@@ -19,9 +19,9 @@ const BtnContainer = styled.div`
 `;
 
 const SeasonsBtn = ({ id, seasons, defaultVideo }) => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeSeason, setActiveSeason] = useState(1);
   const handleTabDisplay = (nbOfSeasons) => {
-    setActiveTab(nbOfSeasons);
+    setActiveSeason(nbOfSeasons);
   };
   return (
     <>
@@ -31,18 +31,26 @@ const SeasonsBtn = ({ id, seasons, defaultVideo }) => {
             <button
               key={index}
               className={
-                activeTab === season.season_number ? 'activeBtn' : null
+                activeSeason === season.season_number ? 'activeBtn' : null
               }
               onClick={() => handleTabDisplay(season.season_number)}
               data-id={season.id}
             >{`Saison ${season.season_number}`}</button>
           ))}
       </BtnContainer>
-   
-      {seasons.length > 0 &&
+
+      {activeSeason &&
+        seasons.length > 0 &&
         seasons.map((season, index) => {
-        return  activeTab === season.season_number && (
-            <SerieEpisodes key={index} season={season.season_number} id={id} defaultVideo={defaultVideo[0]}/>
+          return (
+            activeSeason === season.season_number && (
+              <SerieEpisodes
+                key={index}
+                season={season.season_number}
+                id={id}
+                defaultVideo={defaultVideo[0]}
+              />
+            )
           );
         })}
     </>

@@ -4,5 +4,72 @@ export const colors = {
   blue2: '#0483ee',
   headerColor: '#090b13',
   silver: 'silver',
-  dark: 'rgba(0,0,0,0.6)'
+  dark: 'rgba(0,0,0,0.6)',
 };
+
+export const movieGenres = [
+  {
+    id: 0,
+    name: 'Tous les films',
+  },
+  {
+    id: 28,
+    name: 'Action',
+  },
+  {
+    id: 12,
+    name: 'Aventure',
+  },
+  {
+    id: 16,
+    name: 'Animation',
+  },
+  {
+    id: 35,
+    name: 'Comédie',
+  },
+  {
+    id: 99,
+    name: 'Documentaire',
+  },
+  {
+    id: 18,
+    name: 'Drame',
+  },
+  {
+    id: 10751,
+    name: 'Familial',
+  },
+  {
+    id: 14,
+    name: 'Fantastique',
+  },
+  {
+    id: 36,
+    name: 'Histoire',
+  },
+  {
+    id: 10402,
+    name: 'Musique',
+  },
+  {
+    id: 9648,
+    name: 'Mystère',
+  },
+  {
+    id: 10749,
+    name: 'Romance',
+  },
+  {
+    id: 878,
+    name: 'Science-Fiction',
+  },
+  {
+    id: 53,
+    name: 'Thriller',
+  },
+  {
+    id: 37,
+    name: 'Western',
+  },
+];

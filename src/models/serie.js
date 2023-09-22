@@ -60,7 +60,7 @@ export class SerieData {
     return this._number_of_seasons;
   }
   get seasons() {
-    return this._seasons;
+    return this._seasons.filter((season) => season.season_number > 0);
   }
   get cast() {
     return this._cast;
@@ -117,10 +117,11 @@ export class SerieData {
 
   getDirectors() {
     let resultArray = [];
-    return (resultArray = this._crew.filter(
+    resultArray = this._crew.filter(
       (person) =>
         person.job === 'Executive Producer' &&
         person.known_for_department === 'Production'
-    ));
+    );
+    return resultArray
   }
 }

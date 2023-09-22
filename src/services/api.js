@@ -22,7 +22,7 @@ class Api {
         }
       }) //end pomise then
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res;
       })
       //end promise then
@@ -40,6 +40,30 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
     //  const url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${companyId}&api_key=${apiKey}&language=fr-FR&page=${currentPage}`;
 
     const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&with_genres=${genre}&api_key=${apiKey}`;
+
+    try {
+      const response = await fetch(url2);
+      const data = await response.json();
+
+      allResults.push(...data.results);
+      currentPage++;
+    } catch (error) {
+      console.error('Erreur lors de la requête :', error);
+      return;
+    }
+  }
+  console.log('Tous les résultats:', allResults);
+  return allResults;
+}
+// Fonction récursive pour paginer à travers les résultats
+async function getAllMovies( totalPage) {
+  const companyId = '1%7C2%7C3%7C420%7C7521';
+  const allResults = [];
+  let currentPage = 1;
+  while (currentPage <= totalPage) {
+    //  const url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${companyId}&api_key=${apiKey}&language=fr-FR&page=${currentPage}`;
+
+    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&vote_count.gte=10&with_companies=${companyId}&api_key=${apiKey}`;
 
     try {
       const response = await fetch(url2);
@@ -156,4 +180,4 @@ async function getSeriesSuggestion(genres, companies) {
   return response;
 }
 
-export { getDetail, getMoviesFromCompany, getMoviesSuggestion, getSeriesSuggestion };
+export { getDetail, getMoviesFromCompany, getAllMovies, getMoviesSuggestion, getSeriesSuggestion };
