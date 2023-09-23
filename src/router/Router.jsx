@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Serie from '../pages/serie/Serie';
 import Movie from '../pages/movie/Movie';
 import AllMovies from '../pages/allMovies/AllMovies';
+import AllSeries from '../pages/allSeries/AllSeries';
 
 
 const Router = () => {
@@ -21,6 +22,7 @@ const Router = () => {
         <Route path="/login" element={<Connexion />} />
         <Route path="/home" element={user ? <Home /> : <Login />} />
         <Route path="/movies" element={user ? <AllMovies /> : <Login />} />
+        <Route path="/series" element={user ? <AllSeries /> : <Login />} />
         <Route path="/serie/:id" element={user ? <Serie /> : <Login />} />
         <Route path="/movie/:id" element={user ? <Movie /> : <Login />} />
         <Route path="*" element={user ? <Home /> : <Login />} />

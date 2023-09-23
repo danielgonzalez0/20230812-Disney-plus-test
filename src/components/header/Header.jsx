@@ -250,7 +250,7 @@ const Header = () => {
                 <img src={movieIcon} alt="film" />
                 <span>FILM</span>
               </NavLink>
-              <NavLink to="/home">
+              <NavLink to="/series">
                 <img src={seriesIcon} alt="séries" />
                 <span>SÉRIES</span>
               </NavLink>

@@ -56,17 +56,19 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
   return allResults;
 }
 // Fonction récursive pour paginer à travers les résultats
-async function getAllMovies( totalPage) {
+async function getAllMovies( totalPage, type) {
   const companyId = '1%7C2%7C3%7C420%7C7521';
   const allResults = [];
   let currentPage = 1;
   while (currentPage <= totalPage) {
-    //  const url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${companyId}&api_key=${apiKey}&language=fr-FR&page=${currentPage}`;
+
+    const url1 = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=fr-Fr&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`;
+;
 
     const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&vote_count.gte=10&with_companies=${companyId}&api_key=${apiKey}`;
 
     try {
-      const response = await fetch(url2);
+      const response = await fetch(type === "series" ? url1 : url2);
       const data = await response.json();
 
       allResults.push(...data.results);

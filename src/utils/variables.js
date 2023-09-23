@@ -73,3 +73,58 @@ export const movieGenres = [
     name: 'Western',
   },
 ];
+
+export const seriesGenres = [
+  {
+    id: 0,
+    name: 'Toutes les séries',
+  },
+  {
+    id: 10759,
+    name: 'Action & Adventure',
+  },
+  {
+    id: 16,
+    name: 'Animation',
+  },
+  {
+    id: 35,
+    name: 'Comédie',
+  },
+  {
+    id: 99,
+    name: 'Documentaire',
+  },
+  {
+    id: 18,
+    name: 'Drame',
+  },
+  {
+    id: 10751,
+    name: 'Familial',
+  },
+  {
+    id: 10762,
+    name: 'Enfants',
+  },
+  {
+    id: 9648,
+    name: 'Mystère',
+  },
+  {
+    id: 10763,
+    name: 'News',
+  },
+  {
+    id: 10764,
+    name: 'Reality',
+  },
+  {
+    id: 10765,
+    name: 'Science-Fiction & Fantastique',
+  },
+  {
+    id: 37,
+    name: 'Western',
+  },
+];

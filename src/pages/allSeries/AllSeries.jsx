@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Footer from '../../components/footer/Footer';
-import FilterBtn from '../../components/filterBtn/FilterBtn';
-import { movieGenres } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useMemo, useState } from 'react';
+import styled from 'styled-components';
 import { getAllMovies } from '../../services/api';
-import AllMoviesSlide from './AllMoviesSlide';
+import FilterBtn from '../../components/filterBtn/FilterBtn';
+import { seriesGenres } from '../../utils/variables';
+import Footer from '../../components/footer/Footer';
+import AllSeriesSlide from './AllSeriesSlide';
 
 const Container = styled.main`
   min-height: calc(100vh);
@@ -32,7 +32,7 @@ const Header = styled.header`
   }
 `;
 
-const MoviesContainer = styled.section`
+const SeriesContainer = styled.section`
   position: relative;
   margin-top: 120px;
   margin-bottom: 200px;
@@ -49,19 +49,19 @@ const MoviesContainer = styled.section`
   }
 `;
 
-const AllMovies = () => {
-  const queryKey = ['getMovies'];
+const AllSeries = () => {
+  const queryKey = ['getAllSeries'];
   const { isLoading, data } = useQuery(queryKey, async () => {
-    return await getAllMovies(50, "movies");
+    return await getAllMovies(50, 'series');
     // return await getData();
   });
 
-  const movies = data || [];
-  const [moviesVisibleEnd, setMovieVisible] = useState(50);
-  const [movieArray, setMovieArray] = useState([]);
+  const series = useMemo(() => data || [], [data]);
+  const [seriesVisible, setSeriesVisible] = useState(50);
+  const [serieArray, setSerieArray] = useState([]);
   const [filterValue, setFilterValue] = useState({
     id: 0,
-    name: 'Tous les films',
+    name: 'Toutes les séries',
   });
 
   const handleScroll = () => {
@@ -71,8 +71,8 @@ const AllMovies = () => {
 
     if (windowHeight + scrollTop >= documentHeight) {
       // Lorsque l'utilisateur atteint le bas de la page, chargez plus de films
-      const newVisibleEnd = moviesVisibleEnd + 20; // Chargez 10 films supplémentaires
-      setMovieVisible(newVisibleEnd);
+      const newVisibleEnd = seriesVisible + 20; // Chargez 10 films supplémentaires
+      setSeriesVisible(newVisibleEnd);
     }
   };
 
@@ -82,47 +82,44 @@ const AllMovies = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [moviesVisibleEnd]);
+  }, [seriesVisible]);
 
   useEffect(() => {
-    setMovieArray([ 
-      ...movies.slice(0, moviesVisibleEnd),
-    ])
-  }, [movies, moviesVisibleEnd, filterValue]);
+    setSerieArray([...series.slice(0, seriesVisible)]);
+  }, [series, seriesVisible, filterValue]);
 
   return (
     <>
       <Container>
         <Header>
-          <h1>Films</h1>
+          <h1>Séries</h1>
           <FilterBtn
-            array={movieGenres}
+            array={seriesGenres}
             filterValue={filterValue}
             setFilterValue={setFilterValue}
           />
         </Header>
-        <MoviesContainer>
+        <SeriesContainer>
           {isLoading && <div>en cours de chargement</div>}
           {!isLoading &&
-            movieArray.length > 0 &&
-            movieArray
-        .filter((movie)=>{
-        if(filterValue.id === 0){
-            return movie
-        } else {
-            return movie.genre_ids.includes(filterValue.id)
-        }
-        
-    })
-              .map((movie, index) => (
-                //   <div key={index}>{movie.title}</div>
-                <AllMoviesSlide movie={movie} key={index} />
+            serieArray.length > 0 &&
+            serieArray
+              .filter((serie) => {
+                if (filterValue.id === 0) {
+                  return serie;
+                } else {
+                  return serie.genre_ids.includes(filterValue.id);
+                }
+              })
+              .map((serie, index) => (
+                <AllSeriesSlide serie={serie} key={index} />
+                // <div key={index}>{serie.name}</div>
               ))}
-        </MoviesContainer>
+        </SeriesContainer>
       </Container>
       <Footer />
     </>
   );
 };
 
-export default AllMovies;
+export default AllSeries;

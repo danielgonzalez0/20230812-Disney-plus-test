@@ -23,7 +23,7 @@ import title9 from './img7-title.png';
 import img10 from './img8.jpg';
 import title10 from './img8-title.png';
 import Viewers from '../../components/viewers/Viewers';
-import { getAllMovies, getMoviesFromCompany } from '../../services/api';
+import { getAllMovies } from '../../services/api';
 import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/footer/Footer';
 
