@@ -1,10 +1,10 @@
 export class SerieData {
   constructor(data, casting) {
     this._id = data.id;
-    this._imageBackPath = data.backdrop_path;
+    this._imageBackPath = data.backdrop_path ? data.backdrop_path : 'no image';
     this._genres = data.genres;
     this._overview = data.overview;
-    this._imageFrontPath = data.poster_path;
+    this._imageFrontPath = data.poster_path ? data.poster_path : 'no image';
     this._popularity = data.popularity;
     this._companies = data.production_companies;
     this._first_release = data.first_air_date;
@@ -14,7 +14,7 @@ export class SerieData {
     this._videos = data.videos.results;
     this._number_of_seasons = data.number_of_seasons;
     this._seasons = data.seasons;
-    this._runtime = data.last_episode_to_air.runtime;
+    this._runtime = data.last_episode_to_air ? data.last_episode_to_air.runtime : 0;
     this._cast = casting.cast;
     this._crew = casting.crew;
     this._type = 'serie';

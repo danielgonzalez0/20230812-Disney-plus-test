@@ -98,14 +98,16 @@ const Overview = styled(P)`
 `;
 
 const SerieSlide = (episode) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <>
       <Container>
         <div
           className="link"
-          onClick={() => dispatch(setVideoParams(episode.key))}
+          onClick={() =>
+            episode.key ? dispatch(setVideoParams(episode.key)) : null
+          }
         >
           {episode.image ? (
             <img
@@ -117,7 +119,9 @@ const SerieSlide = (episode) => {
           )}
         </div>
       </Container>
-      <Title>{`${episode.number}. ${episode.name} (${handleFormatTime(episode.runtime)})`}</Title>
+      <Title>{`${episode.number}. ${episode.name} (${handleFormatTime(
+        episode.runtime
+      )})`}</Title>
       <Overview>
         {episode.overview.length === 0
           ? 'no overview available'

@@ -86,7 +86,7 @@ const MovieSection = ({ movie, suggestions }) => {
         </ul>
       </Nav>
       <Section>
-        {activeTab === 'suggestions' && <MovieSuggestions suggestions={suggestions.results}/>}
+        {activeTab === 'suggestions' && <MovieSuggestions suggestions={suggestions.results} id={`${'movieSuggestions'}`}/>}
         {activeTab === 'details' && <DetailMovie movie={movie} />}
         {activeTab === 'bonus' && <VideoContainer videos={movie.getVideos()} />}
       </Section>

@@ -11,6 +11,7 @@ import { deleteVideoParams } from '../../redux/features/videoSlice';
 import Video from '../../components/video/Video';
 import SerieContent from '../../components/dataContent/SerieContent';
 import SerieSection from '../../components/serieSection/SerieSection';
+import disneyBG from '../../assets/images/background-disney.jpg';
 
 const Container = styled.main`
   margin-top: 70px;
@@ -155,10 +156,17 @@ const Serie = () => {
       <Container>
         <div className="filter"></div>
         <Background style={{ opacity: opacityValue }}>
-          <img
-            src={`https://image.tmdb.org/t/p/original/${serieDetail.imageBackPath}`}
-            alt={serieDetail.name}
-          />
+          {serieDetail.imageBackPath ? (
+            <img
+              src={`https://image.tmdb.org/t/p/original/${serieDetail.imageBackPath}`}
+              alt={serieDetail.name}
+            />
+          ) : (
+            <img
+              src={disneyBG}
+              alt={'disney par défaut'}
+            />
+          )}
         </Background>
         <Main>
           <article>

@@ -47,7 +47,7 @@ const SeasonsBtn = ({ id, seasons, defaultVideo }) => {
               <SerieEpisodes
                 key={index}
                 season={season.season_number}
-                id={id}
+                id={`${id}`}
                 defaultVideo={defaultVideo[0]}
               />
             )

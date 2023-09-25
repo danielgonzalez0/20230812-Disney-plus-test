@@ -23,9 +23,23 @@ import title9 from './img7-title.png';
 import img10 from './img8.jpg';
 import title10 from './img8-title.png';
 import Viewers from '../../components/viewers/Viewers';
-import { getAllMovies } from '../../services/api';
-import { useQuery } from '@tanstack/react-query';
+// import { getAllMovies } from '../../services/api';
+// import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/footer/Footer';
+
+import { animations } from '../../utils/collections';
+import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
+
+const Container = styled.main`
+  position: relative;
+  background: url(${bgImg}) center center / cover no-repeat fixed;
+  min-height: calc(100vh - 250px);
+  overflow-x: hidden;
+  display: block;
+  padding: 0 calc(3.5vw + 24px);
+  padding-top: 70px;
+  z-index: 2;
+`;
 
 const Home = () => {
   const array = [
@@ -41,12 +55,14 @@ const Home = () => {
     { img: img10, title: title10, id: 284053, type: 'movie' },
   ];
 
-  const queryKey = ['getMovies'];
-  const { isLoading, data } = useQuery(queryKey, async () => {
-    return await getAllMovies(50);
-    // return await getData();
-  });
-  const movies = data || [];
+
+
+  // const queryKey = ['getMovies'];
+  // const { isLoading, data } = useQuery(queryKey, async () => {
+  //   return await getAllMovies(50);
+  //   // return await getData();
+  // });
+  // const movies = data || [];
 
   return (
     <>
@@ -58,32 +74,17 @@ const Home = () => {
           slidesToScroll={1}
         />
         <Viewers />
-        {isLoading && <div>en cours de chargement</div>}
-        {!isLoading && (
-          <div>
-            {movies.map((movie) => (
-              <div key={movie.id}>
-                <h2>{movie.title}</h2>
-                <p>{movie.production_companies}</p>
-                {/* Affichez d'autres détails du film ici */}
-              </div>
-            ))}
-          </div>
-        )}
+        {/* {isLoading && <div>en cours de chargement</div>}
+        {!isLoading && ( */}
+         <MovieAndSerieSlider content={animations} id={'slide1'}/>
+         <MovieAndSerieSlider content={animations} id={'silde2'}/>
+        {/* )} */}
       </Container>
       <Footer />
     </>
   );
 };
 
-const Container = styled.main`
-  position: relative;
-  background: url(${bgImg}) center center / cover no-repeat fixed;
-  min-height: calc(100vh - 250px);
-  overflow-x: hidden;
-  display: block;
-  padding: 0 5%;
-  padding-top: 70px;
-`;
+
 
 export default Home;

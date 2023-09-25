@@ -70,7 +70,8 @@ const RightBtn = styled(Button)`
   right: calc(-3.5vw - 24px);
 `;
 
-const Slider = ({array, componentToMap}) => {
+const Slider = ({array, componentToMap, id}) => {
+  console.log(array)
     const [slidesVisible, setSlidesVisible] = useState(
     handleSlidesVisible(window.innerWidth)
   );
@@ -116,13 +117,15 @@ const Slider = ({array, componentToMap}) => {
   };
 
   useEffect(() => {
-    handleSlideOverflow();
+      setTimeout(() => {
+        handleSlideOverflow();
+      }, 300);
     window.addEventListener('resize', () => {
       handleSlideOverflow();
       setSlidesVisible(handleSlidesVisible(window.innerWidth));
       setSlideIndex(0);
       setSliderDomElement(
-        document.querySelector(`.${SliderUl.styledComponentId}`)
+        document.querySelector(`#${id}`)
       );
       if (sliderDomElement) {
         sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
@@ -134,14 +137,14 @@ const Slider = ({array, componentToMap}) => {
         setSlidesVisible(handleSlidesVisible(window.innerWidth));
       });
     };
-  }, [sliderDomElement, translateInitial]);
+  }, [sliderDomElement, translateInitial, id]);
 
   useEffect(() => {
-    setSliderDomElement(document.querySelector(`.${SliderUl.styledComponentId}`));
+    setSliderDomElement(document.querySelector(`#${id}`));
     if (sliderDomElement) {
       sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
     }
-  }, [sliderDomElement, translateInitial]);
+  }, [sliderDomElement, translateInitial, id]);
 
   return (
     <>
@@ -152,6 +155,7 @@ const Slider = ({array, componentToMap}) => {
           </LeftBtn>
         )}
         <SliderUl
+          id={id}
           style={{
             width: `${slidesTotal * 100}%`,
           }}

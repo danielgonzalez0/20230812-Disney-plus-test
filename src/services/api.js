@@ -56,28 +56,36 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
   return allResults;
 }
 // Fonction récursive pour paginer à travers les résultats
-async function getAllMovies( totalPage, type) {
-  const companyId = '1%7C2%7C3%7C420%7C7521';
+async function getAllMovies(totalPage, type) {
+  const companyId = '1%7C2%7C3%7C420%7C7521%7C3166%7C281%7C54';
   const allResults = [];
   let currentPage = 1;
   while (currentPage <= totalPage) {
-
     const url1 = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=fr-Fr&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`;
-;
-
-    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&vote_count.gte=10&with_companies=${companyId}&api_key=${apiKey}`;
+    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&vote_count.gte=20&with_companies=${companyId}&api_key=${apiKey}`;
 
     try {
-      const response = await fetch(type === "series" ? url1 : url2);
+      const response = await fetch(type === 'series' ? url1 : url2);
       const data = await response.json();
+      let dataToAdd;
+      if (type === 'series') {
+        dataToAdd = data.results.filter((data) =>
+          Reflect.has(data, 'first_air_date') && data.first_air_date !==""
+        );
+      } else {
+        dataToAdd = data.results.filter((data) =>
+          Reflect.has(data, 'release_date')
+        );
+      }
 
-      allResults.push(...data.results);
+      allResults.push(...dataToAdd);
       currentPage++;
     } catch (error) {
       console.error('Erreur lors de la requête :', error);
       return;
     }
   }
+
   console.log('Tous les résultats:', allResults);
   return allResults;
 }
@@ -138,7 +146,7 @@ async function getDetail(id, type, season) {
     },
   };
 
-  const response = new Api(url, options).getData();
+  const response = await new Api(url, options).getData();
   return response;
 }
 /**
@@ -178,8 +186,19 @@ async function getSeriesSuggestion(genres, companies) {
     },
   };
 
-  const response = new Api(url, options).getData();
-  return response;
+  const response = await new Api(url, options).getData();
+const result = response.results.filter(
+  (data) =>
+    Reflect.has(data, 'first_air_date') && data.first_air_date.length > 0
+);
+    console.log(result);
+  return result;
 }
 
-export { getDetail, getMoviesFromCompany, getAllMovies, getMoviesSuggestion, getSeriesSuggestion };
+export {
+  getDetail,
+  getMoviesFromCompany,
+  getAllMovies,
+  getMoviesSuggestion,
+  getSeriesSuggestion,
+};

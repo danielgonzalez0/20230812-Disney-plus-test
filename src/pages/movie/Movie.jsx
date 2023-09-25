@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteVideoParams } from '../../redux/features/videoSlice';
 import MovieSection from '../../components/movieSection/MovieSection';
 import Footer from '../../components/footer/Footer';
+import disneyBG from '../../assets/images/background-disney.jpg';
 
 const Container = styled.main`
   margin-top: 70px;
@@ -153,39 +154,44 @@ const Movie = () => {
 
   return (
     <>
-    <Container>
-      <div className="filter"></div>
-      <Background style={{ opacity: opacityValue }}>
-        <img
-          src={`https://image.tmdb.org/t/p/w1280/${movieDetail.imageBackPath}`}
-          alt={movieDetail.title}
-        />
-      </Background>
-
-      <Main>
-        <article>
-          {movieImage.logos[0] ? (
+      <Container>
+        <div className="filter"></div>
+        <Background style={{ opacity: opacityValue }}>
+       
+          {movieDetail.imageBackPath ? (
             <img
-              src={`https://image.tmdb.org/t/p/w300/${movieImage.logos[0].file_path}`}
+              src={`https://image.tmdb.org/t/p/original/${movieDetail.imageBackPath}`}
               alt={movieDetail.title}
             />
           ) : (
-            <span>{movieDetail.title}</span>
+            <img src={disneyBG} alt={'disney par défaut'} />
           )}
-        </article>
-        <DataContent
-          id={movieDetail.id}
-          genres={movieDetail.genres}
-          runtime={movieDetail.runtime}
-          release={movieDetail.release}
-          title={movieDetail.title}
-          tagline={movieDetail.tagline}
-          videos={movieDetail.getVideos()}
-        />
-        <MovieSection movie={movieDetail} suggestions={suggestionData} />
-      </Main>
-    </Container>
-    <Footer/>
+        </Background>
+
+        <Main>
+          <article>
+            {movieImage.logos[0] ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w300/${movieImage.logos[0].file_path}`}
+                alt={movieDetail.title}
+              />
+            ) : (
+              <span>{movieDetail.title}</span>
+            )}
+          </article>
+          <DataContent
+            id={movieDetail.id}
+            genres={movieDetail.genres}
+            runtime={movieDetail.runtime}
+            release={movieDetail.release}
+            title={movieDetail.title}
+            tagline={movieDetail.tagline}
+            videos={movieDetail.getVideos()}
+          />
+          <MovieSection movie={movieDetail} suggestions={suggestionData} />
+        </Main>
+      </Container>
+      <Footer />
     </>
   );
 };

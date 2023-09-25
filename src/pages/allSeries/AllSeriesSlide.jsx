@@ -93,13 +93,18 @@ const AllSeriesSlide = ({ serie }) => {
       <>
         <Container>
           <NavLink className="link" to={`/serie/${serie.id}`}>
-            {serieImage.backdrops[0] ? (
+            {serieImage.backdrops[0] ||
+            serieImage.posters[0] ? (
               <img
-                src={`https://image.tmdb.org/t/p/w300/${serieImage.backdrops[0].file_path}`}
-                alt={`titre ${serie.title}`}
+                src={`https://image.tmdb.org/t/p/w300/${
+                  serieImage.backdrops[0]
+                    ? serieImage.backdrops[0].file_path
+                    : serieImage.posters[0].file_path
+                }`}
+                alt={`titre ${serie.name}`}
               />
             ) : (
-              <p>{serie.title}</p>
+              <p>{serie.name}</p>
             )}
           </NavLink>
         </Container>

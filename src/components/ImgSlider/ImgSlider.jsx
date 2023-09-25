@@ -281,7 +281,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       <Carrousel className="carroussel">
         <Slider
           onTransitionEnd={resetInfinite}
-          className="slider"
+          className="slider1"
           style={{
             width: `${(slides.length * 100) / slidesVisible}%`,
           }}

@@ -26,7 +26,7 @@ const SerieEpisodes = ({ id, season, defaultVideo }) => {
   if (isLoading) return <div>en cours de chargement</div>;
   return (
     <div>
-      <Slider array={seasonDetail} componentToMap={SerieSlide} />
+      <Slider array={seasonDetail} componentToMap={SerieSlide} id={`${season.id}`}/>
     </div>
   );
 };

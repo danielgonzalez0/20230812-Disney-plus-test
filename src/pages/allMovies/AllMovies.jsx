@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import Footer from '../../components/footer/Footer';
 import FilterBtn from '../../components/filterBtn/FilterBtn';
@@ -56,7 +56,7 @@ const AllMovies = () => {
     // return await getData();
   });
 
-  const movies = data || [];
+  const movies = useMemo(() => data || [], [data]);
   const [moviesVisibleEnd, setMovieVisible] = useState(50);
   const [movieArray, setMovieArray] = useState([]);
   const [filterValue, setFilterValue] = useState({

@@ -66,10 +66,10 @@ const renderItem = (video) => (
   </>
 );
 
-const VideoContainer = ({ videos }) => {
+const VideoContainer = ({ videos, id}) => {
   return (
     <>
-      <Slider array={videos} componentToMap={renderItem} />
+      <Slider array={videos} componentToMap={renderItem} id={id}/>
     </>
   );
 };

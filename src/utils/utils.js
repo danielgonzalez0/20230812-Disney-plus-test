@@ -29,8 +29,8 @@ handleSlidesVisible.propTypes = {
  * Gère l'opacité des éléments <li> en fonction de leur débordement de la zone visible de la liste <ul>.
  */
 const handleSlideOverflow = () => {
-  const ul = document.querySelector('.slider');
-  if (ul) {
+  const uls = document.querySelectorAll('.slider');
+   uls.forEach((ul) => {
     const lis = ul.querySelectorAll('li');
     const ulLeft = ul.getBoundingClientRect().left;
     const ulRight = ulLeft + ul.clientWidth;
@@ -49,7 +49,7 @@ const handleSlideOverflow = () => {
         }
       });
     }
-  }
+  });
 };
 
 /**

@@ -62,38 +62,44 @@ const Container = styled.div`
   }
 `;
 
-const SuggestionSlide = (serie) => {
-  const serieQueryKey = ['getSerieDetail', serie.id];
+const MovieAndSerieSlide = (item) => {
+  const serieQueryKey = ['getDataDetail', item.id];
   const { isLoading, data } = useQuery(
     serieQueryKey,
     async () => {
-      const serieImageData = await getDetail(serie.id, 'imageSerie');
-      const serieImage = new Images(serieImageData);
-      console.log('serieImages', serieImage);
-      return { serieImage };
+      const itemImageData = await getDetail(
+        item.id,
+        `${item.type === 'serie' ? 'imageSerie' : 'imageMovie'}`
+      );
+      const itemImage = new Images(itemImageData);
+      console.log('itemImages', itemImage);
+      return { itemImage };
     },
     { cacheTime: 0 }
   );
 
-  const { serieImage } = data || [];
+  const { itemImage } = data || [];
 
   if (isLoading) return <div>en cours de chargement</div>;
 
   return (
     <>
       <Container>
-        <NavLink className="link" to={`/serie/${serie.id}`}>
-          {serieImage.backdrops[0] || serieImage.posters[0] ? (
+        <NavLink
+          className="link"
+          to={`${item.type === 'serie' ? '/serie/' : '/movie/'}${item.id}`}
+        >
+          {itemImage.backdrops[0] || itemImage.posters[0] ? (
             <img
               src={`https://image.tmdb.org/t/p/w300/${
-                serieImage.backdrops[0]
-                  ? serieImage.backdrops[0].file_path
-                  : serieImage.posters[0].file_path
+                itemImage.backdrops[0]
+                  ? itemImage.backdrops[0].file_path
+                  : itemImage.posters[0].file_path
               }`}
-              alt={`titre ${serie.name}`}
+              alt={`titre ${item.name}`}
             />
           ) : (
-            <p>{serie.name}</p>
+            <p>{item.name}</p>
           )}
         </NavLink>
       </Container>
@@ -101,4 +107,4 @@ const SuggestionSlide = (serie) => {
   );
 };
 
-export default SuggestionSlide;
+export default MovieAndSerieSlide;

@@ -61,6 +61,7 @@ const SerieSection = ({ serie, suggestions }) => {
   };
   useEffect(() => {
     console.log(serie);
+    console.log(serie.getVideos());
   }, [serie]);
   return (
     <>
@@ -97,12 +98,12 @@ const SerieSection = ({ serie, suggestions }) => {
           <SeasonsBtn
             id={serie.id}
             seasons={serie.seasons}
-            defaultVideo={serie.getVideos()}
+            defaultVideo={serie.getVideos().length > 0 ? serie.getVideos() : 'no video'}
           />
         )}
         {
           activeTab === 'suggestions' && 
-            <SerieSuggestions suggestions={suggestions.results} />
+            <SerieSuggestions suggestions={suggestions} id={`sugg${serie.id}`}/>
         }
         {activeTab === 'details' && <DetailSerie serie={serie} />}
         {activeTab === 'bonus' && <VideoContainer videos={serie.getVideos()} />}
