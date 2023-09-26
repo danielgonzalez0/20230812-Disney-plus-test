@@ -16,11 +16,13 @@ const Container = styled.section`
 
 const MovieAndSerieSlider = ({ content , id}) => {
   return (
-    
+    <>
       <Container>
         <h4>{content.title}</h4>
         <Slider array={content.data} componentToMap={MovieAndSerieSlide} id={id}/>
       </Container>
+    
+    </>
 
 
   );

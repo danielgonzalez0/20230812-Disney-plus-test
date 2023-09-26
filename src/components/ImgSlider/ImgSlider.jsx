@@ -24,8 +24,8 @@ const Button = styled.button`
   position: absolute;
   top: 90px;
   z-index: 6;
-  width: 3.5vw;
-  height: 25.5vw;
+  width: calc(3.5vw + 24px);
+  height: 26vw;
   margin: 0 auto;
   background: transparent;
   border-color: transparent;
@@ -45,11 +45,11 @@ const Button = styled.button`
   }
 `;
 const LeftBtn = styled(Button)`
-  left: 2px;
+  left: -2px;
 `;
 
 const RightBtn = styled(Button)`
-  right: 2px;
+  right: -2px;
 `;
 
 const Slider = styled.div`

@@ -63,19 +63,20 @@ const Button = styled.button`
   }
 `;
 const LeftBtn = styled(Button)`
-  left: calc(-3.5vw - 24px);
+  left: calc(-3.7vw - 26px);
 `;
 
 const RightBtn = styled(Button)`
-  right: calc(-3.5vw - 24px);
+  right: calc(-3.7vw - 26px);
 `;
 
-const Slider = ({array, componentToMap, id}) => {
-    const [slidesVisible, setSlidesVisible] = useState(
+const Slider = ({ array, componentToMap, id }) => {
+  const [slidesVisible, setSlidesVisible] = useState(
     handleSlidesVisible(window.innerWidth)
   );
   const [slideIndex, setSlideIndex] = useState(0);
   const [sliderDomElement, setSliderDomElement] = useState();
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const slidesTotal = Math.ceil(array.length / slidesVisible);
   const translateInitial = `calc(-0% - 0px)`;
 
@@ -86,8 +87,9 @@ const Slider = ({array, componentToMap, id}) => {
       // Appliquer les transformations et la transition
       setSlideIndex(slideIndex - 1);
       let translateX = `calc( ${(-(slideIndex - 1) / slidesTotal) * 100}% - ${
-        20 * (slideIndex - 1)
+        screenWidth > 430 ? 20 * (slideIndex - 1) : 4 * (slideIndex - 1)
       }px)`;
+
       sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
       sliderDomElement.style.transition = 'transform 0.5s ease 0s';
       console.log(slideIndex / slidesTotal);
@@ -99,8 +101,9 @@ const Slider = ({array, componentToMap, id}) => {
   };
   const handleRight = async () => {
     let translateX = `calc( ${(-(slideIndex + 1) / slidesTotal) * 100}% - ${
-      20 * (slideIndex + 1)
+      screenWidth > 430 ? 20 * (slideIndex + 1) : 4 * (slideIndex + 1)
     }px)`;
+
     if (slideIndex >= slidesTotal - 1) {
     } else {
       // Calculer la valeur de translation
@@ -116,16 +119,15 @@ const Slider = ({array, componentToMap, id}) => {
   };
 
   useEffect(() => {
-      setTimeout(() => {
-        handleSlideOverflow();
-      }, 300);
+    setTimeout(() => {
+      handleSlideOverflow();
+    }, 300);
     window.addEventListener('resize', () => {
       handleSlideOverflow();
       setSlidesVisible(handleSlidesVisible(window.innerWidth));
+      setScreenWidth(window.innerWidth);
       setSlideIndex(0);
-      setSliderDomElement(
-        document.querySelector(`#${id}`)
-      );
+      setSliderDomElement(document.querySelector(`#${id}`));
       if (sliderDomElement) {
         sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
       }
@@ -134,6 +136,7 @@ const Slider = ({array, componentToMap, id}) => {
       window.removeEventListener('resize', () => {
         handleSlideOverflow();
         setSlidesVisible(handleSlidesVisible(window.innerWidth));
+        setScreenWidth(window.innerWidth);
       });
     };
   }, [sliderDomElement, translateInitial, id]);
@@ -172,6 +175,5 @@ const Slider = ({array, componentToMap, id}) => {
     </>
   );
 };
-
 
 export default Slider;

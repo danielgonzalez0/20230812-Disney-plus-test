@@ -33,7 +33,7 @@ import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlid
 const Container = styled.main`
   position: relative;
   background: url(${bgImg}) center center / cover no-repeat fixed;
-  min-height: calc(100vh - 250px);
+  min-height: calc(100vh - 200px);
   overflow-x: hidden;
   display: block;
   padding: 0 calc(3.5vw + 24px);
@@ -55,8 +55,6 @@ const Home = () => {
     { img: img10, title: title10, id: 284053, type: 'movie' },
   ];
 
-
-
   // const queryKey = ['getMovies'];
   // const { isLoading, data } = useQuery(queryKey, async () => {
   //   return await getAllMovies(50);
@@ -76,15 +74,13 @@ const Home = () => {
         <Viewers />
         {/* {isLoading && <div>en cours de chargement</div>}
         {!isLoading && ( */}
-         <MovieAndSerieSlider content={animations} id={'slide1'}/>
-         <MovieAndSerieSlider content={animations} id={'silde2'}/>
+        <MovieAndSerieSlider content={animations} id={'slide1'} />
+        <MovieAndSerieSlider content={animations} id={'silde2'} />
         {/* )} */}
       </Container>
       <Footer />
     </>
   );
 };
-
-
 
 export default Home;
