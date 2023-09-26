@@ -12,6 +12,7 @@ const Nav = styled.nav`
 
   ul {
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
   }
 
@@ -51,6 +52,9 @@ const Nav = styled.nav`
 const Section = styled.section`
   width: 100%;
   padding: 10px 0;
+  .container {
+    min-height: 200px;
+  }
 `;
 
 const MovieSection = ({ movie, suggestions }) => {
@@ -86,9 +90,18 @@ const MovieSection = ({ movie, suggestions }) => {
         </ul>
       </Nav>
       <Section>
-        {activeTab === 'suggestions' && <MovieSuggestions suggestions={suggestions.results} id={`${'movieSuggestions'}`}/>}
-        {activeTab === 'details' && <DetailMovie movie={movie} />}
-        {activeTab === 'bonus' && <VideoContainer videos={movie.getVideos()} />}
+        <div className="container">
+          {activeTab === 'suggestions' && (
+            <MovieSuggestions
+              suggestions={suggestions.results}
+              id={`${'movieSuggestions'}`}
+            />
+          )}
+          {activeTab === 'details' && <DetailMovie movie={movie} />}
+          {activeTab === 'bonus' && (
+            <VideoContainer videos={movie.getVideos()} id={'bonus'} />
+          )}
+        </div>
       </Section>
     </>
   );

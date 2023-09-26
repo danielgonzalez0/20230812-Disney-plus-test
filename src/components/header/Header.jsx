@@ -28,14 +28,6 @@ const Nav = styled.nav`
     padding: 0 36px;
     letter-spacing: 16px;
     z-index: 3;
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 170px;
-      width: 100%;
-    }
   }
 
   .hidden {
@@ -64,7 +56,7 @@ const Logo = styled(NavLink)`
   max-height: 70px;
   font-size: 0;
   display: inline-block;
-  z-index:5;
+  z-index: 5;
   img {
     display: block;
     width: 100%;
@@ -130,7 +122,38 @@ const NavMenu = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    display: none;
+    a {
+      padding: 0 6px;
+      span {
+        display: none;
+      }
+      .imgContainer {
+        position: relative;
+        display: inline-block;
+        &:after {
+          content: '';
+          background: rgb(249, 249, 249);
+          border-radius: 0 0 4px 4px;
+          bottom: -6px;
+          left: 0;
+          height: 2px;
+          opacity: 0;
+          position: absolute;
+          transform-origin: left center;
+          transform: scaleX(0);
+          transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+          visibility: hidden;
+          width: 100%;
+        }
+      }
+      &:hover {
+        .imgContainer:after {
+          transform: scaleX(1);
+          visibility: visible;
+          opacity: 1 !important;
+        }
+      }
+    }
   }
 `;
 
@@ -242,27 +265,39 @@ const Header = () => {
           <>
             <NavMenu>
               <NavLink to="/home">
-                <img src={homeIcon} alt="accueil" />
+                <div className="imgContainer">
+                  <img src={homeIcon} alt="accueil" />
+                </div>
                 <span>ACCUEIL</span>
               </NavLink>
               <NavLink to="/home">
-                <img src={searchIcon} alt="recherche" />
+                <div className="imgContainer">
+                  <img src={searchIcon} alt="recherche" />
+                </div>
                 <span>RECHERCHE</span>
               </NavLink>
               <NavLink to="/home">
-                <img src={watchListIcon} alt="ma liste" />
+                <div className="imgContainer">
+                  <img src={watchListIcon} alt="ma liste" />
+                </div>
                 <span>MA LISTE</span>
               </NavLink>
               <NavLink to="/home">
-                <img src={originalIcon} alt="originals" />
+                <div className="imgContainer">
+                  <img src={originalIcon} alt="originals" />
+                </div>
                 <span>ORIGINALS</span>
               </NavLink>
               <NavLink to="/movies">
-                <img src={movieIcon} alt="film" />
+                <div className="imgContainer">
+                  <img src={movieIcon} alt="film" />
+                </div>
                 <span>FILM</span>
               </NavLink>
               <NavLink to="/series">
-                <img src={seriesIcon} alt="séries" />
+                <div className="imgContainer">
+                  <img src={seriesIcon} alt="séries" />
+                </div>
                 <span>SÉRIES</span>
               </NavLink>
             </NavMenu>

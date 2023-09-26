@@ -13,6 +13,7 @@ const Nav = styled.nav`
 
   ul {
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
   }
 
@@ -52,6 +53,9 @@ const Nav = styled.nav`
 const Section = styled.section`
   width: 100%;
   padding: 10px 0;
+  .container{
+    min-height: 200px;
+  }
 `;
 
 const SerieSection = ({ serie, suggestions }) => {
@@ -98,15 +102,23 @@ const SerieSection = ({ serie, suggestions }) => {
           <SeasonsBtn
             id={serie.id}
             seasons={serie.seasons}
-            defaultVideo={serie.getVideos().length > 0 ? serie.getVideos() : 'no video'}
+            defaultVideo={
+              serie.getVideos().length > 0 ? serie.getVideos() : 'no video'
+            }
           />
         )}
-        {
-          activeTab === 'suggestions' && 
-            <SerieSuggestions suggestions={suggestions} id={`sugg${serie.id}`}/>
-        }
-        {activeTab === 'details' && <DetailSerie serie={serie} />}
-        {activeTab === 'bonus' && <VideoContainer videos={serie.getVideos()} />}
+        <div className="container">
+          {activeTab === 'suggestions' && (
+            <SerieSuggestions
+              suggestions={suggestions}
+              id={`sugg${serie.id}`}
+            />
+          )}
+          {activeTab === 'details' && <DetailSerie serie={serie} />}
+          {activeTab === 'bonus' && (
+            <VideoContainer videos={serie.getVideos()} id={'bonus'} />
+          )}
+        </div>
       </Section>
     </>
   );

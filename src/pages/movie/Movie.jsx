@@ -17,7 +17,7 @@ const Container = styled.main`
   margin-top: 70px;
   min-height: 100vh;
   padding: 0 calc(3.5vw + 24px);
-  overflow-x: visible;
+  overflow: hidden;
 
   .filter {
     background-color: rgb(26, 29, 41);
