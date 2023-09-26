@@ -52,7 +52,7 @@ const MoviesContainer = styled.section`
 const AllMovies = () => {
   const queryKey = ['getMovies'];
   const { isLoading, data } = useQuery(queryKey, async () => {
-    return await getAllMovies(50, "movies");
+    return await getAllMovies(50, 'movies');
     // return await getData();
   });
 
@@ -85,9 +85,15 @@ const AllMovies = () => {
   }, [moviesVisibleEnd]);
 
   useEffect(() => {
-    setMovieArray([ 
-      ...movies.slice(0, moviesVisibleEnd),
-    ])
+    if (filterValue.id === 0) {
+      setMovieArray([...movies.slice(0, moviesVisibleEnd)]);
+    } else {
+      setMovieArray([
+        ...movies
+          .filter((movie) => movie.genre_ids.includes(filterValue.id))
+          .slice(0, moviesVisibleEnd),
+      ]);
+    }
   }, [movies, moviesVisibleEnd, filterValue]);
 
   return (
@@ -105,19 +111,9 @@ const AllMovies = () => {
           {isLoading && <div>en cours de chargement</div>}
           {!isLoading &&
             movieArray.length > 0 &&
-            movieArray
-        .filter((movie)=>{
-        if(filterValue.id === 0){
-            return movie
-        } else {
-            return movie.genre_ids.includes(filterValue.id)
-        }
-        
-    })
-              .map((movie, index) => (
-                //   <div key={index}>{movie.title}</div>
-                <AllMoviesSlide movie={movie} key={index} />
-              ))}
+            movieArray.map((movie, index) => (
+              <AllMoviesSlide movie={movie} key={index} />
+            ))}
         </MoviesContainer>
       </Container>
       <Footer />

@@ -71,7 +71,6 @@ const RightBtn = styled(Button)`
 `;
 
 const Slider = ({array, componentToMap, id}) => {
-  console.log(array)
     const [slidesVisible, setSlidesVisible] = useState(
     handleSlidesVisible(window.innerWidth)
   );

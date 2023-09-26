@@ -85,7 +85,15 @@ const AllSeries = () => {
   }, [seriesVisible]);
 
   useEffect(() => {
-    setSerieArray([...series.slice(0, seriesVisible)]);
+   if (filterValue.id === 0) {
+     setSerieArray([...series.slice(0, seriesVisible)]);
+   } else {
+     setSerieArray([
+       ...series
+         .filter((serie) => serie.genre_ids.includes(filterValue.id))
+         .slice(0, seriesVisible),
+     ]);
+   }
   }, [series, seriesVisible, filterValue]);
 
   return (
@@ -104,16 +112,8 @@ const AllSeries = () => {
           {!isLoading &&
             serieArray.length > 0 &&
             serieArray
-              .filter((serie) => {
-                if (filterValue.id === 0) {
-                  return serie;
-                } else {
-                  return serie.genre_ids.includes(filterValue.id);
-                }
-              })
               .map((serie, index) => (
                 <AllSeriesSlide serie={serie} key={index} />
-                // <div key={index}>{serie.name}</div>
               ))}
         </SeriesContainer>
       </Container>
