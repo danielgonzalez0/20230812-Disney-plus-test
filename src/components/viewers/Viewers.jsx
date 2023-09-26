@@ -10,6 +10,7 @@ import marvelVid from './1564676115-marvel.mp4';
 import nationalVid from './1564676296-national-geographic.mp4';
 import pixarVid from './1564676714-pixar.mp4';
 import starVid from './1608229455-star-wars.mp4';
+import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
   margin-top: 30px;
@@ -75,65 +76,75 @@ const Viewers = () => {
   }, []);
   return (
     <Container>
+      <NavLink to="/brand/disney">
+        <Wrap>
+          <img src={disneyViewer} alt="disney" />
+          <video
+            autoPlay={true}
+            loop={true}
+            playsInline={true}
+            ref={vidRef}
+            muted={true}
+          >
+            <source src={disneyVid} type="video/mp4" />
+          </video>
+        </Wrap>
+      </NavLink>
       <Wrap>
-        <img src={disneyViewer} alt="disney" />
-        <video
-          autoPlay={true}
-          loop={true}
-          playsInline={true}
-          ref={vidRef}
-          muted={true}
-        >
-          <source src={disneyVid} type="video/mp4" />
-        </video>
+        <NavLink to="/brand/pixar">
+          <img src={pixarViewer} alt="pixar" />
+          <video
+            autoPlay={true}
+            loop={true}
+            playsInline={true}
+            ref={vidRef}
+            muted={true}
+          >
+            <source src={pixarVid} type="video/mp4" />
+          </video>
+        </NavLink>
       </Wrap>
       <Wrap>
-        <img src={pixarViewer} alt="pixar" />
-        <video
-          autoPlay={true}
-          loop={true}
-          playsInline={true}
-          ref={vidRef}
-          muted={true}
-        >
-          <source src={pixarVid} type="video/mp4" />
-        </video>
+        <NavLink to="/brand/marvel">
+          <img src={marvelViewer} alt="marvel" />
+          <video
+            autoPlay={true}
+            loop={true}
+            playsInline={true}
+            ref={vidRef}
+            muted={true}
+          >
+            <source src={marvelVid} type="video/mp4" />
+          </video>
+        </NavLink>
       </Wrap>
       <Wrap>
-        <img src={marvelViewer} alt="marvel" />
-        <video
-          autoPlay={true}
-          loop={true}
-          playsInline={true}
-          ref={vidRef}
-          muted={true}
-        >
-          <source src={marvelVid} type="video/mp4" />
-        </video>
+        <NavLink to="/brand/star-wars">
+          <img src={starViewer} alt="star" />
+          <video
+            autoPlay={true}
+            loop={true}
+            playsInline={true}
+            ref={vidRef}
+            muted={true}
+          >
+            <source src={starVid} type="video/mp4" />
+          </video>
+        </NavLink>
       </Wrap>
       <Wrap>
-        <img src={starViewer} alt="star" />
-        <video
-          autoPlay={true}
-          loop={true}
-          playsInline={true}
-          ref={vidRef}
-          muted={true}
-        >
-          <source src={starVid} type="video/mp4" />
-        </video>
-      </Wrap>
-      <Wrap>
-        <img src={nationalViewer} alt="national" />
-        <video
-          autoPlay={true}
-          loop={true}
-          playsInline={true}
-          ref={vidRef}
-          muted={true}
-        >
-          <source src={nationalVid} type="video/mp4" />
-        </video>
+        <NavLink to="/brand/national-geographic">
+          <img src={nationalViewer} alt="national" />
+          <video
+            autoPlay={true}
+            loop={true}
+            playsInline={true}
+            ref={vidRef}
+            muted={true}
+          >
+            <source src={nationalVid} type="video/mp4" />
+          </video>
+        </NavLink>
       </Wrap>
     </Container>
   );

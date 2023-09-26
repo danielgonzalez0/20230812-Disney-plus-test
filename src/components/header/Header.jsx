@@ -39,7 +39,18 @@ const Nav = styled.nav`
   }
 
   .hidden {
-    background: transparent;
+    /* background: transparent; */
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.03) 15%,
+      rgba(0, 0, 0, 0.125) 30%,
+      rgba(0, 0, 0, 0.25) 46%,
+      rgba(0, 0, 0, 0.4) 61%,
+      rgba(0, 0, 0, 0.553) 75%,
+      rgba(0, 0, 0, 0.694) 88%,
+      rgba(0, 0, 0, 0.8)
+    );
   }
   .show {
     background: ${colors.headerColor};
