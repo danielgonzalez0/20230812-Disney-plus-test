@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { animations } from '../../utils/collections';
+import { animations, marvelAlaUne, marvelAnimations, marvelLesOrigines, marvelSagaInfini, marvelSagaMultivers, marvelXmen } from '../../utils/collections';
 import Footer from '../../components/footer/Footer';
 import brandImg from '../../assets/images/background-marvel.jpg';
 import brandVideo from '../../assets/videos/marvel.mp4';
@@ -121,12 +121,12 @@ const Marvel = () => {
           </video>
         </Background>
         <SliderContainer>
-          <MovieAndSerieSlider content={animations} id={'slide1'} />
-          <MovieAndSerieSlider content={animations} id={'slide2'} />
-          <MovieAndSerieSlider content={animations} id={'slide3'} />
-          <MovieAndSerieSlider content={animations} id={'slide4'} />
-          <MovieAndSerieSlider content={animations} id={'slide5'} />
-          <MovieAndSerieSlider content={animations} id={'slide6'} />
+          <MovieAndSerieSlider content={marvelAlaUne} id={'slide1'} />
+          <MovieAndSerieSlider content={marvelSagaInfini} id={'slide2'} />
+          <MovieAndSerieSlider content={marvelSagaMultivers} id={'slide3'} />
+          <MovieAndSerieSlider content={marvelLesOrigines} id={'slide4'} />
+          <MovieAndSerieSlider content={marvelAnimations} id={'slide5'} />
+          <MovieAndSerieSlider content={marvelXmen} id={'slide6'} />
         </SliderContainer>
       </Container>
       <Footer />

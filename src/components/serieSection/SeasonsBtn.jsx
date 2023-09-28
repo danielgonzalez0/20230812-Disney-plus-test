@@ -4,7 +4,9 @@ import SerieEpisodes from './SerieEpisodes';
 
 const BtnContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  row-gap: 0;
   margin-bottom: 16px;
   button {
     padding: 10px;

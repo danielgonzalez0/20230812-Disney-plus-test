@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { animations } from '../../utils/collections';
+import { animations, disneyALaUne, disneyAnimationsSutdios, disneyClassiques } from '../../utils/collections';
 import Footer from '../../components/footer/Footer';
 import brandImg from '../../assets/images/background-disney.jpg';
 import brandVideo from '../../assets/videos/disney.mp4'
@@ -122,9 +122,12 @@ const Disney = () => {
           </video>
         </Background>
         <SliderContainer>
-          <MovieAndSerieSlider content={animations} id={'slide1'} />
-          <MovieAndSerieSlider content={animations} id={'slide2'} />
-          <MovieAndSerieSlider content={animations} id={'slide3'} />
+          <MovieAndSerieSlider content={disneyALaUne} id={'slide1'} />
+          <MovieAndSerieSlider
+            content={disneyAnimationsSutdios}
+            id={'slide2'}
+          />
+          <MovieAndSerieSlider content={disneyClassiques} id={'slide3'} />
           <MovieAndSerieSlider content={animations} id={'slide4'} />
           <MovieAndSerieSlider content={animations} id={'slide5'} />
           <MovieAndSerieSlider content={animations} id={'slide6'} />
