@@ -27,7 +27,7 @@ import Viewers from '../../components/viewers/Viewers';
 // import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/footer/Footer';
 
-import { animations } from '../../utils/collections';
+import { animations, disneyAnimationsSutdios, disneyClassiques, marvelSagaInfini, marvelSagaMultivers } from '../../utils/collections';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
 
 const Container = styled.main`
@@ -74,8 +74,12 @@ const Home = () => {
         <Viewers />
         {/* {isLoading && <div>en cours de chargement</div>}
         {!isLoading && ( */}
-        <MovieAndSerieSlider content={animations} id={'slide1'} />
-        <MovieAndSerieSlider content={animations} id={'silde2'} />
+        <MovieAndSerieSlider content={disneyAnimationsSutdios} id={'slide1'} />
+        <MovieAndSerieSlider content={marvelSagaInfini} id={'silde2'} />
+        <MovieAndSerieSlider content={disneyClassiques} id={'silde3'} />
+        <MovieAndSerieSlider content={animations} id={'silde4'} />
+        <MovieAndSerieSlider content={marvelSagaMultivers} id={'silde5'} />
+        <MovieAndSerieSlider content={animations} id={'silde6'} />
         {/* )} */}
       </Container>
       <Footer />
