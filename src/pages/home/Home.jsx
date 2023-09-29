@@ -27,7 +27,7 @@ import Viewers from '../../components/viewers/Viewers';
 // import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/footer/Footer';
 
-import { animations, disneyAnimationsSutdios, disneyClassiques, marvelSagaInfini, marvelSagaMultivers } from '../../utils/collections';
+import { DisneyIlEtaitUneFois, animations, disneyAgeDeGlace, disneyAnimationsSutdios, disneyClassiques, disneyLiveAction, marvelSagaInfini, marvelSagaMultivers, pixarFilms, pixarToyStory, starMovies } from '../../utils/collections';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
 
 const Container = styled.main`
@@ -76,10 +76,15 @@ const Home = () => {
         {!isLoading && ( */}
         <MovieAndSerieSlider content={disneyAnimationsSutdios} id={'slide1'} />
         <MovieAndSerieSlider content={marvelSagaInfini} id={'silde2'} />
-        <MovieAndSerieSlider content={disneyClassiques} id={'silde3'} />
-        <MovieAndSerieSlider content={animations} id={'silde4'} />
-        <MovieAndSerieSlider content={marvelSagaMultivers} id={'silde5'} />
-        <MovieAndSerieSlider content={animations} id={'silde6'} />
+        <MovieAndSerieSlider content={starMovies} id={'silde3'} />
+        <MovieAndSerieSlider content={disneyLiveAction} id={'silde4'} />
+        <MovieAndSerieSlider content={pixarFilms} id={'silde5'} />
+        <MovieAndSerieSlider content={disneyClassiques} id={'silde6'} />
+        <MovieAndSerieSlider content={marvelSagaMultivers} id={'silde7'} />
+        <MovieAndSerieSlider content={pixarToyStory} id={'silde8'} />
+        <MovieAndSerieSlider content={disneyAgeDeGlace} id={'silde9'} />
+        <MovieAndSerieSlider content={DisneyIlEtaitUneFois} id={'silde10'} />
+        <MovieAndSerieSlider content={animations} id={'silde11'} />
         {/* )} */}
       </Container>
       <Footer />

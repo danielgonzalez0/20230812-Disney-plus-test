@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { animations, disneyALaUne, disneyAnimationsSutdios, disneyClassiques } from '../../utils/collections';
+import { DisneyIlEtaitUneFois, animations, disneyALaUne, disneyAgeDeGlace, disneyAnimationsSutdios, disneyClassiques, disneyLaReineDesNeiges, disneyLiveAction } from '../../utils/collections';
 import Footer from '../../components/footer/Footer';
 import brandImg from '../../assets/images/background-disney.jpg';
 import brandVideo from '../../assets/videos/disney.mp4'
@@ -128,9 +128,10 @@ const Disney = () => {
             id={'slide2'}
           />
           <MovieAndSerieSlider content={disneyClassiques} id={'slide3'} />
-          <MovieAndSerieSlider content={animations} id={'slide4'} />
-          <MovieAndSerieSlider content={animations} id={'slide5'} />
-          <MovieAndSerieSlider content={animations} id={'slide6'} />
+          <MovieAndSerieSlider content={disneyLiveAction} id={'slide4'} />
+          <MovieAndSerieSlider content={disneyLaReineDesNeiges} id={'slide5'} />
+          <MovieAndSerieSlider content={disneyAgeDeGlace} id={'slide6'} />
+          <MovieAndSerieSlider content={DisneyIlEtaitUneFois} id={'slide7'} />
         </SliderContainer>
       </Container>
       <Footer />

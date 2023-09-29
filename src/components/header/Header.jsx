@@ -283,12 +283,12 @@ const Header = () => {
                 </div>
                 <span>MA LISTE</span>
               </NavLink>
-              <NavLink to="/home">
+              {/* <NavLink to="/home">
                 <div className="imgContainer">
                   <img src={originalIcon} alt="originals" />
                 </div>
                 <span>ORIGINALS</span>
-              </NavLink>
+              </NavLink> */}
               <NavLink to="/movies">
                 <div className="imgContainer">
                   <img src={movieIcon} alt="film" />

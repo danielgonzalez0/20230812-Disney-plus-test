@@ -95,10 +95,10 @@ const Connexion = () => {
   const user = useSelector((state) => state.user);
 
   const users = [
-    { name: 'User 1', img: user1 },
-    { name: 'User 2', img: user2 },
-    { name: 'User 3', img: user3 },
-    { name: 'User 4', img: user4 },
+    { name: 'Tony', img: user1 },
+    { name: 'B-max', img: user2 },
+    { name: 'Raya', img: user3 },
+    { name: 'Meilin', img: user4 },
   ];
 
   const setUser = useCallback(

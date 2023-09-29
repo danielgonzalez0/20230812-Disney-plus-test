@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { animations } from '../../utils/collections';
+import { animations, pixarALaUne, pixarCars, pixarFilms, pixarHeros, pixarMonstres, pixarToyStory } from '../../utils/collections';
 import Footer from '../../components/footer/Footer';
 import brandImg from '../../assets/images/background-pixar.jpg';
 import brandVideo from '../../assets/videos/pixar.mp4';
@@ -121,12 +121,12 @@ const Pixar = () => {
           </video>
         </Background>
         <SliderContainer>
-          <MovieAndSerieSlider content={animations} id={'slide1'} />
-          <MovieAndSerieSlider content={animations} id={'slide2'} />
-          <MovieAndSerieSlider content={animations} id={'slide3'} />
-          <MovieAndSerieSlider content={animations} id={'slide4'} />
-          <MovieAndSerieSlider content={animations} id={'slide5'} />
-          <MovieAndSerieSlider content={animations} id={'slide6'} />
+          <MovieAndSerieSlider content={pixarALaUne} id={'slide1'} />
+          <MovieAndSerieSlider content={pixarFilms} id={'slide2'} />
+          <MovieAndSerieSlider content={pixarMonstres} id={'slide3'} />
+          <MovieAndSerieSlider content={pixarToyStory} id={'slide4'} />
+          <MovieAndSerieSlider content={pixarCars} id={'slide5'} />
+          <MovieAndSerieSlider content={pixarHeros} id={'slide6'} />
         </SliderContainer>
       </Container>
       <Footer />

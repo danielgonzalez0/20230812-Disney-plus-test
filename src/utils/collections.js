@@ -212,3 +212,251 @@ export const disneyClassiques = {
     { id: 756, type: 'movie', name: `Fantasia` },
   ],
 };
+
+export const disneyLiveAction = {
+  title: `Films live-action`,
+  data: [
+    { id: 420809, type: 'movie', name: `Maléfique: le pouvoir du mal` },
+    { id: 12155, type: 'movie', name: `Alice aux pays des merveilles` },
+    { id: 420817, type: 'movie', name: `Aladdin` },
+    { id: 337401, type: 'movie', name: `Mulan` },
+    { id: 400650, type: 'movie', name: `le retour de Mary Poppins` },
+    { id: 321612, type: 'movie', name: `La belle et la bête` },
+    { id: 102651, type: 'movie', name: `Maléfique` },
+    { id: 420808, type: 'movie', name: `Peter Pan et Wendy` },
+    { id: 338958, type: 'movie', name: `Il était une fois 2` },
+    { id: 150689, type: 'movie', name: `Cendrillon` },
+    { id: 4523, type: 'movie', name: `Il était une fois` },
+    { id: 433, type: 'movie', name: `Mary poppins` },
+    { id: 278927, type: 'movie', name: `le livre de la jungle` },
+    { id: 11674, type: 'movie', name: `les 101 dalmatiens` },
+    { id: 329996, type: 'movie', name: `Dumbo` },
+    { id: 532639, type: 'movie', name: `Pinocchio` },
+  ],
+};
+
+export const disneyLaReineDesNeiges = {
+  title: `La reine des neiges`,
+  data: [
+    { id: 134297, type: 'serie', name: `Olaf présente` },
+    { id: 741074, type: 'movie', name: `Les aventures d'olaf` },
+    { id: 816688, type: 'movie', name: `les 5 esprits` },
+    { id: 103465, type: 'serie', name: `Dans un autre monde` },
+    { id: 460793, type: 'movie', name: `la reine des neiges: joyeuses fêtes` },
+    { id: 326359, type: 'movie', name: `la reine des neiges: une fête givrée` },
+    { id: 109445, type: 'movie', name: `La reine des neiges` },
+    { id: 330457, type: 'movie', name: `La reine des neiges 2` },
+    {
+      id: 665287,
+      type: 'movie',
+      name: `La buche de noel du château d'Arendelle`,
+    },
+  ],
+};
+
+export const disneyAgeDeGlace = {
+  title: `L'âge de glace`,
+  data: [
+    { id: 158307, type: 'serie', name: `Les aventures de Scrat` },
+    { id: 774825, type: 'movie', name: `Les aventures de Buck wild` },
+    { id: 425, type: 'movie', name: `l'age de glaces` },
+    { id: 950, type: 'movie', name: `l'age de glaces 2` },
+    { id: 8355, type: 'movie', name: `l'age de glaces 3` },
+    { id: 57800, type: 'movie', name: `l'age de glaces 4` },
+    {
+      id: 278154,
+      type: 'movie',
+      name: `L'age de glace : les lois de l'univers`,
+    },
+    {
+      id: 387893,
+      type: 'movie',
+      name: `L'age de glace : la grande chasse aux oeufs`,
+    },
+  ],
+};
+export const DisneyIlEtaitUneFois = {
+  title: `Il était une fois`,
+  data: [
+    { id: 877269, type: 'movie', name: `Avalonia` },
+    { id: 224141, type: 'movie', name: `into the woods` },
+    { id: 4523, type: 'movie', name: `Il était une fois` },
+    { id: 330457, type: 'movie', name: `La reine des neiges 2` },
+    { id: 321612, type: 'movie', name: `La belle et la bête` },
+    { id: 338958, type: 'movie', name: `Il était une fois 2` },
+    { id: 9880, type: 'movie', name: `Princesse malgré elle` },
+    { id: 532639, type: 'movie', name: `Pinocchio` },
+    { id: 527774, type: 'movie', name: `Raya` },
+    { id: 102651, type: 'movie', name: `Maléfique` },
+    { id: 277834, type: 'movie', name: `Vaiana` },
+    { id: 12155, type: 'movie', name: `Alice aux pays des merveilles` },
+    { id: 38757, type: 'movie', name: `Raiponce` },
+    { id: 10882, type: 'movie', name: `La belle au bois dormant` },
+    { id: 420808, type: 'movie', name: `Peter Pan et Wendy` },
+    { id: 294272, type: 'movie', name: `Peter et Elliot le dragon` },
+    { id: 10674, type: 'movie', name: `Mulan` },
+    { id: 150689, type: 'movie', name: `Cendrillon` },
+    { id: 109445, type: 'movie', name: `La reine des neiges` },
+    { id: 812, type: 'movie', name: `Aladdin` },
+  ],
+};
+
+ // ------------------------------------------------------
+// pixar
+// ------------------------------------------------------
+
+export const pixarALaUne = {
+  title: `À la une`,
+  data: [
+    { id: 976573, type: 'movie', name: `Elementaire` },
+    { id: 508947, type: 'movie', name: `Alerte rouge` },
+    { id: 90461, type: 'serie', name: 'Monstres et compagnie au travail' },
+    { id: 660851, type: 'movie', name: `c'est quoi l'argent` },
+    { id: 508943, type: 'movie', name: `Luca` },
+    { id: 532953, type: 'movie', name: `Purl` },
+    { id: 301528, type: 'movie', name: `Toy's story 4` },
+    { id: 260513, type: 'movie', name: `les indestructibles 2` },
+  ],
+};
+export const pixarFilms = {
+  title: `Pixar films`,
+  data: [
+    { id: 105864, type: 'movie', name: `le voyage d'arlo` },
+    { id: 508439, type: 'movie', name: `En avant` },
+    { id: 62211, type: 'movie', name: `Monstres academy` },
+    { id: 920, type: 'movie', name: `Cars` },
+    { id: 10193, type: 'movie', name: `Toy story 3` },
+    { id: 10681, type: 'movie', name: `Wall E` },
+    { id: 862, type: 'movie', name: `Toy story` },
+    { id: 260514, type: 'movie', name: `cars 3` },
+    { id: 508943, type: 'movie', name: `luca` },
+    { id: 260513, type: 'movie', name: `les indestructibles 2` },
+    { id: 354912, type: 'movie', name: `coco` },
+    { id: 150540, type: 'movie', name: `vice-versa` },
+    { id: 508442, type: 'movie', name: `Soul` },
+    { id: 62177, type: 'movie', name: `rebelle` },
+    { id: 508947, type: 'movie', name: `Alerte rouge` },
+    { id: 12, type: 'movie', name: `le monde de nemo` },
+    { id: 14160, type: 'movie', name: `la-haut` },
+    { id: 585, type: 'movie', name: `monstres et compagnie` },
+    { id: 2062, type: 'movie', name: `ratatouille` },
+    { id: 9487, type: 'movie', name: `1001 pattes` },
+    { id: 863, type: 'movie', name: `toy story 2` },
+    { id: 127380, type: 'movie', name: `le monde de dory` },
+    { id: 9806, type: 'movie', name: `les indestructibles` },
+  ],
+};
+
+export const pixarMonstres = {
+  title: `Monstres et créatures`,
+  data: [
+    { id: 876716, type: 'movie', name: `Ciao Alberto` },
+    { id: 90461, type: 'serie', name: 'Monstres et compagnie au travail' },
+    { id: 585, type: 'movie', name: `monstres et compagnie` },
+    { id: 62211, type: 'movie', name: `Monstres academy` },
+    { id: 105864, type: 'movie', name: `le voyage d'arlo` },
+    { id: 508943, type: 'movie', name: `luca` },
+    { id: 130925, type: 'movie', name: `partysaurus rex` },
+    { id: 141423, type: 'movie', name: `la légende de mordu` },
+    { id: 258152, type: 'movie', name: `party central` },
+    { id: 256835, type: 'movie', name: `toy story hors du temps` },
+    { id: 13931, type: 'movie', name: `la voiture de bob` },
+  ],
+};
+export const pixarToyStory = {
+  title: `Toy Story`,
+  data: [
+    { id: 862, type: 'movie', name: `Toy story` },
+    { id: 863, type: 'movie', name: `toy story 2` },
+    { id: 10193, type: 'movie', name: `Toy story 3` },
+    { id: 301528, type: 'movie', name: `Toy's story 4` },
+    { id: 82424, type: 'movie', name: `mini buzz` },
+    { id: 77887, type: 'movie', name: `vacances a hawai` },
+    { id: 213121, type: 'movie', name: `angoisse au motel` },
+    { id: 256835, type: 'movie', name: `toy story hors du temps` },
+    { id: 594530, type: 'movie', name: `la vie en lumière` },
+    { id: 130925, type: 'movie', name: `partysaurus rex` },
+  ],
+};
+export const pixarCars = {
+  title: `Cars`,
+  data: [
+    { id: 920, type: 'movie', name: `Cars` },
+    { id: 49013, type: 'movie', name: `Cars 2` },
+    { id: 260514, type: 'movie', name: `Cars 3` },
+    { id: 148605, type: 'movie', name: `Martin poids lourd` },
+    { id: 148607, type: 'movie', name: `heavy metal martin` },
+    { id: 148606, type: 'movie', name: `martin détective privé` },
+    {
+      id: 286189,
+      type: 'movie',
+      name: `les 500 1/2 miles de radiator springs`,
+    },
+    { id: 145316, type: 'movie', name: `air martin` },
+    { id: 13934, type: 'movie', name: `martin et la lumiere fantome` },
+    { id: 140967, type: 'movie', name: `martin le grand` },
+    { id: 230767, type: 'movie', name: `hiccups` },
+    { id: 24328, type: 'movie', name: `tokyo martin` },
+    { id: 438788, type: 'movie', name: `Cars Toon : Martin se la raconte` },
+  ],
+};
+
+export const pixarHeros = {
+  title: `Héros improbables`,
+  data: [
+    { id: 10681, type: 'movie', name: `Wall E` },
+    { id: 62177, type: 'movie', name: `rebelle` },
+    { id: 9806, type: 'movie', name: `les indestructibles` },
+    { id: 9487, type: 'movie', name: `1001 pattes` },
+    { id: 127380, type: 'movie', name: `le monde de dory` },
+    { id: 62211, type: 'movie', name: `Monstres academy` },
+    { id: 508439, type: 'movie', name: `En avant` },
+    { id: 260513, type: 'movie', name: `les indestructibles 2` },
+    { id: 862, type: 'movie', name: `Toy story` },
+    { id: 14160, type: 'movie', name: `la-haut` },
+    { id: 508442, type: 'movie', name: `Soul` },
+    { id: 585, type: 'movie', name: `monstres et compagnie` },
+    { id: 594530, type: 'movie', name: `la vie en lumière` },
+    { id: 508943, type: 'movie', name: `luca` },
+    { id: 863, type: 'movie', name: `toy story 2` },
+  ],
+};
+
+ // ------------------------------------------------------
+// Starwars
+// ------------------------------------------------------
+
+
+export const starProdOrigin = {
+  title: `Productions originales`,
+  data: [
+    { id: 114461, type: 'serie', name: `Ahsoka` },
+    { id: 202998, type: 'serie', name: `les aventures des petits jedi` },
+    { id: 980804, type: 'movie', name: `lego c'est l'été` },
+    { id: 82856, type: 'serie', name: `mandalorian` },
+    { id: 83867, type: 'serie', name: `andor` },
+    { id: 101978, type: 'serie', name: `les making of the mandalorian` },
+    { id: 92830, type: 'serie', name: `obi wan kenobi` },
+    { id: 114478, type: 'serie', name: `visions` },
+    { id: 105971, type: 'serie', name: `bad batch` },
+    { id: 203085, type: 'serie', name: `tales of jedi` },
+    { id: 4194, type: 'serie', name: `clone wars` },
+    { id: 115036, type: 'serie', name: `le livre de boba fett` },
+  ],
+};
+export const starMovies = {
+  title: `Star Wars films`,
+  data: [
+    { id: 11, type: 'movie', name: `un nouvel espoir` },
+    { id: 1891, type: 'movie', name: `empire contre-attaque` },
+    { id: 1892, type: 'movie', name: `le retour de jedi` },
+    { id: 1893, type: 'movie', name: `la menace fantome` },
+    { id: 1894, type: 'movie', name: `l'attaque des clone` },
+    { id: 1895, type: 'movie', name: `la revanche des sith` },
+    { id: 140607, type: 'movie', name: `le réveil de la force` },
+    { id: 330459, type: 'movie', name: `rogue one` },
+    { id: 181808, type: 'movie', name: `les derniers jedi` },
+    { id: 348350, type: 'movie', name: `solo` },
+    { id: 181812, type: 'movie', name: `l'ascencion de skywalker` },
+  ],
+};
