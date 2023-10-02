@@ -84,25 +84,44 @@ const Slider = ({ array, componentToMap, id }) => {
   const [sliderWidth, setSliderWidth] = useState(null);
   const [lastTranslate, setLastTranslate] = useState(null);
 
-  const handleLeft = async () => {
-    if (slideIndex <= 0) {
-    } else {
-      // Calculer la valeur de translation
-      // Appliquer les transformations et la transition
-      setSlideIndex(slideIndex - 1);
-      let translateX = `calc( ${(-(slideIndex - 1) / slidesTotal) * 100}% - ${
-        screenWidth > 430 ? 20 * (slideIndex - 1) : 4 * (slideIndex - 1)
-      }px)`;
+    const handleLeft = async () => {
+      if (slideIndex <= 0) {
+      } else {
+        // Calculer la valeur de translation
+        // Appliquer les transformations et la transition
+        setSlideIndex(slideIndex - 1);
+        let translateX = `calc( ${(-(slideIndex - 1) / slidesTotal) * 100}% - ${
+          screenWidth > 430 ? 20 * (slideIndex - 1) : 4 * (slideIndex - 1)
+        }px)`;
 
-      sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
-      sliderDomElement.style.transition = 'transform 0.5s ease 0s';
-      // console.log(slideIndex / slidesTotal);
-      // console.log('click left', slideIndex, slidesTotal);
-      setTimeout(() => {
-        handleSlideOverflow();
-      }, 500);
-    }
-  };
+        sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
+        sliderDomElement.style.transition = 'transform 0.5s ease 0s';
+        // console.log(slideIndex / slidesTotal);
+        // console.log('click left', slideIndex, slidesTotal);
+        setTimeout(() => {
+          handleSlideOverflow();
+        }, 500);
+      }
+    };
+
+     const handleRight = async () => {
+       let translateX = `calc( ${(-(slideIndex + 1) / slidesTotal) * 100}% - ${
+         screenWidth > 430 ? 20 * (slideIndex + 1) : 4 * (slideIndex + 1)
+       }px)`;
+
+       if (slideIndex >= slidesTotal - 1) {
+       } else {
+         // Calculer la valeur de translation
+         // Appliquer les transformations et la transition
+         sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
+         sliderDomElement.style.transition = 'transform 0.5s ease 0s';
+         setSlideIndex(slideIndex + 1);
+         // console.log('click right', slideIndex, slidesTotal);
+       }
+       setTimeout(() => {
+         handleSlideOverflow();
+       }, 500);
+     };
 
   /**
    * Démarre le déplacement au touché
@@ -155,7 +174,7 @@ const Slider = ({ array, componentToMap, id }) => {
     (e) => {
       if (origin && lastTranslate) {
         sliderDomElement.style.transition = 'transform 0.5s ease 0s';
-        if (Math.abs(lastTranslate.x / sliderWidth) > 0.2) {
+        if (Math.abs(lastTranslate.x / screenWidth) > 0.2) {
           if (lastTranslate.x < 0) {
             handleRight();
           } else {
@@ -168,27 +187,10 @@ const Slider = ({ array, componentToMap, id }) => {
       setOrigin(null);
       console.log(origin);
     },
-    [lastTranslate, origin, sliderWidth]
+    [lastTranslate, origin, sliderWidth, screenWidth, sliderDomElement]
   );
 
-  const handleRight = async () => {
-    let translateX = `calc( ${(-(slideIndex + 1) / slidesTotal) * 100}% - ${
-      screenWidth > 430 ? 20 * (slideIndex + 1) : 4 * (slideIndex + 1)
-    }px)`;
-
-    if (slideIndex >= slidesTotal - 1) {
-    } else {
-      // Calculer la valeur de translation
-      // Appliquer les transformations et la transition
-      sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
-      sliderDomElement.style.transition = 'transform 0.5s ease 0s';
-      setSlideIndex(slideIndex + 1);
-      // console.log('click right', slideIndex, slidesTotal);
-    }
-    setTimeout(() => {
-      handleSlideOverflow();
-    }, 500);
-  };
+ 
 
   useEffect(() => {
     setTimeout(() => {
@@ -220,17 +222,6 @@ const Slider = ({ array, componentToMap, id }) => {
     }
   }, [sliderDomElement, translateInitial, id]);
 
-  useEffect(() => {
-    // window.addEventListener('mousemove', (e) => handleDrag(e));
-    // window.addEventListener('touchmove', (e) => handleDrag(e));
-    window.addEventListener('touchend', (e) => handleEndDrag(e));
-    window.addEventListener('mouseup', (e) => handleEndDrag(e));
-    window.addEventListener('touchcancel', (e) => handleEndDrag(e));
-    // return () => {
-    //   window.removeEventListener('mousemove', (e) => handleDrag(e));
-    //   window.removeEventListener('touchmove', (e) => handleDrag(e));
-    // };
-  }, [handleEndDrag]);
 
   return (
     <>
