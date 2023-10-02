@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { handleSlideOverflow, handleSlidesVisible } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -79,6 +79,10 @@ const Slider = ({ array, componentToMap, id }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const slidesTotal = Math.ceil(array.length / slidesVisible);
   const translateInitial = `calc(-0% - 0px)`;
+  //gestion tactile
+  const [origin, setOrigin] = useState(null);
+  const [sliderWidth, setSliderWidth] = useState(null);
+  const [lastTranslate, setLastTranslate] = useState(null);
 
   const handleLeft = async () => {
     if (slideIndex <= 0) {
@@ -92,13 +96,81 @@ const Slider = ({ array, componentToMap, id }) => {
 
       sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
       sliderDomElement.style.transition = 'transform 0.5s ease 0s';
-      console.log(slideIndex / slidesTotal);
-      console.log('click left', slideIndex, slidesTotal);
+      // console.log(slideIndex / slidesTotal);
+      // console.log('click left', slideIndex, slidesTotal);
       setTimeout(() => {
         handleSlideOverflow();
       }, 500);
     }
   };
+
+  /**
+   * Démarre le déplacement au touché
+   * @param {MouseEvent|TouchEvent} e
+   */
+  const handleStartDrag = (e) => {
+    if (e.touches) {
+      if (e.touches.length > 1) {
+        return;
+      } else {
+        e = e.touches[0];
+      }
+    }
+    setOrigin({ x: e.screenX, y: e.screenY });
+    setSliderWidth(sliderDomElement.offsetWidth);
+    sliderDomElement.style.transition = 'none';
+    console.log(origin, sliderWidth);
+  };
+
+  /**
+   * Déplacement
+   * @param {MouseEvent|TouchEvent} e
+   */
+  const handleDrag = (e) => {
+    if (origin) {
+      let point = e.touches ? e.touches[0] : e;
+      let translate = {
+        x: point.screenX - origin.x,
+        y: point.screenY - origin.y,
+      };
+      console.log('point', point);
+      console.log('translate', translate);
+      if (e.touches && Math.abs(translate.x) > Math.abs(translate.y)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      let baseTranslate = (slideIndex * -100) / array.length;
+      setLastTranslate(translate);
+      console.log('lastTranslate', lastTranslate);
+      let percent = baseTranslate + (100 * translate.x) / sliderWidth;
+      sliderDomElement.style.transform = 'translate3d(' + percent + '%, 0, 0)';
+    }
+  };
+
+  /**
+   * Fin du déplacement
+   * @param {MouseEvent|TouchEvent} e
+   */
+  const handleEndDrag = useCallback(
+    (e) => {
+      if (origin && lastTranslate) {
+        sliderDomElement.style.transition = 'transform 0.5s ease 0s';
+        if (Math.abs(lastTranslate.x / sliderWidth) > 0.2) {
+          if (lastTranslate.x < 0) {
+            handleRight();
+          } else {
+            handleLeft();
+          }
+        } else {
+          // handleRight();
+        }
+      }
+      setOrigin(null);
+      console.log(origin);
+    },
+    [lastTranslate, origin, sliderWidth]
+  );
+
   const handleRight = async () => {
     let translateX = `calc( ${(-(slideIndex + 1) / slidesTotal) * 100}% - ${
       screenWidth > 430 ? 20 * (slideIndex + 1) : 4 * (slideIndex + 1)
@@ -111,7 +183,7 @@ const Slider = ({ array, componentToMap, id }) => {
       sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
       sliderDomElement.style.transition = 'transform 0.5s ease 0s';
       setSlideIndex(slideIndex + 1);
-      console.log('click right', slideIndex, slidesTotal);
+      // console.log('click right', slideIndex, slidesTotal);
     }
     setTimeout(() => {
       handleSlideOverflow();
@@ -148,9 +220,34 @@ const Slider = ({ array, componentToMap, id }) => {
     }
   }, [sliderDomElement, translateInitial, id]);
 
+  useEffect(() => {
+    // window.addEventListener('mousemove', (e) => handleDrag(e));
+    // window.addEventListener('touchmove', (e) => handleDrag(e));
+    window.addEventListener('touchend', (e) => handleEndDrag(e));
+    window.addEventListener('mouseup', (e) => handleEndDrag(e));
+    window.addEventListener('touchcancel', (e) => handleEndDrag(e));
+    // return () => {
+    //   window.removeEventListener('mousemove', (e) => handleDrag(e));
+    //   window.removeEventListener('touchmove', (e) => handleDrag(e));
+    // };
+  }, [handleEndDrag]);
+
   return (
     <>
-      <SlidesContainer className="slider">
+      <SlidesContainer
+        className="slider"
+        onDragStart={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+        onMouseDown={(e) => handleStartDrag(e)}
+        onTouchStart={(e) => handleStartDrag(e)}
+        onMouseMove={(e) => handleDrag(e)}
+        onTouchMove={(e) => handleDrag(e)}
+        onTouchEnd={(e) => handleEndDrag(e)}
+        onMouseUp={(e) => handleEndDrag(e)}
+        onTouchCancel={(e) => handleEndDrag(e)}
+      >
         {slideIndex > 0 && (
           <LeftBtn onClick={() => handleLeft()}>
             <StyledIcon icon={faChevronLeft} />

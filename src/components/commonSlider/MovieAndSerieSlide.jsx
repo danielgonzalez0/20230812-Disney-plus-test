@@ -72,7 +72,6 @@ const MovieAndSerieSlide = (item) => {
         `${item.type === 'serie' ? 'imageSerie' : 'imageMovie'}`
       );
       const itemImage = new Images(itemImageData);
-      console.log('itemImages', itemImage);
       return { itemImage };
     },
     { cacheTime: 0 }
