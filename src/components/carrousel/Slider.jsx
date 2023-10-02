@@ -89,13 +89,13 @@ const Slider = ({ array, componentToMap, id }) => {
       } else {
         // Calculer la valeur de translation
         // Appliquer les transformations et la transition
-        setSlideIndex(slideIndex - 1);
         let translateX = `calc( ${(-(slideIndex - 1) / slidesTotal) * 100}% - ${
           screenWidth > 430 ? 20 * (slideIndex - 1) : 4 * (slideIndex - 1)
         }px)`;
-
+        
         sliderDomElement.style.transform = `translate3d(${translateX}, 0, 0)`;
         sliderDomElement.style.transition = 'transform 0.5s ease 0s';
+        setSlideIndex(slideIndex - 1);
         // console.log(slideIndex / slidesTotal);
         // console.log('click left', slideIndex, slidesTotal);
         setTimeout(() => {
@@ -174,14 +174,17 @@ const Slider = ({ array, componentToMap, id }) => {
     (e) => {
       if (origin && lastTranslate) {
         sliderDomElement.style.transition = 'transform 0.5s ease 0s';
-        if (Math.abs(lastTranslate.x / screenWidth) > 0.2) {
+        if (Math.abs(lastTranslate.x / screenWidth) > 0.5) {
+          console.log(lastTranslate);
           if (lastTranslate.x < 0) {
             handleRight();
+                        console.log('got to right');
           } else {
             handleLeft();
+            console.log('got to left');
           }
         } else {
-          // handleRight();
+       console.log('slideIndex', slideIndex);
         }
       }
       setOrigin(null);
