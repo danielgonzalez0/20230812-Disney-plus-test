@@ -24,6 +24,7 @@ const Container = styled.div`
     transition: all 200ms ease-out 0s !important;
     border: 4px transparent;
     border-radius: 4px;
+    z-index: 10;
 
     &:hover {
       padding: 4px;
@@ -62,7 +63,7 @@ const Container = styled.div`
   }
 `;
 
-const MovieAndSerieSlide = (item) => {
+const MovieAndSerieSlide = (item, isDragging ,index) => {
   const serieQueryKey = ['getDataDetail', item.id];
   const { isLoading, data } = useQuery(
     serieQueryKey,
@@ -87,6 +88,12 @@ const MovieAndSerieSlide = (item) => {
         <NavLink
           className="link"
           to={`${item.type === 'serie' ? '/serie/' : '/movie/'}${item.id}`}
+          onClick={(e)=>{
+            if(isDragging) {
+              e.preventDefault()
+              console.log('event click annulé');
+            }
+          }}
         >
           {itemImage.backdrops[0] || itemImage.posters[0] ? (
             <img
@@ -96,6 +103,7 @@ const MovieAndSerieSlide = (item) => {
                   : itemImage.posters[0].file_path
               }`}
               alt={`titre ${item.name}`}
+              data-id={index}
             />
           ) : (
             <p>{item.name}</p>
