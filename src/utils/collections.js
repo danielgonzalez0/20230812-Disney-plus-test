@@ -301,7 +301,7 @@ export const DisneyIlEtaitUneFois = {
   ],
 };
 
- // ------------------------------------------------------
+// ------------------------------------------------------
 // pixar
 // ------------------------------------------------------
 
@@ -422,10 +422,9 @@ export const pixarHeros = {
   ],
 };
 
- // ------------------------------------------------------
+// ------------------------------------------------------
 // Starwars
 // ------------------------------------------------------
-
 
 export const starProdOrigin = {
   title: `Productions originales`,
@@ -458,5 +457,194 @@ export const starMovies = {
     { id: 181808, type: 'movie', name: `les derniers jedi` },
     { id: 348350, type: 'movie', name: `solo` },
     { id: 181812, type: 'movie', name: `l'ascencion de skywalker` },
+  ],
+};
+export const starProd = {
+  title: `Séries et productions spéciales`,
+  data: [
+    { id: 92830, type: 'serie', name: `Obiwan kenobi` },
+    { id: 114461, type: 'serie', name: `Ahsoka` },
+    { id: 115036, type: 'serie', name: `le livre de boba fett` },
+    { id: 4194, type: 'serie', name: `clone wars` },
+    { id: 60554, type: 'serie', name: `star wars rebels` },
+    { id: 202998, type: 'serie', name: `les aventures des petits jedi` },
+    { id: 82856, type: 'serie', name: `mandalorian` },
+    { id: 825647, type: 'movie', name: `starwars biomes` },
+    { id: 83867, type: 'serie', name: `andor` },
+    { id: 203085, type: 'serie', name: `tales of jedi` },
+    { id: 124734, type: 'serie', name: `a toute vitesse` },
+    { id: 135211, type: 'serie', name: `galaxy of sounds` },
+    { id: 980804, type: 'movie', name: `lego c'est l'été` },
+    { id: 114478, type: 'serie', name: `visions` },
+    {
+      id: 63722,
+      type: 'serie',
+      name: `LEGO Star Wars : Les Contes des Droïdes`,
+    },
+    { id: 732670, type: 'movie', name: `lego joyeuses fetes` },
+    { id: 105971, type: 'serie', name: `bad batch` },
+    { id: 79093, type: 'serie', name: `star wars resistance` },
+    { id: 857702, type: 'movie', name: `lego histoires terrifiantes` },
+    {
+      id: 61513,
+      type: 'serie',
+      name: `lego, chroniques de yoda`,
+    },
+  ],
+};
+
+export const starOrdreChrono = {
+  title: `Star Wars dans l'ordre chronologique`,
+  data: [
+    { id: 1893, type: 'movie', name: `la menace fantome` },
+    { id: 1894, type: 'movie', name: `l'attaque des clone` },
+    { id: 4194, type: 'serie', name: `clone wars` },
+    { id: 1895, type: 'movie', name: `la revanche des sith` },
+    { id: 105971, type: 'serie', name: `bad batch` },
+    { id: 348350, type: 'movie', name: `solo` },
+    { id: 92830, type: 'serie', name: `Obiwan kenobi` },
+    { id: 60554, type: 'serie', name: `star wars rebels` },
+    { id: 83867, type: 'serie', name: `andor` },
+    { id: 330459, type: 'movie', name: `rogue one` },
+    { id: 11, type: 'movie', name: `un nouvel espoir` },
+    { id: 1891, type: 'movie', name: `empire contre-attaque` },
+    { id: 1892, type: 'movie', name: `le retour de jedi` },
+    { id: 82856, type: 'serie', name: `mandalorian` },
+    { id: 115036, type: 'serie', name: `le livre de boba fett` },
+    { id: 114461, type: 'serie', name: `Ahsoka` },
+    { id: 79093, type: 'serie', name: `star wars resistance` },
+    { id: 140607, type: 'movie', name: `le réveil de la force` },
+    { id: 181808, type: 'movie', name: `les derniers jedi` },
+    { id: 181812, type: 'movie', name: `l'ascencion de skywalker` },
+  ],
+};
+
+export const starAnimations = {
+  title: `Animation Star Wars`,
+  data: [
+    { id: 202998, type: 'serie', name: `les aventures des petits jedi` },
+    { id: 114478, type: 'serie', name: `visions` },
+    { id: 203085, type: 'serie', name: `tales of jedi` },
+    { id: 79093, type: 'serie', name: `star wars resistance` },
+    { id: 105971, type: 'serie', name: `bad batch` },
+    { id: 60554, type: 'serie', name: `star wars rebels` },
+    { id: 732670, type: 'movie', name: `lego joyeuses fetes` },
+    { id: 4194, type: 'serie', name: `clone wars` },
+    {
+      id: 63722,
+      type: 'serie',
+      name: `LEGO Star Wars : Les Contes des Droïdes`,
+    },
+    { id: 980804, type: 'movie', name: `lego c'est l'été` },
+    { id: 857702, type: 'movie', name: `lego histoires terrifiantes` },
+    {
+      id: 61513,
+      type: 'serie',
+      name: `lego, chroniques de yoda`,
+    },
+  ],
+};
+export const starVintage = {
+  title: `Star Wars Vintage`,
+  data: [
+    { id: 3122, type: 'serie', name: `Star Wars: Clone Wars` },
+    { id: 25, type: 'serie', name: `Star Wars : Droids` },
+    { id: 3478, type: 'serie', name: `Les Ewoks` },
+    {
+      id: 1884,
+      type: 'movie',
+      name: `L'Aventure des Ewoks : La Caravane du courage`,
+    },
+    {
+      id: 10372,
+      type: 'movie',
+      name: `L'Aventure des Ewoks : La Bataille pour Endor`,
+    },
+    { id: 806789, type: 'movie', name: `L'Histoire du Fidèle Wookiee` },
+  ],
+};
+
+// ------------------------------------------------------
+// national geographics
+// ------------------------------------------------------
+
+export const natGeoALaUne = {
+  title: `À la une`,
+  data: [
+    { id: 231311, type: 'serie', name: `au plus pres des animaux` },
+    { id: 836009, type: 'movie', name: `perdu en arctique` },
+    { id: 202597, type: 'serie', name: `au bout du monde` },
+    { id: 836691, type: 'movie', name: `a la rencontre des requins` },
+    { id: 49297, type: 'serie', name: `l'incroyable docteur pol` },
+    { id: 562685, type: 'movie', name: `mars inside spacex` },
+    { id: 157160, type: 'serie', name: `une lueur d'espoir` },
+    { id: 115996, type: 'serie', name: `sans limite` },
+    { id: 37158, type: 'serie', name: `trésors sous les mers` },
+    { id: 515042, type: 'movie', name: `free solo` },
+  ],
+};
+export const natGeoAnimaux = {
+  title: `Animaux et nature`,
+  data: [
+    { id: 630905, type: 'movie', name: `les lions des arbres` },
+    { id: 546111, type: 'movie', name: `géants des mers` },
+    { id: 106899, type: 'serie', name: `le secret des baleines` },
+    { id: 86800, type: 'serie', name: `planete hostile` },
+    { id: 525023, type: 'movie', name: `la planete des oiseaux` },
+    { id: 106771, type: 'serie', name: `les rois de la peche` },
+    { id: 110119, type: 'serie', name: `rencontre avec les chimpanzés` },
+    { id: 410718, type: 'movie', name: `avant le déluge` },
+    { id: 616104, type: 'movie', name: `survie au fil de l'eau` },
+    { id: 436619, type: 'movie', name: `les iles perdus du pacifique` },
+    { id: 126794, type: 'serie', name: `grandir dans le monde animal` },
+    { id: 913823, type: 'movie', name: `fire of love` },
+    { id: 61120, type: 'serie', name: `en pleine nature avec bear grylls` },
+    { id: 746664, type: 'movie', name: `le royaume du crabe des cocotiers` },
+    { id: 566219, type: 'movie', name: `sea of shadows` },
+    { id: 774823, type: 'movie', name: `cousteau de l'homme a la légende` },
+    { id: 709660, type: 'movie', name: `meilleur espoir animal` },
+    { id: 649162, type: 'movie', name: `au milieu des guepards` },
+    { id: 721509, type: 'movie', name: `big cat game` },
+    { id: 86596, type: 'serie', name: `au coeur du zoo` },
+  ],
+};
+export const natGeoAjoutsRecents = {
+  title: `Ajouts Récents`,
+  data: [
+    { id: 850989, type: 'movie', name: `Killer Shark Vs. Killer Whale` },
+    { id: 841729, type: 'movie', name: `sur les traces de big bull` },
+    { id: 157160, type: 'serie', name: `une lueur d'espoir` },
+    { id: 90439, type: 'serie', name: `la derniere bataille d'hitler` },
+    { id: 196594, type: 'serie', name: `A l’épreuve d’une tribu` },
+    {
+      id: 1096369,
+      type: 'movie',
+      name: `Les Tompkins : une vie pour la nature`,
+    },
+    {
+      id: 879086,
+      type: 'movie',
+      name: `Les cités perdues d'Albert Lin: l'arche de Noé`,
+    },
+    { id: 672491, type: 'movie', name: `Le temple disparu de l'empire Inca` },
+    { id: 286933, type: 'movie', name: `L'attentat du marathon de Boston` },
+    { id: 202359, type: 'serie', name: `les trésors perdus de rome` },
+    { id: 732965, type: 'movie', name: `Inde, à la découverte du léopard` },
+    {
+      id: 134097,
+      type: 'serie',
+      name: `Un monde mortel : redoutables serpents`,
+    },
+    { id: 61478, type: 'serie', name: `Afrique - À la vie, à la mort` },
+    { id: 120497, type: 'serie', name: `Lignées de prédateurs` },
+    { id: 770278, type: 'movie', name: `Virus, la menace planétaire` },
+    { id: 783095, type: 'movie', name: `Le royaume du léopard des neiges` },
+    { id: 664027, type: 'movie', name: `Mars : 24h sur la planète rouge` },
+    { id: 405101, type: 'movie', name: `Rencontre avec Pluton` },
+    {
+      id: 1022523,
+      type: 'movie',
+      name: `Attentats du 11 septembre : le jour qui a changé l’Amérique`,
+    },
   ],
 };

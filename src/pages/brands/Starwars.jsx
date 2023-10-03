@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { animations, starMovies, starProdOrigin } from '../../utils/collections';
+import { animations, starAnimations, starMovies, starOrdreChrono, starProd, starProdOrigin, starVintage } from '../../utils/collections';
 import Footer from '../../components/footer/Footer';
 import brandImg from '../../assets/images/background-starwars.jpg';
 import brandVideo from '../../assets/videos/star-wars.mp4';
@@ -123,10 +123,10 @@ const Starwars = () => {
         <SliderContainer>
           <MovieAndSerieSlider content={starProdOrigin} id={'slide1'} />
           <MovieAndSerieSlider content={starMovies} id={'slide2'} />
-          <MovieAndSerieSlider content={animations} id={'slide3'} />
-          <MovieAndSerieSlider content={animations} id={'slide4'} />
-          <MovieAndSerieSlider content={animations} id={'slide5'} />
-          <MovieAndSerieSlider content={animations} id={'slide6'} />
+          <MovieAndSerieSlider content={starProd} id={'slide3'} />
+          <MovieAndSerieSlider content={starOrdreChrono} id={'slide4'} />
+          <MovieAndSerieSlider content={starAnimations} id={'slide5'} />
+          <MovieAndSerieSlider content={starVintage} id={'slide6'} />
         </SliderContainer>
       </Container>
       <Footer />
@@ -135,3 +135,5 @@ const Starwars = () => {
 };
 
 export default Starwars;
+
+
