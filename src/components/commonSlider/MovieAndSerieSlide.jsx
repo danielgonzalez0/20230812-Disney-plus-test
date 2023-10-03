@@ -91,6 +91,7 @@ const MovieAndSerieSlide = (item, isDragging ,index) => {
           onClick={(e)=>{
             if(isDragging) {
               e.preventDefault()
+               e.stopPropagation();
               console.log('event click annulé');
             }
           }}

@@ -151,7 +151,7 @@ const Slider = ({ array, componentToMap, id }) => {
       setLastTranslate(translate);
       // console.log('lastTranslate', lastTranslate);
       let percent = baseTranslate + (100 * translate.x) / sliderWidth;
-      console.log('percent', percent);
+      console.log('percent', percent + dragPercent);
       sliderDomElement.style.transform =
         'translate3d(' + percent + dragPercent + '%, 0, 0)';
     }
@@ -183,7 +183,9 @@ const Slider = ({ array, componentToMap, id }) => {
    */
   const handleStartDrag = async (e) => {
     setIsDragging(false);
+    console.log('isdragging', isDragging)
     if (e.touches) {
+      console.log('e.touches', e);
       if (e.touches.length > 1) {
         return;
       } else {
@@ -204,14 +206,14 @@ const Slider = ({ array, componentToMap, id }) => {
    */
   const handleEndDrag = useCallback(
     (e) => {
-      if (origin && lastTranslate) {
+      if (origin && lastTranslate && isDragging) {
         sliderDomElement.style.transition = 'transform 0.5s ease 0s';
         //recalcul du percent
         let baseTranslate = (slideIndex * -100) / array.length;
         let percent = baseTranslate + (100 * lastTranslate.x) / sliderWidth;
         setDragPercent(percent);
         //fin recalcul
-        if (Math.abs(lastTranslate.x / screenWidth) > 0.3) {
+        if (Math.abs(lastTranslate.x / screenWidth) > 0.2) {
           console.log(lastTranslate);
           if (lastTranslate.x < 0) {
             handleRight();
@@ -223,10 +225,12 @@ const Slider = ({ array, componentToMap, id }) => {
         } else {
           console.log('slideIndex', slideIndex);
         }
+        setTimeout(() => {
+          setIsDragging(false);
+        }, 300);
       }
       setOrigin(null);
 
-      // setIsDragging(false)
       setTimeout(() => {
         handleSlideOverflow();
       }, 500);
