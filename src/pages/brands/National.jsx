@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { animations, natGeoALaUne, natGeoAjoutsRecents, natGeoAnimaux } from '../../utils/collections';
+import {natGeoALaUne, natGeoAjoutsRecents, natGeoAnimaux, natGeoClimat, natGeoMysteres, natGeoSciences } from '../../utils/collections';
 import Footer from '../../components/footer/Footer';
 import brandImg from '../../assets/images/background-national.jpg'
 import brandVideo from '../../assets/videos/national-geographic.mp4';
@@ -124,9 +124,9 @@ const National = () => {
           <MovieAndSerieSlider content={natGeoALaUne} id={'slide1'} />
           <MovieAndSerieSlider content={natGeoAnimaux} id={'slide2'} />
           <MovieAndSerieSlider content={natGeoAjoutsRecents} id={'slide3'} />
-          <MovieAndSerieSlider content={animations} id={'slide4'} />
-          <MovieAndSerieSlider content={animations} id={'slide5'} />
-          <MovieAndSerieSlider content={animations} id={'slide6'} />
+          <MovieAndSerieSlider content={natGeoSciences} id={'slide4'} />
+          <MovieAndSerieSlider content={natGeoMysteres} id={'slide5'} />
+          <MovieAndSerieSlider content={natGeoClimat} id={'slide6'} />
         </SliderContainer>
       </Container>
       <Footer />

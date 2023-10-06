@@ -74,8 +74,7 @@ const MovieAndSerieSlide = (item, isDragging ,index) => {
       );
       const itemImage = new Images(itemImageData);
       return { itemImage };
-    },
-    { cacheTime: 0 }
+    }
   );
 
   const { itemImage } = data || [];

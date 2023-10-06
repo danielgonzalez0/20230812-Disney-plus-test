@@ -648,3 +648,66 @@ export const natGeoAjoutsRecents = {
     },
   ],
 };
+
+export const natGeoSciences = {
+  title: `Sciences et innovations`,
+  data: [
+    { id: 68919, type: 'serie', name: `Exploration glaciale : Antarctique` },
+    { id: 493121, type: 'movie', name: `science project` },
+    { id: 66497, type: 'serie', name: `genius` },
+    { id: 70386, type: 'serie', name: `origines : l'histoire de l'humanité` },
+    { id: 608590, type: 'movie', name: `de Paris à Pittsburgh` },
+  ],
+};
+export const natGeoMysteres = {
+  title: `Mystères d'un autre temps`,
+  data: [
+    {
+      id: 642584,
+      type: 'movie',
+      name: `À la recherche du tombeau d'Alexandre le Grand`,
+    },
+    { id: 526736, type: 'movie', name: `Les Secrets du tombeau du Christ` },
+    { id: 114125, type: 'serie', name: `Malédictions autour du monde` },
+    {
+      id: 879086,
+      type: 'movie',
+      name: `Les cités perdues d'Albert Lin: l'arche de Noé`,
+    },
+
+    { id: 80225, type: 'serie', name: `Les trésors cachés de Toutankhamon` },
+    {
+      id: 87994,
+      type: 'serie',
+      name: `Les Trésors Perdus de la Vallée des Rois`,
+    },
+    {
+      id: 425921,
+      type: 'movie',
+      name: `Les Trésors perdus d'Égypte`,
+    },
+    {
+      id: 95782,
+      type: 'serie',
+      name: `Les légendes de la Bible avec Albert Lin`,
+    },
+    {
+      id: 89666,
+      type: 'serie',
+      name: `Les trésors perdus des Mayas`,
+    },
+  ],
+};
+export const natGeoClimat = {
+  title: `Changements climatiques`,
+  data: [
+    { id: 86800, type: 'serie', name: `planete hostile` },
+    { id: 410718, type: 'movie', name: `avant le déluge` },
+    { id: 722836, type: 'movie', name: `Expédition Everest` },
+    { id: 520446, type: 'movie', name: `Au coeur de l'Okavango` },
+    { id: 913849, type: 'movie', name: `La forêt amazonienne : notre terre` },
+    { id: 68919, type: 'serie', name: `Exploration glaciale : Antarctique` },
+    { id: 608590, type: 'movie', name: `de Paris à Pittsburgh` },
+    { id: 433118, type: 'movie', name: `De l'espoir sous l'océan` },
+  ],
+};
