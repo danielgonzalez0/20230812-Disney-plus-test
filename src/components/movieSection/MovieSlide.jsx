@@ -62,7 +62,7 @@ const Container = styled.div`
   }
 `;
 
-const MovieSlide = (movie) => {
+const MovieSlide = (movie, isDragging, index) => {
   const movieQueryKey = ['getMovieDetail', movie.id];
   const { isLoading, data } = useQuery(
     movieQueryKey,
@@ -82,11 +82,22 @@ const MovieSlide = (movie) => {
   return (
     <>
       <Container>
-        <NavLink className="link" to={`/movie/${movie.id}`}>
+        <NavLink
+          className="link"
+          to={`/movie/${movie.id}`}
+          onClick={(e) => {
+            if (isDragging) {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('event click annulé');
+            }
+          }}
+        >
           {movieImage.backdrops[0] ? (
             <img
               src={`https://image.tmdb.org/t/p/w300/${movieImage.backdrops[0].file_path}`}
               alt={`titre ${movie.title}`}
+              data-id={index}
             />
           ) : (
             <p>{movie.title}</p>

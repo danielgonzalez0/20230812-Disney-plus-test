@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import { useDispatch } from 'react-redux';
@@ -97,7 +97,7 @@ const Overview = styled(P)`
   line-height: 1.5;
 `;
 
-const SerieSlide = (episode) => {
+const SerieSlide = (episode, isDragging, index) => {
   const dispatch = useDispatch();
 
   return (
@@ -106,13 +106,16 @@ const SerieSlide = (episode) => {
         <div
           className="link"
           onClick={() =>
-            episode.key ? dispatch(setVideoParams(episode.key)) : null
+            episode.key && isDragging === false
+              ? dispatch(setVideoParams(episode.key))
+              : null
           }
         >
           {episode.image ? (
             <img
               src={`https://image.tmdb.org/t/p/w300${episode.image}`}
               alt={`titre ${episode.name}`}
+              data-id={index}
             />
           ) : (
             <span>No Image available</span>

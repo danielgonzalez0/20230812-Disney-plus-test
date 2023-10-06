@@ -62,7 +62,7 @@ const Container = styled.div`
   }
 `;
 
-const SuggestionSlide = (serie) => {
+const SuggestionSlide = (serie, isDragging, index) => {
   const serieQueryKey = ['getSerieDetail', serie.id];
   const { isLoading, data } = useQuery(
     serieQueryKey,
@@ -82,7 +82,17 @@ const SuggestionSlide = (serie) => {
   return (
     <>
       <Container>
-        <NavLink className="link" to={`/serie/${serie.id}`}>
+        <NavLink
+          className="link"
+          to={`/serie/${serie.id}`}
+          onClick={(e) => {
+            if (isDragging) {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('event click annulé');
+            }
+          }}
+        >
           {serieImage.backdrops[0] || serieImage.posters[0] ? (
             <img
               src={`https://image.tmdb.org/t/p/w300/${
@@ -91,6 +101,7 @@ const SuggestionSlide = (serie) => {
                   : serieImage.posters[0].file_path
               }`}
               alt={`titre ${serie.name}`}
+              data-id={index}
             />
           ) : (
             <p>{serie.name}</p>
