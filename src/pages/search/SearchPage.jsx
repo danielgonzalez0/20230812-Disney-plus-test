@@ -51,6 +51,14 @@ const Form = styled.form`
     color: rgb(249, 249, 249);
   }
 
+  /* clears the ‘X’ from Chrome */
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
+    display: none;
+  }
+
   @media only screen and (max-width: 600px) {
     height: 60px;
     input {
@@ -59,17 +67,50 @@ const Form = styled.form`
   }
 `;
 
+const Button = styled.button`
+  height: 60px;
+  width: 40px;
+  font-size: 44px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgb(249, 249, 249);
+  cursor: pointer;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+`;
+
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState('');
 
   return (
     <>
-      <Form>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <input
-          typeof="search"
+          type="search"
           placeholder={'Titre ou personnage'}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => {
+            e.preventDefault();
+            setSearchValue(e.target.value);
+          }}
+          value={searchValue}
         ></input>
+        {searchValue.length > 1 && (
+          <Button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setSearchValue('');
+            }}
+          >
+            X
+          </Button>
+        )}
       </Form>
       <Container>{searchValue}</Container>
       <Footer />
