@@ -24,7 +24,7 @@ const Container = styled.main`
   gap: 20px;
   align-items: center;
   align-content: flex-start;
-  justify-content: center;
+  /* justify-content: center; */
   transition: all 300ms ease-out 0s;
 
   .errorMessage {
