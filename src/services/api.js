@@ -57,7 +57,7 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
 }
 // Fonction récursive pour paginer à travers les résultats
 async function getAllMovies(totalPage, type) {
-  const companyId = '1%7C2%7C3%7C420%7C7521%7C3166%7C281%7C54';
+  const companyId = '1%7C2%7C3%7C420%7C7521%7C3166%7C281%7C54%7C11749';
   const allResults = [];
   let currentPage = 1;
   while (currentPage <= totalPage) {
@@ -80,6 +80,7 @@ async function getAllMovies(totalPage, type) {
               type: type,
               name: content.name,
               genre: content.genre_ids,
+              overview: content.overview,
             };
           });
       } else {
@@ -91,6 +92,7 @@ async function getAllMovies(totalPage, type) {
               type: type,
               name: content.title,
               genre: content.genre_ids,
+              overview: content.overview,
             };
           });
       }

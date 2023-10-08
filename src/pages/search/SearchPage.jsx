@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Footer from '../../components/footer/Footer';
 import { useSelector } from 'react-redux';
+import AllMoviesSlide from '../allMovies/AllMoviesSlide';
+import AllSeriesSlide from '../allSeries/AllSeriesSlide';
 
 const Container = styled.main`
   min-height: calc(100vh);
@@ -10,9 +12,35 @@ const Container = styled.main`
   position: relative;
   margin-top: 70px;
   padding-top: 150px;
+  padding-bottom: 50px;
+
+  /* position: relative;
+  margin-top: 120px;
+  margin-bottom: 200px; */
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: center;
+  transition: all 300ms ease-out 0s;
+
+  .errorMessage {
+    padding-top: 72px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  /* @media screen and (max-width: 390px) {
+    margin-top: 250px;
+  } */
 
   @media only screen and (max-width: 600px) {
     padding-top: 80px;
+    padding-bottom: 20px;
   }
 `;
 
@@ -89,20 +117,18 @@ const Button = styled.button`
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState('');
   const content = useSelector((state) => state.content);
-  const [result, setResult] = useState([]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchValue(e.target.value);
-    console.log(content);
-    if (searchValue.length > 2) {
-      setResult(
-        content.filter((item) =>
-          item.name.toLowerCase().includes(searchValue.toLowerCase())
-        )
-      );
-    }
   };
+
+  // Filtrer le contenu en fonction de la valeur de recherche
+  const filteredContent = content.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.overview.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <>
@@ -128,9 +154,17 @@ const SearchPage = () => {
         )}
       </Form>
       <Container>
-        {result.map((item, index) => (
-          <p key={index}>{item.name}</p>
-        ))}
+        {searchValue.length > 2 && filteredContent.length === 0 && (
+          <p className="errorMessage">{`Aucun résultat pour "${searchValue}"`}</p>
+        )}
+        {searchValue.length > 2 &&
+          filteredContent.map((item, index) => {
+            return item.type === 'movies' ? (
+              <AllMoviesSlide key={index} movie={item} />
+            ) : (
+              <AllSeriesSlide key={index} serie={item} />
+            );
+          })}
       </Container>
       <Footer />
     </>
