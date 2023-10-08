@@ -271,7 +271,7 @@ const Header = () => {
                 </div>
                 <span>ACCUEIL</span>
               </NavLink>
-              <NavLink to="/home">
+              <NavLink to="/search">
                 <div className="imgContainer">
                   <img src={searchIcon} alt="recherche" />
                 </div>

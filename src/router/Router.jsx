@@ -15,6 +15,7 @@ import Pixar from '../pages/brands/Pixar';
 import Marvel from '../pages/brands/Marvel';
 import Starwars from '../pages/brands/Starwars';
 import National from '../pages/brands/National';
+import SearchPage from '../pages/search/SearchPage';
 
 const Router = () => {
   const user = useSelector((state) => state.user.name);
@@ -25,6 +26,7 @@ const Router = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Connexion />} />
         <Route path="/home" element={user ? <Home /> : <Login />} />
+        <Route path="/search" element={user ? <SearchPage /> : <Login />} />
         <Route path="/movies" element={user ? <AllMovies /> : <Login />} />
         <Route path="/series" element={user ? <AllSeries /> : <Login />} />
         <Route path="/brand/disney" element={user ? <Disney /> : <Login />} />
