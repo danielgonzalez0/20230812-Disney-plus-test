@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Footer from '../../components/footer/Footer';
+import { useSelector } from 'react-redux';
 
 const Container = styled.main`
   min-height: calc(100vh);
@@ -87,6 +88,21 @@ const Button = styled.button`
 
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState('');
+  const content = useSelector((state) => state.content);
+  const [result, setResult] = useState([]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchValue(e.target.value);
+    console.log(content);
+    if (searchValue.length > 2) {
+      setResult(
+        content.filter((item) =>
+          item.name.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      );
+    }
+  };
 
   return (
     <>
@@ -95,8 +111,7 @@ const SearchPage = () => {
           type="search"
           placeholder={'Titre ou personnage'}
           onChange={(e) => {
-            e.preventDefault();
-            setSearchValue(e.target.value);
+            handleSearch(e);
           }}
           value={searchValue}
         ></input>
@@ -112,7 +127,11 @@ const SearchPage = () => {
           </Button>
         )}
       </Form>
-      <Container>{searchValue}</Container>
+      <Container>
+        {result.map((item, index) => (
+          <p key={index}>{item.name}</p>
+        ))}
+      </Container>
       <Footer />
     </>
   );

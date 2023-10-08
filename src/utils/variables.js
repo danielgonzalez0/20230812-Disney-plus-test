@@ -81,7 +81,7 @@ export const seriesGenres = [
   },
   {
     id: 10759,
-    name: 'Action & Adventure',
+    name: 'Action & Aventure',
   },
   {
     id: 16,
