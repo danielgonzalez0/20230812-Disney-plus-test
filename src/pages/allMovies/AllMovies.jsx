@@ -30,6 +30,12 @@ const Header = styled.header`
   h1 {
     font-size: 44px;
   }
+  @media only screen and (max-width: 600px) {
+    align-items: flex-start;
+    h1 {
+      font-size: 24px;
+    }
+  }
 `;
 
 const MoviesContainer = styled.section`
@@ -44,9 +50,6 @@ const MoviesContainer = styled.section`
   align-items: center;
   transition: all 300ms ease-out 0s;
 
-  @media screen and (max-width: 390px) {
-    margin-top: 250px;
-  }
 `;
 
 const AllMovies = () => {
