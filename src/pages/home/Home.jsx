@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import bgImg from './home-background.png';
 import ImgSlider from '../../components/ImgSlider/ImgSlider';
@@ -23,14 +23,11 @@ import title9 from './img7-title.png';
 import img10 from './img8.jpg';
 import title10 from './img8-title.png';
 import Viewers from '../../components/viewers/Viewers';
-// import { getAllMovies } from '../../services/api';
-// import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/footer/Footer';
 
 import { DisneyIlEtaitUneFois, animations, disneyAgeDeGlace, disneyAnimationsSutdios, disneyClassiques, disneyLiveAction, marvelSagaInfini, marvelSagaMultivers, pixarFilms, pixarToyStory, starMovies } from '../../utils/collections';
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
-import { useQuery } from '@tanstack/react-query';
-import { getAllMovies } from '../../services/api';
+
 
 const Container = styled.main`
   position: relative;
@@ -56,14 +53,6 @@ const Home = () => {
     { img: img9, title: title9, id: 83867, type: 'serie' },
     { img: img10, title: title10, id: 284053, type: 'movie' },
   ];
-
- const queryKey = ['getMovies'];
- const { isLoading, data } = useQuery(queryKey, async () => {
-   return await getAllMovies(50, 'movies');
-   // return await getData();
- });
-
- const movies = useMemo(() => data || [], [data]);
 
   return (
     <>

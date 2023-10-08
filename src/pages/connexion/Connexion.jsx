@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import { auth, provider } from '../../utils/firebase';
@@ -13,6 +13,10 @@ import user1 from './user1.png';
 import user2 from './user2.png';
 import user3 from './user3.png';
 import user4 from './user4.png';
+import { useQuery } from '@tanstack/react-query';
+import { getAllMovies } from '../../services/api';
+import { deleteContent, setContent } from '../../redux/features/contentSlice';
+import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.div`
   display: flex;
@@ -90,9 +94,20 @@ const ProfilContainer = styled.div`
 `;
 
 const Connexion = () => {
+  const [isLoading, setIsloading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const queryKey = ['getMovies'];
+  const { data } = useQuery(queryKey, async () => {
+    const movieData = await getAllMovies(50, 'movies');
+    const serieData = await getAllMovies(50, 'series');
+    const contentData = [...movieData, ...serieData];
+    return contentData;
+    // return await getData();
+  });
+
+  const content = useMemo(() => data || [], [data]);
 
   const users = [
     { name: 'Tony', img: user1 },
@@ -121,7 +136,17 @@ const Connexion = () => {
       signInWithPopup(auth, provider)
         .then((res) => {
           setUser(res.user);
-          navigate('/home');
+        })
+        .then(() => {
+          setIsloading(true);
+          console.log('content', content);
+          dispatch(setContent(content));
+        })
+        .then(() => {
+          setTimeout(() => {
+            setIsloading(false);
+            navigate('/home');
+          }, 3000);
         })
         .catch((err) => {
           console.log(err.message);
@@ -131,6 +156,7 @@ const Connexion = () => {
         .signOut()
         .then(() => {
           dispatch(setSignOutState());
+          dispatch(deleteContent());
           navigate('/');
         })
         .catch((err) => console.log(err.message));
@@ -150,8 +176,19 @@ const Connexion = () => {
                 photo: profil.img,
               })
             );
-            navigate('/home');
           }
+        })
+        .then(() => {
+          setIsloading(true);
+          console.log('content', content);
+          dispatch(setContent(content));
+        })
+        .then(() => {
+          setTimeout(() => {
+            
+      setIsloading(false)
+            navigate('/home');
+          }, 3000);
         })
         .catch((err) => {
           console.log(err.message);
@@ -161,11 +198,14 @@ const Connexion = () => {
         .signOut()
         .then(() => {
           dispatch(setSignOutState());
+          dispatch(deleteContent());
           navigate('/');
         })
         .catch((err) => console.log(err.message));
     }
   };
+
+  if (isLoading) return <SpinnerFullPage />;
 
   return (
     <Container>

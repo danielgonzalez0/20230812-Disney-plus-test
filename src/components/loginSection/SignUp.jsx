@@ -53,7 +53,7 @@ const Container = styled.section`
   text-align: center;
   min-height: 100vh;
   @media only screen and (min-width: 769px) and (max-width: 1024px) {
-    min-height: 70vh;
+    min-height: 100vh;
   }
   /* @media only screen and (max-width: 768px) {
     max-height: 70vh;
@@ -74,7 +74,7 @@ const Content = styled.div`
   height: 100%;
 
   @media only screen and (min-width: 769px) and (max-width: 1024px) {
-    min-height: 70vh;
+    min-height: 100vh;
     padding-top: 26vw;
   }
 `;

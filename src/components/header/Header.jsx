@@ -14,6 +14,7 @@ import { auth } from '../../utils/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { setSignOutState } from '../../redux/features/userSlice';
+import { deleteContent } from '../../redux/features/contentSlice';
 
 const Nav = styled.nav`
   .wrapper {
@@ -28,7 +29,7 @@ const Nav = styled.nav`
     align-items: center;
     padding: 0 36px;
     letter-spacing: 16px;
-    z-index: 3;
+    z-index: 6;
   }
 
   .hidden {
@@ -232,6 +233,7 @@ const Header = () => {
       .signOut()
       .then(() => {
         dispatch(setSignOutState());
+         dispatch(deleteContent());
         navigate('/');
       })
       .catch((err) => console.log(err.message));

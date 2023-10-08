@@ -100,10 +100,10 @@ const AllMoviesSlide = ({movie}) => {
          {movieImage.backdrops[0] ? (
            <img
              src={`https://image.tmdb.org/t/p/w300/${movieImage.backdrops[0].file_path}`}
-             alt={`titre ${movie.title}`}
+             alt={`titre ${movie.name}`}
            />
          ) : (
-           <p>{movie.title}</p>
+           <p>{movie.name}</p>
          )}
        </NavLink>
      </Container>

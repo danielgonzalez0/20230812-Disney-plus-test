@@ -90,7 +90,7 @@ const AllSeries = () => {
    } else {
      setSerieArray([
        ...series
-         .filter((serie) => serie.genre_ids.includes(filterValue.id))
+         .filter((serie) => serie.genre.includes(filterValue.id))
          .slice(0, seriesVisible),
      ]);
    }

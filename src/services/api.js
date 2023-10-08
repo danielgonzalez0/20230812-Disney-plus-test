@@ -69,13 +69,30 @@ async function getAllMovies(totalPage, type) {
       const data = await response.json();
       let dataToAdd;
       if (type === 'series') {
-        dataToAdd = data.results.filter((data) =>
-          Reflect.has(data, 'first_air_date') && data.first_air_date !==""
-        );
+        dataToAdd = data.results
+          .filter(
+            (data) =>
+              Reflect.has(data, 'first_air_date') && data.first_air_date !== ''
+          )
+          .map((content) => {
+            return {
+              id: content.id,
+              type: type,
+              name: content.name,
+              genre: content.genre_ids,
+            };
+          });
       } else {
-        dataToAdd = data.results.filter((data) =>
-          Reflect.has(data, 'release_date')
-        );
+        dataToAdd = data.results
+          .filter((data) => Reflect.has(data, 'release_date'))
+          .map((content) => {
+            return {
+              id: content.id,
+              type: type,
+              name: content.title,
+              genre: content.genre_ids,
+            };
+          });
       }
 
       allResults.push(...dataToAdd);
@@ -187,11 +204,11 @@ async function getSeriesSuggestion(genres, companies) {
   };
 
   const response = await new Api(url, options).getData();
-const result = response.results.filter(
-  (data) =>
-    Reflect.has(data, 'first_air_date') && data.first_air_date.length > 0
-);
-    console.log(result);
+  const result = response.results.filter(
+    (data) =>
+      Reflect.has(data, 'first_air_date') && data.first_air_date.length > 0
+  );
+  console.log(result);
   return result;
 }
 

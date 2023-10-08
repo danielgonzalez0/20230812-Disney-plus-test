@@ -90,7 +90,7 @@ const AllMovies = () => {
     } else {
       setMovieArray([
         ...movies
-          .filter((movie) => movie.genre_ids.includes(filterValue.id))
+          .filter((movie) => movie.genre.includes(filterValue.id))
           .slice(0, moviesVisibleEnd),
       ]);
     }

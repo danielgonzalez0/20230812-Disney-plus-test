@@ -25,7 +25,7 @@ const Form = styled.form`
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
   outline: none;
   text-overflow: ellipsis;
-  z-index: calc(9);
+  z-index: calc(3);
 
   input {
     border: none;
