@@ -5,6 +5,7 @@ import { colors } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
 import { getDetail } from '../../services/api';
 import { Images } from '../../models/images';
+import Spinner from '../../components/spinner/Spinner';
 
 const Container = styled.div`
   cursor: pointer;
@@ -75,6 +76,22 @@ const Container = styled.div`
   }
 `;
 
+const SpinnerContainer = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
 const AllSeriesSlide = ({ serie }) => {
   const movieQueryKey = ['getSerieDetail', serie.id];
   const { isLoading, data } = useQuery(movieQueryKey, async () => {
@@ -86,30 +103,37 @@ const AllSeriesSlide = ({ serie }) => {
 
   const { serieImage } = data || [];
 
-  //   if (isLoading) return <div>en cours de chargement</div>;
 
-  if (!isLoading)
+
+  if (isLoading)
     return (
-      <>
-        <Container>
-          <NavLink className="link" to={`/serie/${serie.id}`}>
-            {serieImage.backdrops[0] ||
-            serieImage.posters[0] ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w300/${
-                  serieImage.backdrops[0]
-                    ? serieImage.backdrops[0].file_path
-                    : serieImage.posters[0].file_path
-                }`}
-                alt={`titre ${serie.name}`}
-              />
-            ) : (
-              <p>{serie.name}</p>
-            )}
-          </NavLink>
-        </Container>
-      </>
+      <Container>
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      </Container>
     );
+
+  return (
+    <>
+      <Container>
+        <NavLink className="link" to={`/serie/${serie.id}`}>
+          {serieImage.backdrops[0] || serieImage.posters[0] ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${
+                serieImage.backdrops[0]
+                  ? serieImage.backdrops[0].file_path
+                  : serieImage.posters[0].file_path
+              }`}
+              alt={`titre ${serie.name}`}
+            />
+          ) : (
+            <p>{serie.name}</p>
+          )}
+        </NavLink>
+      </Container>
+    </>
+  );
 };
 
 export default AllSeriesSlide;

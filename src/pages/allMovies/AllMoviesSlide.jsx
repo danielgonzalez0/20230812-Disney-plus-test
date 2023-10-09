@@ -80,8 +80,9 @@ const SpinnerContainer = styled.div`
   position: absolute;
   width: 50px;
   height: 50px;
-  top: 45%;
-  left: 45%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -5,13 +5,13 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAhTXPb7VRexfUQi5nwx02zJ7DY_ywrkk0',
-  authDomain: 'disneyplus-clone-test.firebaseapp.com',
-  projectId: 'disneyplus-clone-test',
-  storageBucket: 'disneyplus-clone-test.appspot.com',
-  messagingSenderId: '338907109297',
-  appId: '1:338907109297:web:d2b1f402b4f248ea864f90',
-  measurementId: 'G-6VVXBD7E3X',
+  apiKey: `${process.env.REACT_APP_FB_APIKEY}`,
+  authDomain: `${process.env.REACT_APP_FB_AUTHDOMAIN}`,
+  projectId: `${process.env.REACT_APP_FB_PROJECTID}`,
+  storageBucket: `${process.env.REACT_APP_FB_STORAGEBUCKET}`,
+  messagingSenderId: `${process.env.REACT_APP_FB_MESSAGINGSENDERID}`,
+  appId: `${process.env.REACT_APP_FB_APPID}`,
+  measurementId: `${process.env.REACT_APP_FB_MEASUREMENTID}`,
 };
 
 // Initialize Firebase
