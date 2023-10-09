@@ -35,6 +35,9 @@ const Container = styled.div`
     text-align: center;
     font-weight: 700;
   }
+  p {
+    margin-bottom: 15px;
+  }
 `;
 
 const AuthButton = styled.button`
@@ -48,7 +51,7 @@ const AuthButton = styled.button`
   padding: 16.5px 0;
   border: 1px solid transparent;
   border-radius: 4px;
-  margin: 30px 0;
+  margin: 15px 0;
   cursor: pointer;
   &:hover {
     background: ${colors.blue2};
@@ -233,6 +236,12 @@ const Connexion = () => {
         ))}
       </ProfilsDiv>
       <p>Non isncrit ?</p>
+      <AuthButton onClick={handleAuthGoogle}>
+        Se connecter avec Google
+      </AuthButton>
+      <AuthButton onClick={handleAuthGoogle}>
+        Se connecter avec Google
+      </AuthButton>
       <AuthButton onClick={handleAuthGoogle}>
         Se connecter avec Google
       </AuthButton>

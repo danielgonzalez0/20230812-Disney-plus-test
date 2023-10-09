@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -211,6 +211,103 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
     ((1 + slides.length) * 100) / slides.length
   }% - ${(1 + slides.length) * 2}vw)`;
 
+  //gestion tactile
+    const [screenWidth] = useState(window.innerWidth);
+  const [origin, setOrigin] = useState(null);
+  const [sliderWidth, setSliderWidth] = useState(null);
+  const [lastTranslate, setLastTranslate] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragPercent, setDragPercent] = useState(0);
+
+  /**
+   * Déplacement
+   * @param {MouseEvent|TouchEvent} e
+   */
+  const handleDrag = (e) => {
+    setIsDragging(true);
+    if (origin) {
+      // console.log('drag orign +width', origin, sliderWidth);
+      // console.log('avant def point', e.screenX);
+      let point = e.touches ? e.touches[0] : e;
+      let translate = {
+        x: point.screenX - origin.x,
+        y: point.screenY - origin.y,
+      };
+      // console.log('point', point);
+      // console.log('translate', translate);
+      if (e.touches && Math.abs(translate.x) > Math.abs(translate.y)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      let baseTranslate = (slideIndex * -100) / slides.length;
+      // console.log('baseTranslate', baseTranslate);
+      setLastTranslate(translate);
+      // console.log('lastTranslate', lastTranslate);
+      let percent = baseTranslate + (100 * translate.x) / sliderWidth;
+      // console.log('percent', percent + dragPercent);
+      sliderDomElement.style.transform =
+        'translate3d(' + percent + dragPercent + '%, 0, 0)';
+    }
+  };
+  /**
+   * Démarre le déplacement au touché
+   * @param {MouseEvent|TouchEvent} e
+   */
+  const handleStartDrag = async (e) => {
+    setIsDragging(false);
+    // console.log('isdragging', isDragging);
+    if (e.touches) {
+      // console.log('e.touches', e);
+      if (e.touches.length > 1) {
+        return;
+      } else {
+        e = e.touches[0];
+      }
+    }
+    setOrigin({ x: e.screenX, y: e.screenY });
+    setSliderWidth(sliderDomElement.offsetWidth);
+    sliderDomElement.style.transition = 'none';
+
+    // console.log('start drag', e.target.alt);
+    // console.log('start drag', e.screenX, e.screenY);
+  };
+
+  /**
+   * Fin du déplacement
+   * @param {MouseEvent|TouchEvent} e
+   */
+  const handleEndDrag = useCallback(
+    (e) => {
+      if (origin && lastTranslate && isDragging) {
+        sliderDomElement.style.transition = 'transform 0.5s ease 0s';
+        //recalcul du percent
+        let baseTranslate = (slideIndex * -100) / slides.length;
+        let percent = baseTranslate + (100 * lastTranslate.x) / sliderWidth;
+        setDragPercent(percent);
+        //fin recalcul
+        if (Math.abs(lastTranslate.x / screenWidth) > 0.1) {
+          // console.log(lastTranslate);
+          if (lastTranslate.x < 0) {
+            handleRight();
+          } else {
+            handleLeft();
+          }
+        } else {
+          // console.log('slideIndex', slideIndex);
+        }
+        setTimeout(() => {
+          setIsDragging(false);
+        }, 300);
+      }
+      setOrigin(null);
+
+ 
+      // console.log(origin);
+      // console.log('end drag', e.target.alt);
+    },
+    [lastTranslate, origin, sliderWidth, screenWidth, sliderDomElement]
+  );
+
   const handleLeft = async () => {
     let translateX = `calc(-${((slideIndex - 1) * 100) / slides.length}% - ${
       (slideIndex - 1) * 2
@@ -280,6 +377,19 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       </LeftBtn>
       <Carrousel className="carroussel">
         <Slider
+          onDragStart={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          onMouseDown={(e) => handleStartDrag(e)}
+          onTouchStart={(e) => handleStartDrag(e)}
+          onMouseMove={(e) => {
+            handleDrag(e);
+          }}
+          onTouchMove={(e) => handleDrag(e)}
+          onTouchEnd={(e) => handleEndDrag(e)}
+          onMouseUp={(e) => handleEndDrag(e)}
+          onTouchCancel={(e) => handleEndDrag(e)}
           onTransitionEnd={resetInfinite}
           className="slider1"
           style={{
@@ -297,6 +407,13 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
                       ? `/movie/${movie.id}`
                       : `/serie/${movie.id}`
                   }
+                  onClick={(e) => {
+                    if (isDragging) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      // console.log('event click annulé');
+                    }
+                  }}
                 >
                   <img key={index} src={movie.img} alt="Slide" />
                   <img

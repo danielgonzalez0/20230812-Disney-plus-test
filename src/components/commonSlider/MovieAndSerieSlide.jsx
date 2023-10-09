@@ -5,10 +5,11 @@ import { colors } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
 import { getDetail } from '../../services/api';
 import { Images } from '../../models/images';
+import Spinner from '../spinner/Spinner';
 
 const Container = styled.div`
   cursor: pointer;
-  /* position: relative; */
+  position: relative;
   transition: transform 300ms ease-out 0s;
   /* background-color: rgb(26, 29, 41); */
   border-radius: 10px;
@@ -63,54 +64,71 @@ const Container = styled.div`
   }
 `;
 
-const MovieAndSerieSlide = (item, isDragging ,index) => {
+const SpinnerContainer = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 45%;
+  left: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
+const MovieAndSerieSlide = (item, isDragging, index) => {
   const serieQueryKey = ['getDataDetail', item.id];
-  const { isLoading, data } = useQuery(
-    serieQueryKey,
-    async () => {
-      const itemImageData = await getDetail(
-        item.id,
-        `${item.type === 'serie' ? 'imageSerie' : 'imageMovie'}`
-      );
-      const itemImage = new Images(itemImageData);
-      return { itemImage };
-    }
-  );
+  const { isLoading, data } = useQuery(serieQueryKey, async () => {
+    const itemImageData = await getDetail(
+      item.id,
+      `${item.type === 'serie' ? 'imageSerie' : 'imageMovie'}`
+    );
+    const itemImage = new Images(itemImageData);
+    return { itemImage };
+  });
 
   const { itemImage } = data || [];
 
-  if (isLoading) return <div>en cours de chargement</div>;
+  if (isLoading)
+    return (
+      <Container>
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      </Container>
+    );
 
   return (
-    <>
-      <Container>
-        <NavLink
-          className="link"
-          to={`${item.type === 'serie' ? '/serie/' : '/movie/'}${item.id}`}
-          onClick={(e)=>{
-            if(isDragging) {
-              e.preventDefault()
-               e.stopPropagation();
-              console.log('event click annulé');
-            }
-          }}
-        >
-          {itemImage.backdrops[0] || itemImage.posters[0] ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${
-                itemImage.backdrops[0]
-                  ? itemImage.backdrops[0].file_path
-                  : itemImage.posters[0].file_path
-              }`}
-              alt={`titre ${item.name}`}
-              data-id={index}
-            />
-          ) : (
-            <p>{item.name}</p>
-          )}
-        </NavLink>
-      </Container>
-    </>
+    <Container>
+      <NavLink
+        className="link"
+        to={`${item.type === 'serie' ? '/serie/' : '/movie/'}${item.id}`}
+        onClick={(e) => {
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            // console.log('event click annulé');
+          }
+        }}
+      >
+        {itemImage.backdrops[0] || itemImage.posters[0] ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w300/${
+              itemImage.backdrops[0]
+                ? itemImage.backdrops[0].file_path
+                : itemImage.posters[0].file_path
+            }`}
+            alt={`titre ${item.name}`}
+            data-id={index}
+          />
+        ) : (
+          <p>{item.name}</p>
+        )}
+      </NavLink>
+    </Container>
   );
 };
 

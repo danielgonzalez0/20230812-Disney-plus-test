@@ -5,6 +5,7 @@ import { colors } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
 import { getDetail } from '../../services/api';
 import { Images } from '../../models/images';
+import Spinner from '../../components/spinner/Spinner';
 
 const Container = styled.div`
   cursor: pointer;
@@ -75,6 +76,21 @@ const Container = styled.div`
   }
 `;
 
+const SpinnerContainer = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 45%;
+  left: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
 const AllMoviesSlide = ({movie}) => {
   const movieQueryKey = ['getMovieDetail', movie.id];
   const { isLoading, data } = useQuery(
@@ -89,26 +105,32 @@ const AllMoviesSlide = ({movie}) => {
 
   const { movieImage } = data || [];
 
-//   if (isLoading) return <div>en cours de chargement</div>;
 
- if(!isLoading) return (
-   <>
-     <Container
+  if (isLoading)
+    return (
+      <Container>
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      </Container>
+    );
 
-     >
-       <NavLink className="link" to={`/movie/${movie.id}`}>
-         {movieImage.backdrops[0] ? (
-           <img
-             src={`https://image.tmdb.org/t/p/w300/${movieImage.backdrops[0].file_path}`}
-             alt={`titre ${movie.name}`}
-           />
-         ) : (
-           <p>{movie.name}</p>
-         )}
-       </NavLink>
-     </Container>
-   </>
- );
+  return (
+    <>
+      <Container>
+        <NavLink className="link" to={`/movie/${movie.id}`}>
+          {movieImage.backdrops[0] ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${movieImage.backdrops[0].file_path}`}
+              alt={`titre ${movie.name}`}
+            />
+          ) : (
+            <p>{movie.name}</p>
+          )}
+        </NavLink>
+      </Container>
+    </>
+  );
 };
 
 export default AllMoviesSlide;

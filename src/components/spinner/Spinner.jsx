@@ -4,8 +4,10 @@ import styled from 'styled-components';
 const StyledSpinner = styled.svg`
   animation: rotate 2s linear infinite;
   margin: -25px 0 0 -25px;
-  width: 100px;
-  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
+  min-height: 50px;
+  min-width: 50px;
 
   & .path {
     stroke: #07d;

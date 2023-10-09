@@ -100,7 +100,7 @@ const Slider = ({ array, componentToMap, id }) => {
       setSlideIndex(slideIndex - 1);
       // console.log(slideIndex / slidesTotal);
       // console.log('click left', slideIndex, slidesTotal);
-      console.log(slideIndex);
+      // console.log(slideIndex);
       setTimeout(() => {
         handleSlideOverflow();
       }, 500);
@@ -133,15 +133,15 @@ const Slider = ({ array, componentToMap, id }) => {
   const handleDrag = (e) => {
     setIsDragging(true);
     if (origin) {
-      console.log('drag orign +width', origin, sliderWidth);
-      console.log('avant def point', e.screenX);
+      // console.log('drag orign +width', origin, sliderWidth);
+      // console.log('avant def point', e.screenX);
       let point = e.touches ? e.touches[0] : e;
       let translate = {
         x: point.screenX - origin.x,
         y: point.screenY - origin.y,
       };
       // console.log('point', point);
-      console.log('translate', translate);
+      // console.log('translate', translate);
       if (e.touches && Math.abs(translate.x) > Math.abs(translate.y)) {
         e.preventDefault();
         e.stopPropagation();
@@ -151,41 +151,20 @@ const Slider = ({ array, componentToMap, id }) => {
       setLastTranslate(translate);
       // console.log('lastTranslate', lastTranslate);
       let percent = baseTranslate + (100 * translate.x) / sliderWidth;
-      console.log('percent', percent + dragPercent);
+      // console.log('percent', percent + dragPercent);
       sliderDomElement.style.transform =
         'translate3d(' + percent + dragPercent + '%, 0, 0)';
     }
   };
-  // /**
-  //  * attach drag event to DOM element
-  //  */
-  // const attachDragEvent = () => {
-  //   console.log('sliderDeom', sliderDomElement);
-  //   if (sliderDomElement) {
-  //     sliderDomElement.addEventListener('mousemove', (e) => handleDrag(e));
-  //     sliderDomElement.addEventListener('touchmove', (e) => handleDrag(e));
-  //   }
-  // };
-
-  // /**
-  //  * detach drag event to DOM element
-  //  */
-  // const detachDragEvent = () => {
-  //   if (sliderDomElement) {
-  //     sliderDomElement.removeEventListener('mousemove', handleDrag);
-  //     sliderDomElement.removeEventListener('touchmove', handleDrag);
-  //   }
-  // };
-
   /**
    * Démarre le déplacement au touché
    * @param {MouseEvent|TouchEvent} e
    */
   const handleStartDrag = async (e) => {
     setIsDragging(false);
-    console.log('isdragging', isDragging)
+    // console.log('isdragging', isDragging)
     if (e.touches) {
-      console.log('e.touches', e);
+      // console.log('e.touches', e);
       if (e.touches.length > 1) {
         return;
       } else {
@@ -196,8 +175,8 @@ const Slider = ({ array, componentToMap, id }) => {
     setSliderWidth(sliderDomElement.offsetWidth);
     sliderDomElement.style.transition = 'none';
 
-    console.log('start drag', e.target.alt);
-    console.log('start drag', e.screenX, e.screenY);
+    // console.log('start drag', e.target.alt);
+    // console.log('start drag', e.screenX, e.screenY);
   };
 
   /**
@@ -214,16 +193,16 @@ const Slider = ({ array, componentToMap, id }) => {
         setDragPercent(percent);
         //fin recalcul
         if (Math.abs(lastTranslate.x / screenWidth) > 0.2) {
-          console.log(lastTranslate);
+          // console.log(lastTranslate);
           if (lastTranslate.x < 0) {
             handleRight();
-            console.log('got to right');
+            // console.log('got to right');
           } else {
             handleLeft();
-            console.log('got to left');
+            // console.log('got to left');
           }
         } else {
-          console.log('slideIndex', slideIndex);
+          // console.log('slideIndex', slideIndex);
         }
         setTimeout(() => {
           setIsDragging(false);
@@ -234,8 +213,8 @@ const Slider = ({ array, componentToMap, id }) => {
       setTimeout(() => {
         handleSlideOverflow();
       }, 500);
-      console.log(origin);
-      console.log('end drag', e.target.alt);
+      // console.log(origin);
+      // console.log('end drag', e.target.alt);
     },
     [lastTranslate, origin, sliderWidth, screenWidth, sliderDomElement]
   );
@@ -269,11 +248,6 @@ const Slider = ({ array, componentToMap, id }) => {
       sliderDomElement.style.transform = `translate3d(${translateInitial}, 0, 0)`;
     }
   }, [sliderDomElement, translateInitial, id]);
-
-  // useEffect(() => {
-  //   window.addEventListener('mousemove', (e) => handleDrag(e));
-  //   window.addEventListener('touchmove', handleDrag());
-  // }, []);
 
   return (
     <>
