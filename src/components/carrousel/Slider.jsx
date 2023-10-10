@@ -131,8 +131,8 @@ const Slider = ({ array, componentToMap, id }) => {
    * @param {MouseEvent|TouchEvent} e
    */
   const handleDrag = (e) => {
-    setIsDragging(true);
     if (origin) {
+      setIsDragging(true);
       // console.log('drag orign +width', origin, sliderWidth);
       // console.log('avant def point', e.screenX);
       let point = e.touches ? e.touches[0] : e;
@@ -278,9 +278,26 @@ const Slider = ({ array, componentToMap, id }) => {
             width: `${slidesTotal * 100}%`,
           }}
         >
-          {array.map((item, index) => (
-            <li key={index}>{componentToMap(item, isDragging, index)}</li>
-          ))}
+          {array.map((item, index) => {
+            const isVisible =
+              index < (slideIndex + 1) * slidesVisible &&
+              index >= slideIndex * slidesVisible
+                ? true
+                : false;
+            //gestion slide visible pour tab
+            //  slidesTotal = 4 de 0 a 3
+            // mes index = 16 de 0 a 15
+            // slidesVisbile = 4
+            //quand slideIndex = 0 => index 0 1 2 3 sont visibles  => si index < (slideIndex + 1) * slideVisible => visible
+            //quand slideIndex = 1 => index 4 5 6 7 sont visibles => et si index >= slideIndex * slideVisible => visible
+            //quand slideIndex = 2 => index 8 9 10 11 sont visibles
+            //quand slideIndex = 3 => index 12 13 14 15 sont visibles
+            return (
+              <li key={index}>
+                {componentToMap(item, isDragging, index, isVisible)}
+              </li>
+            );
+          })}
         </SliderUl>
         {slideIndex < slidesTotal - 1 && (
           <RightBtn onClick={() => handleRight()}>

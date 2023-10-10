@@ -62,7 +62,7 @@ const Container = styled.div`
   }
 `;
 
-const MovieSlide = (movie, isDragging, index) => {
+const MovieSlide = (movie, isDragging, index, isVisible) => {
   const movieQueryKey = ['getMovieDetail', movie.id];
   const { isLoading, data } = useQuery(
     movieQueryKey,
@@ -85,6 +85,7 @@ const MovieSlide = (movie, isDragging, index) => {
         <NavLink
           className="link"
           to={`/movie/${movie.id}`}
+          tabIndex={isVisible === true ? 0 : -1}
           onClick={(e) => {
             if (isDragging) {
               e.preventDefault();

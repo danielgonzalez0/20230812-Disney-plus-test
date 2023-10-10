@@ -97,7 +97,7 @@ const Overview = styled(P)`
   line-height: 1.5;
 `;
 
-const SerieSlide = (episode, isDragging, index) => {
+const SerieSlide = (episode, isDragging, index, isVisible) => {
   const dispatch = useDispatch();
 
   return (
@@ -105,8 +105,13 @@ const SerieSlide = (episode, isDragging, index) => {
       <Container>
         <div
           className="link"
+          tabIndex={isVisible === true ? 0 : -1}
           onClick={() =>
             episode.key && isDragging === false
+              ? dispatch(setVideoParams(episode.key))
+              : null
+          }
+          onKeyDown={(e) => e.key === 'Enter' && episode.key && isDragging === false
               ? dispatch(setVideoParams(episode.key))
               : null
           }

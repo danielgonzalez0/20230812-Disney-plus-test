@@ -62,7 +62,7 @@ const Container = styled.div`
   }
 `;
 
-const SuggestionSlide = (serie, isDragging, index) => {
+const SuggestionSlide = (serie, isDragging, index, isVisible) => {
   const serieQueryKey = ['getSerieDetail', serie.id];
   const { isLoading, data } = useQuery(
     serieQueryKey,
@@ -85,6 +85,7 @@ const SuggestionSlide = (serie, isDragging, index) => {
         <NavLink
           className="link"
           to={`/serie/${serie.id}`}
+          tabIndex={isVisible === true ? 0 : -1}
           onClick={(e) => {
             if (isDragging) {
               e.preventDefault();

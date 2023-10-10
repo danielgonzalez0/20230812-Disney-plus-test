@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
-import { auth, provider } from '../../utils/firebase';
+import db, { auth, provider } from '../../utils/firebase';
 import { signInWithPopup, signInAnonymously } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,9 @@ import user4 from './user4.png';
 import { getAllMovies } from '../../services/api';
 import { deleteContent, setContent } from '../../redux/features/contentSlice';
 import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
-import ConnexionLogin from './ConnexionLogin';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { getLikes } from '../../redux/features/likesSlice';
+// import ConnexionLogin from './ConnexionLogin';
 
 const Container = styled.div`
   display: flex;
@@ -99,11 +101,31 @@ const ProfilContainer = styled.div`
 
 const Connexion = () => {
   const [isLoading, setIsLoading] = useState(false);
-  // const [isLogin, setIsLogin] = useState(false);
-  // const [isSignUp, setIsSignUp] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+
+  // test data from firebase
+  const [likesList, setLikesList] = useState([]);
+  const likesCollectionRef = collection(db, 'likes');
+
+  const getLikesList = async (name) => {
+    //read data
+    try {
+      const userData = doc(db, 'likes', `${name}`);
+      const docSnap = await getDoc(userData);
+      if (docSnap.exists()) {
+        setLikesList(docSnap.data().data)
+        dispatch(getLikes(docSnap.data().data));
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log('No such document!');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    //set likes list
+  };
 
   const fetchdata = async () => {
     try {
@@ -205,6 +227,7 @@ const Connexion = () => {
             })
             .then(() => {
               setIsLoading(false);
+              getLikesList(profil.name);
               navigate('/home');
             })
             .catch((err) => {
@@ -247,10 +270,10 @@ const Connexion = () => {
           </ProfilContainer>
         ))}
       </ProfilsDiv>
-      <p>Non isncrit ?</p>
-      <AuthButton onClick={handleAuthGoogle}>
+      {/* <p>Non isncrit ?</p> */}
+      {/* <AuthButton onClick={handleAuthGoogle}>
         Se connecter avec Google
-      </AuthButton>
+      </AuthButton> */}
       {/* <AuthButton onClick={() => setIsLogin(!isLogin)}>
         Se connecter (email / MDP)
       </AuthButton>

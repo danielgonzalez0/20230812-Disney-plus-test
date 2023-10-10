@@ -212,7 +212,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
   }% - ${(1 + slides.length) * 2}vw)`;
 
   //gestion tactile
-    const [screenWidth] = useState(window.innerWidth);
+  const [screenWidth] = useState(window.innerWidth);
   const [origin, setOrigin] = useState(null);
   const [sliderWidth, setSliderWidth] = useState(null);
   const [lastTranslate, setLastTranslate] = useState(null);
@@ -224,8 +224,8 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
    * @param {MouseEvent|TouchEvent} e
    */
   const handleDrag = (e) => {
-    setIsDragging(true);
     if (origin) {
+      setIsDragging(true);
       // console.log('drag orign +width', origin, sliderWidth);
       // console.log('avant def point', e.screenX);
       let point = e.touches ? e.touches[0] : e;
@@ -301,7 +301,6 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       }
       setOrigin(null);
 
- 
       // console.log(origin);
       // console.log('end drag', e.target.alt);
     },
@@ -402,6 +401,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
               elements={slides.map((movie, index) => (
                 <NavLink
                   className="link"
+                  tabIndex={-1}
                   to={
                     movie.type === 'movie'
                       ? `/movie/${movie.id}`

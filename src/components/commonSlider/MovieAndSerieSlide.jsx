@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
@@ -80,7 +80,7 @@ const SpinnerContainer = styled.div`
   }
 `;
 
-const MovieAndSerieSlide = (item, isDragging, index) => {
+const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
   const serieQueryKey = ['getDataDetail', item.id];
   const { isLoading, data } = useQuery(serieQueryKey, async () => {
     const itemImageData = await getDetail(
@@ -93,6 +93,7 @@ const MovieAndSerieSlide = (item, isDragging, index) => {
 
   const { itemImage } = data || [];
 
+
   if (isLoading)
     return (
       <Container>
@@ -104,16 +105,26 @@ const MovieAndSerieSlide = (item, isDragging, index) => {
 
   return (
     <Container>
-      <NavLink
+      <Link
         className="link"
+        tabIndex={isVisible === true ? 0 : -1}
         to={`${item.type === 'serie' ? '/serie/' : '/movie/'}${item.id}`}
         onClick={(e) => {
+          console.log('isDragging', isDragging);
           if (isDragging) {
             e.preventDefault();
             e.stopPropagation();
             // console.log('event click annulé');
           }
         }}
+        // onKeyDown={(e) => {
+        //   // Si la touche "Entrée" est enfoncée, naviguer vers le lien
+        //   if (e.key === 'Enter') {
+        //     window.location.href = `${
+        //       item.type === 'serie' ? '/serie/' : '/movie/'
+        //     }${item.id}`;
+        //   }
+        // }}
       >
         {itemImage.backdrops[0] || itemImage.posters[0] ? (
           <img
@@ -128,7 +139,7 @@ const MovieAndSerieSlide = (item, isDragging, index) => {
         ) : (
           <p>{item.name}</p>
         )}
-      </NavLink>
+      </Link>
     </Container>
   );
 };

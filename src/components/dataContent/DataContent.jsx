@@ -88,7 +88,7 @@ const BtnTrailer = styled(BtnPlay)`
   }
 `;
 
-const DataContent = ({ genres, runtime, release, videos, tagline, title }) => {
+const DataContent = ({ id, genres, runtime, release, videos, tagline, title }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -121,7 +121,7 @@ const DataContent = ({ genres, runtime, release, videos, tagline, title }) => {
             </BtnTrailer>
           </>
         )}
-        <LikeBtn />
+        <LikeBtn id={id} type={'movie'}/>
       </div>
       <Description>
         <span>{title}</span>

@@ -57,10 +57,10 @@ const Title = styled.p`
   }
 `;
 
-const renderItem = (video, isDragging, index) => (
+const renderItem = (video, isDragging, index, isVisible) => (
   <>
     <Container >
-      <VideoMin id={video.key} playing={false} isDragging={isDragging}  data-id={index}/>
+      <VideoMin id={video.key} playing={false} isDragging={isDragging}  data-id={index} isVisible={isVisible}/>
     </Container>
     <Title>{video.name}</Title>
   </>

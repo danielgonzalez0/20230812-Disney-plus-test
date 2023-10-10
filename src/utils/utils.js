@@ -30,7 +30,7 @@ handleSlidesVisible.propTypes = {
  */
 const handleSlideOverflow = () => {
   const uls = document.querySelectorAll('.slider');
-   uls.forEach((ul) => {
+  uls.forEach((ul) => {
     const lis = ul.querySelectorAll('li');
     const ulLeft = ul.getBoundingClientRect().left;
     const ulRight = ulLeft + ul.clientWidth;
@@ -43,9 +43,11 @@ const handleSlideOverflow = () => {
         if (liLeft > ulLeft && liRight < ulRight) {
           // L'élément li est entièrement visible dans la zone ul
           li.style.opacity = 1;
+          li.setAttribute('data-visible', true)
         } else {
           // L'élément li est partiellement ou entièrement en dehors de la zone ul
           li.style.opacity = 0.5;
+             li.setAttribute('data-visible', false);
         }
       });
     }
@@ -65,26 +67,26 @@ const handleFormatTime = (minutes) => {
    * @param {number} minutes - Le nombre de minutes à convertir en heures et minutes.
    * @returns {string} Une chaîne de caractères au format "hh h mm min" ou "Invalid Input" si l'entrée est invalide.
    */
-    if (isNaN(minutes) || minutes < 0) {
-      return 'Invalid Input';
-    }
+  if (isNaN(minutes) || minutes < 0) {
+    return 'Invalid Input';
+  }
 
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
 
-    const formattedHours = hours > 0 ? `${hours} h` : '';
-    const formattedMinutes =
-      remainingMinutes > 0 ? `${remainingMinutes} min` : '';
+  const formattedHours = hours > 0 ? `${hours} h` : '';
+  const formattedMinutes =
+    remainingMinutes > 0 ? `${remainingMinutes} min` : '';
 
-    if (formattedHours && formattedMinutes) {
-      return `${formattedHours} ${formattedMinutes}`;
-    } else if (formattedHours) {
-      return formattedHours;
-    } else if (formattedMinutes) {
-      return formattedMinutes;
-    } else {
-      return '0 min'; // Si l'entrée est 0 minute
-    }
+  if (formattedHours && formattedMinutes) {
+    return `${formattedHours} ${formattedMinutes}`;
+  } else if (formattedHours) {
+    return formattedHours;
+  } else if (formattedMinutes) {
+    return formattedMinutes;
+  } else {
+    return '0 min'; // Si l'entrée est 0 minute
+  }
 };
 
 export { handleFormatTime, handleSlidesVisible, handleSlideOverflow };
