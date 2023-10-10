@@ -17,6 +17,7 @@ import user4 from './user4.png';
 import { getAllMovies } from '../../services/api';
 import { deleteContent, setContent } from '../../redux/features/contentSlice';
 import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
+import ConnexionLogin from './ConnexionLogin';
 
 const Container = styled.div`
   display: flex;
@@ -98,6 +99,8 @@ const ProfilContainer = styled.div`
 
 const Connexion = () => {
   const [isLoading, setIsLoading] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
+  // const [isSignUp, setIsSignUp] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -134,6 +137,10 @@ const Connexion = () => {
     [dispatch]
   );
 
+  /**
+   * Gère l'authentification avec Google.
+   * Cette fonction se connecte avec le fournisseur Google si l'utilisateur n'est pas déjà connecté, ou déconnecte l'utilisateur s'il est déjà connecté.
+   */
   const handleAuthGoogle = () => {
     console.log(user.name);
     if (!user.name) {
@@ -170,6 +177,11 @@ const Connexion = () => {
     }
   };
 
+  /**
+   * Gère l'authentification anonyme ou la déconnexion de l'utilisateur.
+   *
+   * @param {Object} profil - Les informations du profil utilisateur (nom et image).
+   */
   const handleAuthAnonymous = (profil) => {
     if (!user.name) {
       signInAnonymously(auth)
@@ -239,12 +251,11 @@ const Connexion = () => {
       <AuthButton onClick={handleAuthGoogle}>
         Se connecter avec Google
       </AuthButton>
-      <AuthButton onClick={handleAuthGoogle}>
-        Se connecter avec Google
+      {/* <AuthButton onClick={() => setIsLogin(!isLogin)}>
+        Se connecter (email / MDP)
       </AuthButton>
-      <AuthButton onClick={handleAuthGoogle}>
-        Se connecter avec Google
-      </AuthButton>
+      {<ConnexionLogin setIsLogin={setIsLogin} isLogin={isLogin} />}
+      <AuthButton onClick={() => setIsSignUp(true)}>Créer un compte</AuthButton> */}
     </Container>
   );
 };

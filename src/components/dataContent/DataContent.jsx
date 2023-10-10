@@ -7,6 +7,7 @@ import { setVideoParams } from '../../redux/features/videoSlice';
 import { handleFormatTime } from '../../utils/utils';
 import ccImg from './cc.png';
 import adImg from './ad.png';
+import LikeBtn from '../likeBtn/LikeBtn';
 
 const Container = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const Container = styled.div`
   .btnContainer {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 20px;
   }
 `;
@@ -108,16 +110,19 @@ const DataContent = ({ genres, runtime, release, videos, tagline, title }) => {
         ))}
       </GenresList>
 
-      {videos[0] && (
-        <div className="btnContainer">
-          <BtnPlay onClick={() => dispatch(setVideoParams(videos[0].key))}>
-            <StyledIcon icon={faPlay} /> LECTURE
-          </BtnPlay>
-          <BtnTrailer onClick={() => dispatch(setVideoParams(videos[0].key))}>
-            BANDE-ANNONCE
-          </BtnTrailer>
-        </div>
-      )}
+      <div className="btnContainer">
+        {videos[0] && (
+          <>
+            <BtnPlay onClick={() => dispatch(setVideoParams(videos[0].key))}>
+              <StyledIcon icon={faPlay} /> LECTURE
+            </BtnPlay>
+            <BtnTrailer onClick={() => dispatch(setVideoParams(videos[0].key))}>
+              BANDE-ANNONCE
+            </BtnTrailer>
+          </>
+        )}
+        <LikeBtn />
+      </div>
       <Description>
         <span>{title}</span>
         <span>{tagline}</span>
