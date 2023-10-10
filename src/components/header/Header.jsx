@@ -8,7 +8,7 @@ import originalIcon from './original-icon.svg';
 import searchIcon from './search-icon.svg';
 import seriesIcon from './series-icon.svg';
 import watchListIcon from './watchlist-icon.svg';
-import dotsIcon from './three_dots_vertical_icon.png'
+import dotsIcon from './three_dots_vertical_icon.png';
 import { auth } from '../../utils/firebase';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -233,7 +233,7 @@ const Header = () => {
       .signOut()
       .then(() => {
         dispatch(setSignOutState());
-         dispatch(deleteContent());
+        dispatch(deleteContent());
         navigate('/');
       })
       .catch((err) => console.log(err.message));
@@ -279,7 +279,7 @@ const Header = () => {
                 </div>
                 <span>RECHERCHE</span>
               </NavLink>
-              <NavLink to="/home">
+              <NavLink to="/watchlist">
                 <div className="imgContainer">
                   <img src={watchListIcon} alt="ma liste" />
                 </div>

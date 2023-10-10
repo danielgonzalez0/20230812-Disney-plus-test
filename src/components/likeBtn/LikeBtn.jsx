@@ -57,7 +57,7 @@ const Container = styled.button.attrs((props) => ({
   }
 `;
 
-const LikeBtn = ({ id, type }) => {
+const LikeBtn = ({ id, type, name }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
   const likes = useSelector((state) => state.like);
@@ -119,7 +119,7 @@ const LikeBtn = ({ id, type }) => {
       console.log(uploadData);
     } else {
       await handleIsLiked();
-      const uploadData = [...likes, { id: id, type: type }];
+      const uploadData = [...likes, { id: id, type: type, name: name}];
       setLikesOnFirebase(uploadData);
       console.log(uploadData);
     }
@@ -132,6 +132,7 @@ const LikeBtn = ({ id, type }) => {
     const like = {
       id: id,
       type: type,
+      name: name,
     };
     console.log(like);
     //envoyer objet dans redux

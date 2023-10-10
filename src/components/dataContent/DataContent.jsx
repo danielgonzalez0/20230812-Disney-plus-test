@@ -121,7 +121,7 @@ const DataContent = ({ id, genres, runtime, release, videos, tagline, title }) =
             </BtnTrailer>
           </>
         )}
-        <LikeBtn id={id} type={'movie'}/>
+        <LikeBtn id={id} type={'movie'} name={title}/>
       </div>
       <Description>
         <span>{title}</span>
