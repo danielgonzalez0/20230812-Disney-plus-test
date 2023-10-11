@@ -47,6 +47,15 @@ const Nav = styled.nav`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: 700px) {
+    ul {
+      gap: 25px;
+    }
+    li {
+      font-size: 15px;
+    }
+  }
 `;
 
 const Section = styled.section`
@@ -71,19 +80,27 @@ const MovieSection = ({ movie, suggestions }) => {
         <ul>
           <li
             className={activeTab === 'suggestions' ? 'active' : null}
+            tabIndex={0}
             onClick={() => handleTabDisplay('suggestions')}
+            onKeyDown={(e) =>
+              e.key === 'Enter' && handleTabDisplay('suggestions')
+            }
           >
             SUGGESTIONS
           </li>
           <li
             className={activeTab === 'bonus' ? 'active' : null}
+            tabIndex={0}
             onClick={() => handleTabDisplay('bonus')}
+            onKeyDown={(e) => e.key === 'Enter' && handleTabDisplay('bonus')}
           >
             BONUS
           </li>
           <li
             className={activeTab === 'details' ? 'active' : null}
+            tabIndex={0}
             onClick={() => handleTabDisplay('details')}
+            onKeyDown={(e) => e.key === 'Enter' && handleTabDisplay('details')}
           >
             DÉTAILS
           </li>

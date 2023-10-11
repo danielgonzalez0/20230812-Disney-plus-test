@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { StyleSheetManager, css, keyframes } from 'styled-components';
-import {
-  addLike,
-  deleteLike,
-} from '../../redux/features/likesSlice';
+import { addLike, deleteLike } from '../../redux/features/likesSlice';
 import { doc, setDoc } from 'firebase/firestore';
 import db from '../../utils/firebase';
 
@@ -52,6 +49,18 @@ const Container = styled.button.attrs((props) => ({
     position: absolute;
     top: 2px;
     left: 8px;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 30px;
+    height: 30px;
+    span {
+     
+      font-size: 20px !important;
+      width: 20px;
+      left:3.5px;
+      top:-1px;
+    }
   }
 `;
 

@@ -4,11 +4,9 @@ import { colors } from '../../utils/variables';
 import disneyLogo from '../../assets/images/disneyLogo.svg';
 import homeIcon from './home-icon.svg';
 import movieIcon from './movie-icon.svg';
-import originalIcon from './original-icon.svg';
 import searchIcon from './search-icon.svg';
 import seriesIcon from './series-icon.svg';
 import watchListIcon from './watchlist-icon.svg';
-import dotsIcon from './three_dots_vertical_icon.png';
 import { auth } from '../../utils/firebase';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,7 +16,7 @@ import { deleteContent } from '../../redux/features/contentSlice';
 
 const Nav = styled.nav`
   .wrapper {
-    transition: all 300ms ease 0s;
+    transition: all 100ms ease-in-out 0s;
     position: fixed;
     top: 0;
     left: 0;

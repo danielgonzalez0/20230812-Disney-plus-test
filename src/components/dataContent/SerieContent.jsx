@@ -23,6 +23,10 @@ const Container = styled.div`
     flex-wrap: wrap;
     gap: 20px;
   }
+
+  @media screen and (max-width: 600px) {
+    margin-bottom: 26px;
+  }
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -60,6 +64,11 @@ const Description = styled.p`
     display: flex;
     flex-direction: column;
   }
+  @media screen and (max-width: 600px) {
+    span {
+      font-size: 15px;
+    }
+  }
 `;
 
 const BtnPlay = styled.button`
@@ -81,6 +90,12 @@ const BtnPlay = styled.button`
   }
   &:focus-visible {
     outline: solid 2px #f9f9f9;
+  }
+
+  @media screen and (max-width: 700px) {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 10px;
   }
 `;
 

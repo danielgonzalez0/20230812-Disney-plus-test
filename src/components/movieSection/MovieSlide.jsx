@@ -25,11 +25,12 @@ const Container = styled.div`
     border: 4px transparent;
     border-radius: 4px;
 
-    &:hover {
+    &:hover, &:focus-visible {
       padding: 4px;
       transform: scale(1.1);
       border: 4px solid ${colors.white};
-      border-radius: 4px;
+      border-radius: 10px;
+      outline: none;
     }
 
     img {

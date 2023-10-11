@@ -48,12 +48,21 @@ const Nav = styled.nav`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: 700px){
+    ul{
+      gap: 25px;
+    }
+    li{
+      font-size: 15px;
+    }
+  }
 `;
 
 const Section = styled.section`
   width: 100%;
   padding: 10px 0;
-  .container{
+  .container {
     min-height: 200px;
   }
 `;
@@ -74,24 +83,34 @@ const SerieSection = ({ serie, suggestions }) => {
           <li
             className={activeTab === 'episodes' ? 'active' : null}
             onClick={() => handleTabDisplay('episodes')}
+            onKeyDown={(e) => e.key === 'Enter' && handleTabDisplay('episodes')}
+            tabIndex={0}
           >
             ÉPISODES
           </li>
           <li
             className={activeTab === 'suggestions' ? 'active' : null}
             onClick={() => handleTabDisplay('suggestions')}
+            onKeyDown={(e) =>
+              e.key === 'Enter' && handleTabDisplay('suggestions')
+            }
+            tabIndex={0}
           >
             SUGGESTIONS
           </li>
           <li
             className={activeTab === 'bonus' ? 'active' : null}
             onClick={() => handleTabDisplay('bonus')}
+            onKeyDown={(e) => e.key === 'Enter' && handleTabDisplay('bonus')}
+            tabIndex={0}
           >
             BONUS
           </li>
           <li
             className={activeTab === 'details' ? 'active' : null}
             onClick={() => handleTabDisplay('details')}
+            onKeyDown={(e) => e.key === 'Enter' && handleTabDisplay('details')}
+            tabIndex={0}
           >
             DÉTAILS
           </li>

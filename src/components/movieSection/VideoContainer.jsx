@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import VideoMin from '../video/VideoMin';
 
 import Slider from '../carrousel/Slider';
+import { colors } from '../../utils/variables';
 
 const Container = styled.div`
   cursor: pointer;
@@ -12,14 +13,19 @@ const Container = styled.div`
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.69) 0px 26px 30px -10px,
     rgba(0, 0, 0, 0.73) 0px 16px 10px -10px;
-  &:hover {
-    padding: 3px;
-    transform: scale(1.1);
-    border: 4px solid white;
-    border-radius: 4px;
-  }
+
   .react-player__preview {
     border-radius: 10px;
+    transition: transform 300ms ease-out 0s;
+
+    &:hover,
+    &:focus-visible {
+      padding: 4px;
+      transform: scale(1.1);
+      border: 4px solid ${colors.white};
+      border-radius: 10px;
+      outline: none;
+    }
   }
 
   @media screen and (max-width: 767px) {
