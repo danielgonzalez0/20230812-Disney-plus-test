@@ -8,7 +8,7 @@ import { getAllMovies } from '../../services/api';
 import AllMoviesSlide from './AllMoviesSlide';
 
 const Container = styled.main`
-  min-height: calc(100vh);
+  min-height: calc(100vh - 270px);
   overflow: hidden;
   padding: 0 calc(3.5vw + 24px);
   position: relative;

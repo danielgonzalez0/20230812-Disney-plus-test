@@ -54,10 +54,10 @@ const StyledIcon = styled(FontAwesomeIcon)`
 `;
 
 const FilterBtn = ({ array, filterValue, setFilterValue }) => {
-//   const [filterValue, setFilterValue] = useState(array[0]);
   const [isOpen, setIsOpen] = useState(false);
   const filterRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
 
   const handleIndex = () => {
     const newIndex = array.findIndex((genre) => genre === filterValue);
@@ -80,7 +80,9 @@ const FilterBtn = ({ array, filterValue, setFilterValue }) => {
       }}
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === 'Enter') setIsOpen(!isOpen);
+        if (e.key === 'Enter' || (e.key === 'Tab' && isOpen === false)) {
+          setIsOpen(true);
+        }
       }}
     >
       <span>{filterValue.name}</span>
@@ -95,6 +97,15 @@ const FilterBtn = ({ array, filterValue, setFilterValue }) => {
               onClick={() => setFilterValue(genre)}
               onMouseEnter={() => handleLiMouseEnter(index)} //
               aria-selected={activeIndex === index ? 'true' : 'false'}
+              onKeyDown={(e) => {
+                e.key === 'Tab' &&
+                  e.shiftKey === true &&
+                  index === 0 &&
+                  setIsOpen(false);
+                e.key === 'Tab' &&
+                  index === array.length - 1 &&
+                  setIsOpen(false);
+              }}
               style={{
                 backgroundColor:
                   activeIndex === index
