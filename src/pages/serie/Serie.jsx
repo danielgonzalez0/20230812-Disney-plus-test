@@ -162,10 +162,7 @@ const Serie = () => {
               alt={serieDetail.name}
             />
           ) : (
-            <img
-              src={disneyBG}
-              alt={'disney par défaut'}
-            />
+            <img src={disneyBG} alt={'disney par défaut'} />
           )}
         </Background>
         <Main>
@@ -181,6 +178,8 @@ const Serie = () => {
           </article>
 
           <SerieContent
+            id={serieDetail.id}
+            name={serieDetail.title}
             genres={serieDetail.genres}
             firstRelease={serieDetail.first_release}
             lastRelease={serieDetail.last_release}

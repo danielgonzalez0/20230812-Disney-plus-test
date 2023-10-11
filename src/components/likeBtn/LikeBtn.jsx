@@ -4,9 +4,8 @@ import styled, { StyleSheetManager, css, keyframes } from 'styled-components';
 import {
   addLike,
   deleteLike,
-  setLikesOnFirebase,
 } from '../../redux/features/likesSlice';
-import { doc, updateDoc, deleteField, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import db from '../../utils/firebase';
 
 const rotateAnimation = keyframes`
@@ -47,13 +46,12 @@ const Container = styled.button.attrs((props) => ({
     color: ${(props) => (props.isliked === 'true' ? '#0063e5' : 'black')};
   }
   span {
-    display: inline-block;
+    display: block;
     font-size: 30px !important;
     width: 30px;
-    height: 30px;
     position: absolute;
     top: 2px;
-    left: 9px;
+    left: 8px;
   }
 `;
 
@@ -64,12 +62,19 @@ const LikeBtn = ({ id, type, name }) => {
   const userName = useSelector((state) => state.user.name);
   const dispatch = useDispatch();
 
-  console.log('username', userName);
-
   const likesRef = doc(db, 'likes', userName);
 
+  /**
+   * Met à jour les "likes" dans la base de données Firebase.
+   *
+   * Cette fonction envoie les données fournies à la référence Firestore spécifiée.
+   *
+   * @async
+   * @function
+   * @param {Array} data - Les données des "likes" à envoyer à Firebase.
+   * @returns {void}
+   */
   const setLikesOnFirebase = async (data) => {
-    console.log(likes);
     await setDoc(likesRef, {
       data: data,
     });
@@ -99,7 +104,12 @@ const LikeBtn = ({ id, type, name }) => {
   };
 
   /**
-   * handle like btn animation
+   * Gère l'animation de rotation du bouton "J'aime".
+   *
+   * Cette fonction anime le bouton "J'aime" en le faisant tourner, puis met à jour l'état "isLiked" et réinitialise l'animation.
+   *
+   * @function
+   * @returns {void}
    */
   const handleAnimation = () => {
     if (!isRotating) {
@@ -111,22 +121,37 @@ const LikeBtn = ({ id, type, name }) => {
     }
   };
 
+  /**
+   * Gère le clic sur le bouton "J'aime" d'un élément.
+   *
+   * Cette fonction gère l'ajout ou la suppression d'un "like" pour un élément, met à jour les données dans Firebase, et déclenche une animation.
+   *
+   * @async
+   * @function
+   * @returns {void}
+   */
   const handleLikeClick = async () => {
     if (isLiked) {
       await handleIsUnliked();
       const uploadData = likes.filter((like) => like.id !== id);
       setLikesOnFirebase(uploadData);
-      console.log(uploadData);
     } else {
       await handleIsLiked();
-      const uploadData = [...likes, { id: id, type: type, name: name}];
+      const uploadData = [...likes, { id: id, type: type, name: name }];
       setLikesOnFirebase(uploadData);
-      console.log(uploadData);
     }
     handleAnimation();
-    // await handleFirebaseUpdate();
   };
 
+  /**
+   * Gère l'ajout d'un "like" pour un élément donné.
+   *
+   * Cette fonction crée un objet "like" contenant des informations spécifiques, l'envoie dans Redux à l'aide de `dispatch`
+   *
+   * @async
+   * @function
+   * @returns {void}
+   */
   const handleIsLiked = async () => {
     //créer un objet
     const like = {
@@ -137,17 +162,22 @@ const LikeBtn = ({ id, type, name }) => {
     console.log(like);
     //envoyer objet dans redux
     dispatch(addLike(like));
-    //mettre a jour firebase
   };
 
+  /**
+   * Gère la suppression d'un "like" pour un élément donné.
+   *
+   * @async
+   * @function
+   * @returns {void}
+   */
   const handleIsUnliked = async () => {
     dispatch(deleteLike(id));
   };
-  // const handleFirebaseUpdate = async () => {
-  //   dispatch(setLikesOnFirebase(userName));
-  // };
 
   return (
+    //permet de filtrer les props utilisés pour le style
+    //évite les erreurs liées au fait que react ne reconnait pas les props
     <StyleSheetManager
       shouldForwardProp={(prop) => prop !== 'isliked' && prop !== 'isrotating'}
     >

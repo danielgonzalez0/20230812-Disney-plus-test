@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import ccImg from './cc.png';
 import adImg from './ad.png';
+import LikeBtn from '../likeBtn/LikeBtn';
 
 const Container = styled.div`
   display: flex;
@@ -96,6 +97,8 @@ const BtnTrailer = styled(BtnPlay)`
 `;
 
 const SerieContent = ({
+  id,
+  name,
   genres,
   firstRelease,
   lastRelease,
@@ -136,16 +139,19 @@ const SerieContent = ({
         ))}
       </GenresList>
 
-      {videos[0] && (
-        <div className="btnContainer">
-          <BtnPlay onClick={() => dispatch(setVideoParams(videos[0].key))}>
-            <StyledIcon icon={faPlay} /> LECTURE
-          </BtnPlay>
-          <BtnTrailer onClick={() => dispatch(setVideoParams(videos[0].key))}>
-            BANDE-ANNONCE
-          </BtnTrailer>
-        </div>
-      )}
+      <div className="btnContainer">
+        {videos[0] && (
+          <>
+            <BtnPlay onClick={() => dispatch(setVideoParams(videos[0].key))}>
+              <StyledIcon icon={faPlay} /> LECTURE
+            </BtnPlay>
+            <BtnTrailer onClick={() => dispatch(setVideoParams(videos[0].key))}>
+              BANDE-ANNONCE
+            </BtnTrailer>
+          </>
+        )}
+        <LikeBtn id={id} type={'serie'} name={name} />
+      </div>
       <Description>
         <span>{overview}</span>
       </Description>
