@@ -6,6 +6,7 @@ import FilterBtn from '../../components/filterBtn/FilterBtn';
 import { seriesGenres } from '../../utils/variables';
 import Footer from '../../components/footer/Footer';
 import AllSeriesSlide from './AllSeriesSlide';
+import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.main`
   min-height: calc(100vh - 270px);
@@ -40,7 +41,7 @@ const Header = styled.header`
 
 const SeriesContainer = styled.section`
   position: relative;
-  margin-top: 120px;
+  margin-top: 130px;
   margin-bottom: 200px;
   z-index: 0;
   width: 100%;
@@ -111,7 +112,7 @@ const AllSeries = () => {
           />
         </Header>
         <SeriesContainer>
-          {isLoading && <div>en cours de chargement</div>}
+          {isLoading && <SpinnerFullPage/>}
           {!isLoading &&
             serieArray.length > 0 &&
             serieArray.map((serie, index) => (

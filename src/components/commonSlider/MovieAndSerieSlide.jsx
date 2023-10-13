@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
@@ -27,11 +27,13 @@ const Container = styled.div`
     border-radius: 4px;
     z-index: 10;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       padding: 4px;
       transform: scale(1.1);
       border: 4px solid ${colors.white};
-      border-radius: 4px;
+      border-radius: 10px;
+      outline: none;
     }
 
     img {

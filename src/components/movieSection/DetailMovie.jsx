@@ -36,6 +36,15 @@ const GridContainer = styled.div`
       padding: 0;
     }
   }
+
+  @media screen and (max-width: 600px) {
+    .overview {
+      font-size: 15px;
+    }
+    .detailsContainer {
+      font-size: 12px;
+    }
+  }
 `;
 
 const MovieDetailContainer = styled.div`
@@ -51,6 +60,11 @@ const MovieDetailContainer = styled.div`
   }
   p:first-child {
     color: #cacaca;
+  }
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 12px;
+    }
   }
 `;
 

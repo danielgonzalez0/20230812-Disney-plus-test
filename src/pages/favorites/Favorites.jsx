@@ -71,20 +71,14 @@ const Favorites = () => {
         </Header>
       <MediaContainer>
         {likes.length > 0 &&
-          likes.map((media) => <>
+          likes.map((media, index) => <>
           
           {media.type === 'movie' ? (
-            <AllMoviesSlide movie={media} key={media.id} />
+            <AllMoviesSlide movie={media} key={index} />
           ) : (
-            <AllSeriesSlide serie={media} key={media.id} />
+            <AllSeriesSlide serie={media} key={index} />
           )}
           </>)}
-        {/* {isLoading && <div>en cours de chargement</div>}
-        {!isLoading &&
-          serieArray.length > 0 &&
-          serieArray.map((serie, index) => (
-            <AllSeriesSlide serie={serie} key={index} />
-          ))}  */}
       </MediaContainer>
       </Container>
       <Footer />

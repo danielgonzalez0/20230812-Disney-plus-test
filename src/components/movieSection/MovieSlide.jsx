@@ -5,6 +5,7 @@ import { colors } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
 import { getDetail } from '../../services/api';
 import { Images } from '../../models/images';
+import Spinner from '../spinner/Spinner';
 
 const Container = styled.div`
   cursor: pointer;
@@ -63,6 +64,22 @@ const Container = styled.div`
   }
 `;
 
+const SpinnerContainer = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
 const MovieSlide = (movie, isDragging, index, isVisible) => {
   const movieQueryKey = ['getMovieDetail', movie.id];
   const { isLoading, data } = useQuery(
@@ -78,7 +95,14 @@ const MovieSlide = (movie, isDragging, index, isVisible) => {
 
   const { movieImage } = data || [];
 
-  if (isLoading) return <div>en cours de chargement</div>;
+  if (isLoading)
+    return (
+      <Container>
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      </Container>
+    );
 
   return (
     <>

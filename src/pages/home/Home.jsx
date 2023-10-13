@@ -29,6 +29,7 @@ import { DisneyIlEtaitUneFois, animations, disneyAgeDeGlace, disneyAnimationsSut
 import MovieAndSerieSlider from '../../components/commonSlider/MovieAndSerieSlider';
 
 
+
 const Container = styled.main`
   position: relative;
   background: url(${bgImg}) center center / cover no-repeat fixed;
@@ -64,8 +65,7 @@ const Home = () => {
           slidesToScroll={1}
         />
         <Viewers />
-        {/* {isLoading && <div>en cours de chargement</div>}
-        {!isLoading && ( */}
+
         <MovieAndSerieSlider content={disneyAnimationsSutdios} id={'slide1'} />
         <MovieAndSerieSlider content={marvelSagaInfini} id={'silde2'} />
         <MovieAndSerieSlider content={starMovies} id={'silde3'} />

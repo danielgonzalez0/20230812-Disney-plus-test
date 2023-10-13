@@ -6,6 +6,7 @@ import { movieGenres } from '../../utils/variables';
 import { useQuery } from '@tanstack/react-query';
 import { getAllMovies } from '../../services/api';
 import AllMoviesSlide from './AllMoviesSlide';
+import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.main`
   min-height: calc(100vh - 270px);
@@ -40,7 +41,7 @@ const Header = styled.header`
 
 const MoviesContainer = styled.section`
   position: relative;
-  margin-top: 120px;
+  margin-top: 130px;
   margin-bottom: 200px;
   z-index: 0;
   width: 100%;
@@ -110,7 +111,7 @@ const AllMovies = () => {
           />
         </Header>
         <MoviesContainer>
-          {isLoading && <div>en cours de chargement</div>}
+          {isLoading && <SpinnerFullPage/>}
           {!isLoading &&
             movieArray.length > 0 &&
             movieArray.map((movie, index) => (

@@ -152,29 +152,33 @@ const cloneElements = (elements, n) => {
 
   // Cloning the last n elements and adding them to the beginning
   clonedElements.push(
-    ...elements
-      .slice(-n)
-      .map((element, index) =>
-        React.cloneElement(element, { key: `clonedFirst${index}` })
-      )
+    ...elements.slice(-n).map((element, index) =>
+      React.cloneElement(element, {
+        key: `clonedFirst${index}`,
+      })
+    )
   );
 
   // Adding the original elements
-  clonedElements.push(...elements);
+  clonedElements.push(
+    ...elements.map((element, index) =>
+      React.cloneElement(element, { key: `original${index}` })
+    )
+  );
 
   // Cloning the first n elements and adding them to the end
   clonedElements.push(
-    ...elements
-      .slice(0, n)
-      .map((element, index) =>
-        React.cloneElement(element, { key: `clonedLast${index}` })
-      )
+    ...elements.slice(0, n).map((element, index) =>
+      React.cloneElement(element, {
+        key: `clonedLast${index}`,
+      })
+    )
   );
 
   return clonedElements;
 };
 
-const InfiniteLoopComponent = ({ elements, offset }) => {
+const InfiniteLoopComponent = ({ elements, offset, slideIndex }) => {
   const [clonedElements, setClonedElements] = useState([]);
 
   useEffect(() => {
@@ -187,15 +191,30 @@ const InfiniteLoopComponent = ({ elements, offset }) => {
   // Rendu de votre composant avec les éléments clonés
   return (
     <>
-      {clonedElements.map((element, index) => (
-        <div
-          key={index}
-          className="container"
-          style={{ flex: `0 0 ${(1 / elements.length) * 100}%` }}
-        >
-          {element}
-        </div>
-      ))}
+      {clonedElements.map((element, index) => {
+        return (
+          <div
+            key={index}
+            className="container"
+            style={{ flex: `0 0 ${(1 / elements.length) * 100}%` }}
+            id={element.key}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                // Si la touche "Enter" est enfoncée, déclencher le clic sur le lien
+                const link = e.target.querySelector('.link'); // Trouver le lien à l'intérieur de l'élément
+                if (link) {
+                  link.click(); // Déclencher le clic sur le lien
+                }
+              }
+            }}
+            tabIndex={
+              slideIndex === index && element.key.includes('original') ? 0 : -1
+            }
+          >
+            {element}
+          </div>
+        );
+      })}
     </>
   );
 };
@@ -231,7 +250,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       let point = e.touches ? e.touches[0] : e;
       let translate = {
         x: point.screenX - origin.x,
-        y: point.screenY - origin.y,
+        y: 0,
       };
       // console.log('point', point);
       // console.log('translate', translate);
@@ -285,7 +304,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
         let percent = baseTranslate + (100 * lastTranslate.x) / sliderWidth;
         setDragPercent(percent);
         //fin recalcul
-        if (Math.abs(lastTranslate.x / screenWidth) > 0.1) {
+        if (Math.abs(lastTranslate.x / screenWidth) > 0.2) {
           // console.log(lastTranslate);
           if (lastTranslate.x < 0) {
             handleRight();
@@ -371,7 +390,11 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
 
   return (
     <>
-      <LeftBtn onClick={handleLeft}>
+      <LeftBtn
+        onClick={() => {
+          handleLeft();
+        }}
+      >
         <StyledIcon icon={faChevronLeft} />
       </LeftBtn>
       <Carrousel className="carroussel">
@@ -398,34 +421,38 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
           {slides && (
             <InfiniteLoopComponent
               offset={offset}
-              elements={slides.map((movie, index) => (
-                <NavLink
-                  className="link"
-                  tabIndex={-1}
-                  to={
-                    movie.type === 'movie'
-                      ? `/movie/${movie.id}`
-                      : `/serie/${movie.id}`
-                  }
-                  onClick={(e) => {
-                    if (isDragging) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      // console.log('event click annulé');
+              slideIndex={slideIndex}
+              elements={slides.map((movie, index) => {
+                return (
+                  <NavLink
+                    data-index={`${index}`}
+                    className="link"
+                    tabIndex={-1}
+                    to={
+                      movie.type === 'movie'
+                        ? `/movie/${movie.id}`
+                        : `/serie/${movie.id}`
                     }
-                  }}
-                >
-                  <img key={index} src={movie.img} alt="Slide" />
-                  <img
-                    key={`title-${index}`}
-                    src={movie.title}
-                    alt="title"
-                    className={
-                      slideIndex - 2 === parseInt(index) ? 'visible' : null
-                    }
-                  />
-                </NavLink>
-              ))}
+                    onClick={(e) => {
+                      if (isDragging) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // console.log('event click annulé');
+                      }
+                    }}
+                  >
+                    <img key={index} src={movie.img} alt="Slide" />
+                    <img
+                      key={`title-${index}`}
+                      src={movie.title}
+                      alt="title"
+                      className={
+                        slideIndex - 2 === parseInt(index) ? 'visible' : null
+                      }
+                    />
+                  </NavLink>
+                );
+              })}
             />
           )}
         </Slider>
@@ -440,7 +467,11 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
           ))}
         </Pagination>
       </Carrousel>
-      <RightBtn onClick={() => handleRight()}>
+      <RightBtn
+        onClick={() => {
+          handleRight();
+        }}
+      >
         <StyledIcon icon={faChevronRight} />
       </RightBtn>
     </>

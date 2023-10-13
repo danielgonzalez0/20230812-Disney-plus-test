@@ -16,7 +16,7 @@ import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.main`
   margin-top: 70px;
-  min-height: 100vh;
+  min-height: calc(100vh - 270px);
   padding: 0 calc(3.5vw + 24px);
   overflow: hidden;
 
