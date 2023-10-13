@@ -49,7 +49,6 @@ const MoviesContainer = styled.section`
   gap: 20px;
   align-items: center;
   transition: all 300ms ease-out 0s;
-
 `;
 
 const AllMovies = () => {
@@ -72,7 +71,11 @@ const AllMovies = () => {
     const documentHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY;
 
-    if (windowHeight + scrollTop >= documentHeight) {
+    console.log('windowHeight', windowHeight);
+    console.log('documentHeight', documentHeight);
+    console.log('scrollTop', scrollTop);
+
+    if (windowHeight + scrollTop + 200 >= documentHeight) {
       // Lorsque l'utilisateur atteint le bas de la page, chargez plus de films
       const newVisibleEnd = moviesVisibleEnd + 20; // Chargez 10 films supplémentaires
       setMovieVisible(newVisibleEnd);
