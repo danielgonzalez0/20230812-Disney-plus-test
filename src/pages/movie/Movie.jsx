@@ -12,6 +12,7 @@ import { deleteVideoParams } from '../../redux/features/videoSlice';
 import MovieSection from '../../components/movieSection/MovieSection';
 import Footer from '../../components/footer/Footer';
 import disneyBG from '../../assets/images/background-disney.jpg';
+import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.main`
   margin-top: 70px;
@@ -148,7 +149,7 @@ const Movie = () => {
     };
   }, [videoIsOpen, dispatch]);
 
-  if (isLoading) return <div>en cours de chargement</div>;
+  if (isLoading) return <SpinnerFullPage />;
 
   if (videoIsOpen) return <Video playing={true} id={videoId} />;
 

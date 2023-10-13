@@ -138,7 +138,8 @@ const Slider = ({ array, componentToMap, id }) => {
       let point = e.touches ? e.touches[0] : e;
       let translate = {
         x: point.screenX - origin.x,
-        y: point.screenY - origin.y,
+        y: 0,
+        // y: point.screenY - origin.y,
       };
       // console.log('point', point);
       // console.log('translate', translate);

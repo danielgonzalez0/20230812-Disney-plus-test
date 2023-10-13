@@ -72,7 +72,7 @@ const AllSeries = () => {
     const documentHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY;
 
-    if (windowHeight + scrollTop >= documentHeight) {
+    if (windowHeight + scrollTop + 200 >= documentHeight) {
       // Lorsque l'utilisateur atteint le bas de la page, chargez plus de films
       const newVisibleEnd = seriesVisible + 20; // Chargez 10 films supplémentaires
       setSeriesVisible(newVisibleEnd);

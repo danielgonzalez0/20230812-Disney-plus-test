@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Footer from '../../components/footer/Footer';
 import { useSelector } from 'react-redux';
@@ -117,6 +117,7 @@ const Button = styled.button`
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState('');
   const content = useSelector((state) => state.content);
+  const [moviesVisibleEnd, setMovieVisible] = useState(20);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -127,8 +128,28 @@ const SearchPage = () => {
   const filteredContent = content.filter(
     (item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.overview.toLowerCase().includes(searchValue.toLowerCase())
-  );
+      item.overview.toLowerCase().includes(searchValue.toLowerCase()) 
+  ).slice(0, moviesVisibleEnd);
+
+   const handleScroll = () => {
+     const windowHeight = window.innerHeight;
+     const documentHeight = document.documentElement.scrollHeight;
+     const scrollTop = window.scrollY;
+
+     if (windowHeight + scrollTop + 200 >= documentHeight) {
+       // Lorsque l'utilisateur atteint le bas de la page, chargez plus de films
+       const newVisibleEnd = moviesVisibleEnd + 20; // Chargez 10 films supplémentaires
+       setMovieVisible(newVisibleEnd);
+     }
+   };
+
+   useEffect(() => {
+     window.addEventListener('scroll', handleScroll);
+
+     return () => {
+       window.removeEventListener('scroll', handleScroll);
+     };
+   }, [moviesVisibleEnd]);
 
   return (
     <>

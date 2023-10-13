@@ -12,6 +12,7 @@ import Video from '../../components/video/Video';
 import SerieContent from '../../components/dataContent/SerieContent';
 import SerieSection from '../../components/serieSection/SerieSection';
 import disneyBG from '../../assets/images/background-disney.jpg';
+import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.main`
   margin-top: 70px;
@@ -147,7 +148,7 @@ const Serie = () => {
     };
   }, [videoIsOpen, dispatch]);
 
-  if (isLoading) return <div>en cours de chargement</div>;
+  if (isLoading) return <SpinnerFullPage />;
 
   if (videoIsOpen) return <Video playing={true} id={videoId} />;
 
