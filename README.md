@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+<p align="center">
+<img src="https://img.shields.io/badge/NPM-Published-crimson?style=for-the-badge&logo=npm">
+<img src="https://img.shields.io/badge/Create%20with-React-blue?style=for-the-badge&logo=react">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# React Front-end Integration Personal Project
 
-In the project directory, you can run:
+## Disney Plus clone
 
-### `npm start`
+### Project Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is a personal project aimed at creating a clone of the Disney+ website using React. The project utilizes 'the movie database' API for data retrieval, Firebase for simulating user authentication and data storage, all without the need for a dedicated back-end.
+I use my personal components for sliders and the application is responsive and can be used on mobile phones, with touch event management.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Version
 
-### `npm test`
+version 1 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Project Deployment link: 
+[link](https://20230812-disney-plus-test.vercel.app/)
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- react router 
+- functional components
+- filters, favorites features
+- responsive design
+- Styled with CSS through styled-components
+- Utilizes 'the movie database' API for movie and TV show data
+- API calls handle with react-query (TanStack)
+- Custom-built components for sliders
+- Firebase authetification and database
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Client:** React, redux, react-router-dom, styled-components, firebase, react-query, react-player
 
-### `npm run eject`
+**Server:** none
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Required
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[![Node.js](https://custom-icon-badges.demolab.com/badge/-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[![NPM](https://img.shields.io/badge/-NPM-CC3534?logo=npm&logoColor=white&style=for-the-badge)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+clone project
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  git clone https://github.com/danielgonzalez0/20230812-Disney-plus-test.git
+```
 
-### Code Splitting
+Go to the project directory
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+  cd my-project
+```
 
-### Analyzing the Bundle Size
+Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+  npm install
+```
 
-### Making a Progressive Web App
+launch server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+  npm run start
+```
 
-### Advanced Configuration
+## Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To run this project, you will need to create an .env file at the root of the project and add the following environment variables to your .env file
 
-### Deployment
+`REACT_APP_KEY`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## API Reference
 
-### `npm run build` fails to minify
+![TMDB](https://user-images.githubusercontent.com/86351071/231418851-e086bbf2-7b58-41dd-8b32-60a4be8587f3.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Documetation
+
+https://developer.themoviedb.org/reference/intro/getting-started
+
+## Screenshots
+
+### Desktop version
+
+![disney-desk-min](https://github.com/danielgonzalez0/20230812-Disney-plus-test/assets/86351071/b1a0256d-8492-4654-9a30-d5244e193794)
+
+### tablet version
+
+![disney-tab-min](https://github.com/danielgonzalez0/20230812-Disney-plus-test/assets/86351071/eb258d1b-c742-4d5c-b879-0ea9dc463c75)
+
+### mobile version
+
+![disney-mobile-min](https://github.com/danielgonzalez0/20230812-Disney-plus-test/assets/86351071/ca3bd31a-63ae-4ea1-96c3-ea087ae71b57)
+
+## 🚀 About Me
+
+Hello everyone,
+
+My name is Daniel Gonzalez, I am 43 years old, and I am a father of two children. 
+
+Over the past few months, I have undertaken an intensive training program in front-end development with a focus on React at OpenClassrooms. 
+
+This training has allowed me to specialize in front-end development, using a highly regarded framework in the industry.
+
+Before that, I completed an initial training program in web development, where I gained a foundation in programming (HTML, CSS, JS) for both front-end and back-end development. I worked on aspects such as web integration, creating APIs and databases, accessibility, SEO, and more.
+
+Here is my portfolio, feel free to visit it to see my latest projects `:smile:`
+
+[www.gonzalez-daniel.com/](https://www.gonzalez-daniel.com/)
