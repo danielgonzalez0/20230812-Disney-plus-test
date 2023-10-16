@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SeasonsBtn from './SeasonsBtn';
 import VideoContainer from '../movieSection/VideoContainer';
@@ -72,10 +72,10 @@ const SerieSection = ({ serie, suggestions }) => {
   const handleTabDisplay = (tab) => {
     setActiveTab(tab);
   };
-  useEffect(() => {
-    console.log(serie);
-    console.log(serie.getVideos());
-  }, [serie]);
+  // useEffect(() => {
+  //   console.log(serie);
+  //   console.log(serie.getVideos());
+  // }, [serie]);
   return (
     <>
       <Nav>

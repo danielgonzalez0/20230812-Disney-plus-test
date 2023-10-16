@@ -52,7 +52,7 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
       return;
     }
   }
-  console.log('Tous les résultats:', allResults);
+  // console.log('Tous les résultats:', allResults);
   return allResults;
 }
 // Fonction récursive pour paginer à travers les résultats
@@ -105,7 +105,7 @@ async function getAllMovies(totalPage, type) {
     }
   }
 
-  console.log('Tous les résultats:', allResults);
+  // console.log('Tous les résultats:', allResults);
   return allResults;
 }
 
@@ -210,7 +210,7 @@ async function getSeriesSuggestion(genres, companies) {
     (data) =>
       Reflect.has(data, 'first_air_date') && data.first_air_date.length > 0
   );
-  console.log(result);
+  // console.log(result);
   return result;
 }
 

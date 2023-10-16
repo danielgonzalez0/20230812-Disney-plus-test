@@ -124,8 +124,8 @@ const Connexion = () => {
 
   const fetchdata = async () => {
     try {
-      const movieData = await getAllMovies(50, 'movies');
-      const serieData = await getAllMovies(50, 'series');
+      const movieData = await getAllMovies(25, 'movies');
+      const serieData = await getAllMovies(25, 'series');
       const contentData = [...movieData, ...serieData];
       return contentData;
     } catch (error) {
@@ -203,7 +203,7 @@ const Connexion = () => {
     if (!user.name) {
       signInAnonymously(auth)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.user.isAnonymous) {
             dispatch(
               setUserLoginDetails({

@@ -247,7 +247,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       // console.log('drag orign +width', origin, sliderWidth);
       // console.log('avant def point', e.screenX);
       setIsDragging(true);
-      console.log('isDragging ', isDragging);
+      // console.log('isDragging ', isDragging);
       let point = e.touches ? e.touches[0] : e;
       let translate = {
         x: point.screenX - origin.x,
@@ -265,7 +265,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       // console.log('lastTranslate', lastTranslate);
       let percent = baseTranslate + (100 * translate.x) / sliderWidth;
       // console.log('percent', percent + dragPercent);
-      console.log('percent', percent);
+      // console.log('percent', percent);
       if (Math.abs(percent) > 10 ) {
         sliderDomElement.style.transform =
           'translate3d(' + percent + dragPercent + '%, 0, 0)';
@@ -278,7 +278,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
    */
   const handleStartDrag = async (e) => {
     setIsDragging(false);
-    console.log('isdragging', isDragging);
+    // console.log('isdragging', isDragging);
     if (e.touches) {
       // console.log('e.touches', e);
       if (e.touches.length > 1) {
@@ -292,7 +292,7 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
     sliderDomElement.style.transition = 'none';
 
     // console.log('start drag', e.target.alt);
-    console.log('start drag', e.screenX, e.screenY);
+    // console.log('start drag', e.screenX, e.screenY);
   };
 
   /**

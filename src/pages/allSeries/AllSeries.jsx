@@ -50,7 +50,6 @@ const SeriesContainer = styled.section`
   gap: 20px;
   align-items: center;
   transition: all 300ms ease-out 0s;
-
 `;
 
 const AllSeries = () => {
@@ -102,6 +101,7 @@ const AllSeries = () => {
 
   return (
     <>
+      {isLoading && <SpinnerFullPage />}
       <Container>
         <Header>
           <h1>Séries</h1>
@@ -112,7 +112,6 @@ const AllSeries = () => {
           />
         </Header>
         <SeriesContainer>
-          {isLoading && <SpinnerFullPage/>}
           {!isLoading &&
             serieArray.length > 0 &&
             serieArray.map((serie, index) => (

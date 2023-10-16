@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import VideoContainer from './VideoContainer';
 import DetailMovie from './DetailMovie';
@@ -71,9 +71,9 @@ const MovieSection = ({ movie, suggestions }) => {
   const handleTabDisplay = (tab) => {
     setActiveTab(tab);
   };
-  useEffect(() => {
-    console.log(movie);
-  }, [movie]);
+  // useEffect(() => {
+  //   console.log(movie);
+  // }, [movie]);
   return (
     <>
       <Nav>

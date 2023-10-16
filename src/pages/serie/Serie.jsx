@@ -96,9 +96,9 @@ const Serie = () => {
         serieDetail.getGenresQueryParams(),
         serieDetail.getCompaniesQueryParams()
       );
-      console.log('serieImages', serieImage);
-      console.log('serieDetail', serieDetail);
-      console.log('suggestions', suggestionData);
+      // console.log('serieImages', serieImage);
+      // console.log('serieDetail', serieDetail);
+      // console.log('suggestions', suggestionData);
       return { serieDetail, serieImage, suggestionData };
     },
     { cacheTime: 0 }

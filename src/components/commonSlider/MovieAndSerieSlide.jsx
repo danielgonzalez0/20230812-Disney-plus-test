@@ -112,7 +112,7 @@ const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
         tabIndex={isVisible === true ? 0 : -1}
         to={`${item.type === 'serie' ? '/serie/' : '/movie/'}${item.id}`}
         onClick={(e) => {
-          console.log('isDragging', isDragging);
+          // console.log('isDragging', isDragging);
           if (isDragging) {
             e.preventDefault();
             e.stopPropagation();

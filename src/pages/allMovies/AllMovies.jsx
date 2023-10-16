@@ -101,6 +101,7 @@ const AllMovies = () => {
 
   return (
     <>
+      {isLoading && <SpinnerFullPage />}
       <Container>
         <Header>
           <h1>Films</h1>
@@ -111,7 +112,6 @@ const AllMovies = () => {
           />
         </Header>
         <MoviesContainer>
-          {isLoading && <SpinnerFullPage/>}
           {!isLoading &&
             movieArray.length > 0 &&
             movieArray.map((movie, index) => (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setVideoParams } from '../../redux/features/videoSlice';
@@ -123,9 +123,10 @@ const SerieContent = ({
 }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(videos);
-  }, [videos]);
+  // useEffect(() => {
+  //   console.log(videos);
+  // }, [videos]);
+
   return (
     <Container>
       <SeasonContainer>

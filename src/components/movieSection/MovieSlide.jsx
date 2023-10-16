@@ -115,7 +115,7 @@ const MovieSlide = (movie, isDragging, index, isVisible) => {
             if (isDragging) {
               e.preventDefault();
               e.stopPropagation();
-              console.log('event click annulé');
+              // console.log('event click annulé');
             }
           }}
         >

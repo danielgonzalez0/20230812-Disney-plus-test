@@ -96,9 +96,9 @@ const Movie = () => {
         movieDetail.getGenresQueryParams(),
         movieDetail.getCompaniesQueryParams()
       );
-      console.log('moviImages', movieImage);
-      console.log('movieData', movieDetail);
-      console.log('suggestions', suggestionData);
+      // console.log('moviImages', movieImage);
+      // console.log('movieData', movieDetail);
+      // console.log('suggestions', suggestionData);
       return { movieDetail, movieImage, suggestionData };
     },
     { cacheTime: 0 }

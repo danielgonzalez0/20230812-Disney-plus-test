@@ -25,7 +25,7 @@ const SignUp = () => {
             incontournables et encore + en streaming
           </Title>
           <H4>Sans coût additionnel. Sans engagement.*</H4>
-          <SignUpBtn onClick={()=> navigate("/login")}>S'INSCRIRE</SignUpBtn>
+          <SignUpBtn onClick={()=> navigate("/login")}>ENTRER</SignUpBtn>
           <Promo>
             Profitez de 12 mois au prix de 10 avec un abonnement annuel.
             Économies par rapport à un an d'abonnement mensuel.

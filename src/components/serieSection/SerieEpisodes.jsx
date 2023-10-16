@@ -14,9 +14,9 @@ const SerieEpisodes = ({ id, season, defaultVideo }) => {
       const seasonData = await getDetail(id, 'season', season);
       const result = new Season(seasonData, seasonVideoData, defaultVideo)
       const seasonDetail = result.getEpisodesWithVideosKey();
-      console.log('seasonData', seasonData);
-      console.log('seasonVideo', seasonVideoData);
-      console.log('episodes', seasonDetail);
+      // console.log('seasonData', seasonData);
+      // console.log('seasonVideo', seasonVideoData);
+      // console.log('episodes', seasonDetail);
       return { seasonDetail };
     }
   );

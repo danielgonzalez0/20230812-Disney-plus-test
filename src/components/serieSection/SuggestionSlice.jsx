@@ -88,7 +88,7 @@ const SuggestionSlide = (serie, isDragging, index, isVisible) => {
     async () => {
       const serieImageData = await getDetail(serie.id, 'imageSerie');
       const serieImage = new Images(serieImageData);
-      console.log('serieImages', serieImage);
+      // console.log('serieImages', serieImage);
       return { serieImage };
     },
     { cacheTime: 0 }
@@ -116,7 +116,7 @@ const SuggestionSlide = (serie, isDragging, index, isVisible) => {
             if (isDragging) {
               e.preventDefault();
               e.stopPropagation();
-              console.log('event click annulé');
+              // console.log('event click annulé');
             }
           }}
         >

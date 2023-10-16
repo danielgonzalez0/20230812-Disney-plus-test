@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -106,9 +106,9 @@ const BtnTrailer = styled(BtnPlay)`
 const DataContent = ({ id, genres, runtime, release, videos, tagline, title }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(videos);
-  }, [videos]);
+  // useEffect(() => {
+  //   console.log(videos);
+  // }, [videos]);
 
   return (
     <Container>

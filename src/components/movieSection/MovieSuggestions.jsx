@@ -5,7 +5,7 @@ import MovieSlide from './MovieSlide';
 
 
 const MovieSuggestions = ({ suggestions, id }) => {
-  console.log(suggestions);
+  // console.log(suggestions);
   return (
     <>
       <Slider array={suggestions.slice(0, 10)} componentToMap={MovieSlide} id={id}/>

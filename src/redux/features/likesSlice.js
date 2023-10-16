@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import db from '../../utils/firebase';
-// import { doc, setDoc } from 'firebase/firestore';
 
 export const likeSlice = createSlice({
   name: 'like',
@@ -15,14 +13,6 @@ export const likeSlice = createSlice({
     deleteLike: (state, action) => {
       return state.filter((like) => like.id !== action.payload);
     },
-    // setLikesOnFirebase: async (state, action) => {
-    //   const likesRef = doc(db, 'likes', action.payload);
-    //   state = [...state]
-    //   console.log(state);
-    //   await setDoc(likesRef, {
-    //     data:state,
-    //   });
-    // },
   },
 });
 

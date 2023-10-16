@@ -168,7 +168,7 @@ const LikeBtn = ({ id, type, name }) => {
       type: type,
       name: name,
     };
-    console.log(like);
+  
     //envoyer objet dans redux
     dispatch(addLike(like));
   };
