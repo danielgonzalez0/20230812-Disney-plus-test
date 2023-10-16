@@ -153,6 +153,8 @@ const Slider = ({ array, componentToMap, id }) => {
       // console.log('lastTranslate', lastTranslate);
       let percent = baseTranslate + (100 * translate.x) / sliderWidth;
       // console.log('percent', percent + dragPercent);
+      // console.log('percent', percent);
+
       sliderDomElement.style.transform =
         'translate3d(' + percent + dragPercent + '%, 0, 0)';
     }
