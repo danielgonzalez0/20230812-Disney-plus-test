@@ -16,7 +16,7 @@ import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
 
 const Container = styled.main`
   margin-top: 70px;
-  min-height: calc(100vh - 270px);
+  min-height: calc(100vh - 70px);
   padding: 0 calc(3.5vw + 24px);
   overflow: hidden;
 
@@ -67,8 +67,14 @@ const Main = styled.section`
     min-height: 170px;
     img {
       height: auto;
-      max-width: 25vw;
-      max-height: 200px;
+      max-width: 30vw;
+      max-height: 300px;
+    }
+
+    @media screen and (max-width: 800px) {
+      img {
+        max-width: 50vw;
+      }
     }
   }
 `;

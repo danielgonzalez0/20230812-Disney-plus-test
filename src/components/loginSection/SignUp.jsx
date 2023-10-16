@@ -4,7 +4,7 @@ import backgroundDesk from './background-desk.jpg';
 import backgroundTab from './background-tab.jpg';
 import backgroundMob from './background-mob.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+// import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import {colors} from "../../utils/variables"
 import { useNavigate } from 'react-router-dom';
 
@@ -34,9 +34,9 @@ const SignUp = () => {
             * La résiliation prend effet à la fin de la période d’abonnement en
             cours. Abonnement requis.
           </Span>
-          <BtnChevron>
+          {/* <BtnChevron>
             <StyledIcon icon={faChevronDown} />
-          </BtnChevron>
+          </BtnChevron> */}
         </CTA>
         <BgImage />
       </Content>

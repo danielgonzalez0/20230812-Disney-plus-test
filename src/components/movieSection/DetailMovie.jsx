@@ -33,6 +33,7 @@ const GridContainer = styled.div`
     display: block;
     flex-direction: row;
     .detailsContainer {
+      margin-top: 20px;
       padding: 0;
     }
   }

@@ -12,7 +12,7 @@ import LikeBtn from '../likeBtn/LikeBtn';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 40px;
   display: flex;
   min-height: 30px;
   margin-bottom: 56px;
@@ -50,7 +50,7 @@ const GenresList = styled.div`
 `;
 
 const Description = styled.p`
-  padding: 1rem 0;
+  padding: 2rem 0;
   span {
     font-size: 20px;
     display: flex;
