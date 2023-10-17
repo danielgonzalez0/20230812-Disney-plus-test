@@ -35,7 +35,7 @@ const Container = styled.div`
       border: 2px solid rgba(249, 249, 249, 0.8);
       border-radius: 10px;
       outline: none;
-      
+
       video {
         opacity: 1;
       }
@@ -45,17 +45,19 @@ const Container = styled.div`
   @media only screen and (max-width: 768px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  @media only screen and (max-width: 600px) {
+    margin-top: 0px;
+  }
 `;
 
 const Wrap = styled.div`
   padding-top: 56.25%;
   border-radius: 10px;
-
   cursor: pointer;
   overflow: hidden;
   position: relative;
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s !important;
-  border: 3px solid rgba(249, 249, 249, 0.1);
+  /* border: 3px solid rgba(249, 249, 249, 0.1); */
 
   img {
     inset: 0px;

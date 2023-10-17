@@ -25,7 +25,7 @@ const Button = styled.button`
   top: 90px;
   z-index: 6;
   width: calc(3.5vw + 24px);
-  height: 26vw;
+  height: 22vw;
   margin: 0 auto;
   background: transparent;
   border-color: transparent;
@@ -40,7 +40,7 @@ const Button = styled.button`
   }
 
   &:focus-visible {
-    outline: 1px solid ${colors.white};
+    outline: 4px solid ${colors.white};
     opacity: 1;
   }
 `;
@@ -54,7 +54,7 @@ const RightBtn = styled(Button)`
 
 const Slider = styled.div`
   display: flex;
-  height: 26vw;
+  height: 22vw;
   /* width: auto; */
   gap: 2vw;
   /* transition: ${(props) =>
@@ -73,6 +73,11 @@ const Slider = styled.div`
     cursor: pointer;
     box-shadow: rgb(0 0 0 / 69%) 0 26px 30px -10px,
       rgb(0 0 0 / 73%) 0 16px 10px -10px;
+    &:focus-visible {
+      border: 4px solid ${colors.white};
+      transition-duration: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s !important;
+      outline: none;
+    }
 
     .link {
       position: relative;
@@ -92,6 +97,7 @@ const Slider = styled.div`
       &:hover:after {
         border: 4px solid ${colors.white};
         transition-duration: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s !important;
+        outline: none;
       }
     }
 
@@ -142,6 +148,11 @@ const Pagination = styled.ul`
 
   .active {
     background: ${colors.white};
+  }
+
+  @media screen and (max-width: 600px) {
+    bottom: 2px;
+    right: 15px;
   }
 `;
 
@@ -266,10 +277,10 @@ const ImgSlider = ({ slides, slidesVisible, slidesToScroll }) => {
       let percent = baseTranslate + (100 * translate.x) / sliderWidth;
       // console.log('percent', percent + dragPercent);
       // console.log('percent', percent);
-      if (Math.abs(percent) > 10 ) {
+      if (Math.abs(percent) > 10) {
         sliderDomElement.style.transform =
           'translate3d(' + percent + dragPercent + '%, 0, 0)';
-      } 
+      }
     }
   };
   /**
