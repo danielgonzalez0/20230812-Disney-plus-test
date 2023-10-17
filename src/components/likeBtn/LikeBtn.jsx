@@ -43,23 +43,25 @@ const Container = styled.button.attrs((props) => ({
     color: ${(props) => (props.isliked === 'true' ? '#0063e5' : 'black')};
   }
   span {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 30px !important;
     width: 30px;
+    height: 30px;
     position: absolute;
-    top: 2px;
-    left: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* top: 2px;
+    left: 8px; */
   }
 
   @media screen and (max-width: 700px) {
     width: 30px;
     height: 30px;
     span {
-     
       font-size: 20px !important;
-      width: 20px;
-      left:3.5px;
-      top:-1px;
     }
   }
 `;
@@ -168,7 +170,7 @@ const LikeBtn = ({ id, type, name }) => {
       type: type,
       name: name,
     };
-  
+
     //envoyer objet dans redux
     dispatch(addLike(like));
   };
