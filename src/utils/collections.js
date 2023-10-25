@@ -1,7 +1,7 @@
 export const animations = {
   title: "Séries d'animation",
   data: [
-    { id: 1276351, type: 'serie', name: 'Spidey' },
+    { id: 127635, type: 'serie', name: 'Spidey' },
     { id: 70047, type: 'serie', name: 'Raiponce' },
     { id: 72705, type: 'serie', name: 'Spiderman' },
     { id: 65334, type: 'serie', name: 'Miraculous' },
