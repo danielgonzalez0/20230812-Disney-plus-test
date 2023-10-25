@@ -90,6 +90,7 @@ const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
       `${item.type === 'serie' ? 'imageSerie' : 'imageMovie'}`
     );
     const itemImage = new Images(itemImageData);
+    console.log(itemImage);
     return { itemImage };
   });
 
@@ -105,7 +106,7 @@ const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
       </Container>
     );
 
-  return (
+  if(itemImage) return (
     <Container>
       <Link
         className="link"
@@ -128,7 +129,7 @@ const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
         //   }
         // }}
       >
-        {itemImage.backdrops[0] || itemImage.posters[0] ? (
+        {itemImage && (itemImage.backdrops || itemImage.posters) ? (
           <img
             src={`https://image.tmdb.org/t/p/w300/${
               itemImage.backdrops[0]
@@ -144,6 +145,12 @@ const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
       </Link>
     </Container>
   );
+
+  return (
+    <Container>
+      Media not found
+    </Container>
+  )
 };
 
 export default MovieAndSerieSlide;

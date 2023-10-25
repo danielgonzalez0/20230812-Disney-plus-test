@@ -1,7 +1,7 @@
 export const animations = {
   title: "Séries d'animation",
   data: [
-    { id: 127635, type: 'serie', name: 'Spidey' },
+    { id: 1276351, type: 'serie', name: 'Spidey' },
     { id: 70047, type: 'serie', name: 'Raiponce' },
     { id: 72705, type: 'serie', name: 'Spiderman' },
     { id: 65334, type: 'serie', name: 'Miraculous' },
@@ -70,7 +70,6 @@ export const marvelSagaMultivers = {
     { id: 92749, type: 'serie', name: `Moon Knight` },
     { id: 232125, type: 'serie', name: `Je s'appelle Groot` },
     { id: 92783, type: 'serie', name: `She hulk` },
-    { id: 234376, type: 'serie', name: `werewolf by night` },
     {
       id: 774752,
       type: 'movie',

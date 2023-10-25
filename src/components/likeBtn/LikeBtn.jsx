@@ -61,7 +61,7 @@ const Container = styled.button.attrs((props) => ({
     width: 30px;
     height: 30px;
     span {
-      font-size: 20px !important;
+      font-size: 20px !important; 
     }
   }
 `;
