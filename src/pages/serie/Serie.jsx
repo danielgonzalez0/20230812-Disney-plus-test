@@ -102,9 +102,6 @@ const Serie = () => {
         serieDetail.getGenresQueryParams(),
         serieDetail.getCompaniesQueryParams()
       );
-      // console.log('serieImages', serieImage);
-      // console.log('serieDetail', serieDetail);
-      // console.log('suggestions', suggestionData);
       return { serieDetail, serieImage, suggestionData };
     },
     { cacheTime: 0 }
@@ -114,6 +111,7 @@ const Serie = () => {
   useEffect(() => {
     // Invoquez queryClient.invalidateQueries lorsque id change
     queryClient.invalidateQueries(queryKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   function handleScroll() {

@@ -59,55 +59,56 @@ async function getMoviesFromCompany(companyId, totalPage, genre) {
 async function getAllMovies(totalPage, type) {
   const companyId = '1%7C2%7C3%7C420%7C7521%7C3166%7C281%7C54%7C11749';
   const allResults = [];
-  let currentPage = 1;
-  while (currentPage <= totalPage) {
-    const url1 = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=fr-Fr&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`;
-    const url2 = `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&vote_count.gte=20&with_companies=${companyId}&api_key=${apiKey}`;
 
-    try {
-      const response = await fetch(type === 'series' ? url1 : url2);
-      const data = await response.json();
-      let dataToAdd;
-      if (type === 'series') {
-        dataToAdd = data.results
-          .filter(
-            (data) =>
-              Reflect.has(data, 'first_air_date') && data.first_air_date !== ''
-          )
-          .map((content) => {
-            return {
-              id: content.id,
-              type: type,
-              name: content.name,
-              genre: content.genre_ids,
-              overview: content.overview,
-            };
-          });
-      } else {
-        dataToAdd = data.results
-          .filter((data) => Reflect.has(data, 'release_date'))
-          .map((content) => {
-            return {
-              id: content.id,
-              type: type,
-              name: content.title,
-              genre: content.genre_ids,
-              overview: content.overview,
-            };
-          });
-      }
+  // Fonction pour récupérer les données à partir d'une URL
+  const fetchData = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results || [];
+  };
 
-      allResults.push(...dataToAdd);
-      currentPage++;
-    } catch (error) {
-      console.error('Erreur lors de la requête :', error);
-      return;
+  // Générer les URLs pour toutes les pages
+  const urls = Array.from({ length: totalPage }, (_, index) => {
+    const currentPage = index + 1;
+    return type === 'series'
+      ? `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=fr-Fr&page=${currentPage}&sort_by=popularity.desc&with_companies=${companyId}&api_key=${apiKey}`
+      : `https://api.themoviedb.org/3/discover/movie?certification=fr&include_adult=false&include_video=true&language=fr-FR&page=${currentPage}&sort_by=popularity.desc&vote_count.gte=20&with_companies=${companyId}&api_key=${apiKey}`;
+  });
+
+  // Utiliser Promise.all pour paralléliser les requêtes
+  const allPagesData = await Promise.all(urls.map(url => fetchData(url)));
+
+  // Traiter les données pour chaque page
+  allPagesData.forEach(data => {
+    let dataToAdd;
+    if (type === 'series') {
+      dataToAdd = data
+        .filter(content => Reflect.has(content, 'first_air_date') && content.first_air_date !== '')
+        .map(content => ({
+          id: content.id,
+          type: type,
+          name: content.name,
+          genre: content.genre_ids,
+          overview: content.overview,
+        }));
+    } else {
+      dataToAdd = data
+        .filter(content => Reflect.has(content, 'release_date'))
+        .map(content => ({
+          id: content.id,
+          type: type,
+          name: content.title,
+          genre: content.genre_ids,
+          overview: content.overview,
+        }));
     }
-  }
 
-  // console.log('Tous les résultats:', allResults);
+    allResults.push(...dataToAdd);
+  });
+
   return allResults;
 }
+
 
 /**
  * url of tmdb depending on a specific type

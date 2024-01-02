@@ -1,8 +1,7 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { colors } from '../../utils/variables';
 import db, { auth } from '../../utils/firebase';
-import {signInAnonymously } from 'firebase/auth';
+import { signInAnonymously } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -17,7 +16,7 @@ import user4 from './user4.png';
 import { getAllMovies } from '../../services/api';
 import { deleteContent, setContent } from '../../redux/features/contentSlice';
 import SpinnerFullPage from '../../components/spinner/SpinnerFullPage';
-import {doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { getLikes } from '../../redux/features/likesSlice';
 // import ConnexionLogin from './ConnexionLogin';
 
@@ -43,23 +42,6 @@ const Container = styled.div`
   }
 `;
 
-// const AuthButton = styled.button`
-//   color: ${colors.white};
-//   background: ${colors.blue1};
-//   width: 80%;
-//   max-width: 360px;
-//   letter-spacing: 1.5px;
-//   margin-bottom: 12px;
-//   font-size: 18px;
-//   padding: 16.5px 0;
-//   border: 1px solid transparent;
-//   border-radius: 4px;
-//   margin: 15px 0;
-//   cursor: pointer;
-//   &:hover {
-//     background: ${colors.blue2};
-//   }
-// `;
 
 const ProfilsDiv = styled.div`
   display: flex;
@@ -140,59 +122,6 @@ const Connexion = () => {
     { name: 'Meilin', img: user4 },
   ];
 
-  // const setUser = useCallback(
-  //   (user) => {
-  //     console.log(user);
-  //     dispatch(
-  //       setUserLoginDetails({
-  //         name: user.displayName,
-  //         email: user.email,
-  //         photo: user.photoURL,
-  //       })
-  //     );
-  //   },
-  //   [dispatch]
-  // );
-
-  // /**
-  //  * Gère l'authentification avec Google.
-  //  * Cette fonction se connecte avec le fournisseur Google si l'utilisateur n'est pas déjà connecté, ou déconnecte l'utilisateur s'il est déjà connecté.
-  //  */
-  // const handleAuthGoogle = () => {
-  //   console.log(user.name);
-  //   if (!user.name) {
-  //     signInWithPopup(auth, provider)
-  //       .then((res) => {
-  //         setUser(res.user);
-  //       })
-  //       .then(() => {
-  //         setIsLoading(true);
-  //         fetchdata()
-  //           .then((contentData) => {
-  //             dispatch(setContent(contentData));
-  //           })
-  //           .then(() => {
-  //             setIsLoading(false);
-  //             navigate('/home');
-  //           })
-  //           .catch((err) => {
-  //             console.log(err.message);
-  //           });
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.message);
-  //       });
-  //   } else {
-  //     auth
-  //       .signOut()
-  //       .then(() => {
-  //         dispatch(setSignOutState());
-  //         dispatch(deleteContent());
-  //         navigate('/');
-  //       })
-  //       .catch((err) => console.log(err.message));
-  //   }
-  // };
 
   /**
    * Gère l'authentification anonyme ou la déconnexion de l'utilisateur.
@@ -215,15 +144,18 @@ const Connexion = () => {
           }
         })
         .then(() => {
+
           setIsLoading(true);
           fetchdata()
             .then((contentData) => {
               dispatch(setContent(contentData));
             })
             .then(() => {
-              setIsLoading(false);
-              getLikesList(profil.name);
-              navigate('/home');
+              setTimeout(() => {
+                setIsLoading(false);
+                getLikesList(profil.name);
+                navigate('/home');
+              }, 500)
             })
             .catch((err) => {
               console.log(err.message);
@@ -265,15 +197,6 @@ const Connexion = () => {
           </ProfilContainer>
         ))}
       </ProfilsDiv>
-      {/* <p>Non isncrit ?</p> */}
-      {/* <AuthButton onClick={handleAuthGoogle}>
-        Se connecter avec Google
-      </AuthButton> */}
-      {/* <AuthButton onClick={() => setIsLogin(!isLogin)}>
-        Se connecter (email / MDP)
-      </AuthButton>
-      {<ConnexionLogin setIsLogin={setIsLogin} isLogin={isLogin} />}
-      <AuthButton onClick={() => setIsSignUp(true)}>Créer un compte</AuthButton> */}
     </Container>
   );
 };
