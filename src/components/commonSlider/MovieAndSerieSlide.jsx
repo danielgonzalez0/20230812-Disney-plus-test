@@ -90,7 +90,7 @@ const MovieAndSerieSlide = (item, isDragging, index, isVisible) => {
       `${item.type === 'serie' ? 'imageSerie' : 'imageMovie'}`
     );
     const itemImage = new Images(itemImageData);
-    console.log(itemImage);
+    // console.log(itemImage);
     return { itemImage };
   });
 
